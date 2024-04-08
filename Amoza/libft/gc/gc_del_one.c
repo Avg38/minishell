@@ -13,7 +13,7 @@ void	gc_del_one(void *ptr_to_free, int gc_id)
 	{
 		*alst = tmp->next;
 		ft_lst_delone(tmp, free);
-		tmp NULL;
+		tmp = NULL;
 	}
 	while (tmp && tmp->content != ptr_to_free)
 	{
