@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:59:43 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/08 14:59:55 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:10:18 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-95372ozshinozshin53ozashnozshinozshin51ozashnozshinozsahn5ozashnozshinozsahn4ozashnozshinozshin40ozashnozshinozsahn7ozashn5#ifndef LIBFT_H
+#ifndef LIBFT_H
 # define LIBFT_H
 
 # include <stdlib.h>
@@ -27,6 +27,23 @@ void	ft_print_nbr(int nb, size_t *len);
 void	ft_print_hexa(unsigned int nb, char *base, size_t *len);
 void	ft_print_unsigned(unsigned int nb, size_t *len);
 int		ft_printf(const char *str, ...);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*--------------------------gnl--------------------------*/
 # ifndef BUFFER_SIZE
