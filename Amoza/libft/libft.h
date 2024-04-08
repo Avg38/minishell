@@ -6,7 +6,7 @@
 /*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:59:43 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/08 15:10:18 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:10:51 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,6 @@ void	ft_print_nbr(int nb, size_t *len);
 void	ft_print_hexa(unsigned int nb, char *base, size_t *len);
 void	ft_print_unsigned(unsigned int nb, size_t *len);
 int		ft_printf(const char *str, ...);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*--------------------------gnl--------------------------*/
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
