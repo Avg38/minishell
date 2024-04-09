@@ -83,6 +83,7 @@ static int	create_strs(char const *s, char **strs, char c, int id_gc)
 	strs[j] = NULL;
 	return (1);
 }
+
 char	**gc_split(char const *s, char c, int id_gc)
 {
 	char	**strs;
