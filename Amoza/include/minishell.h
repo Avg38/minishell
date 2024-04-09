@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:40:20 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/08 14:49:31 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/04/09 14:33:53 by ozasahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,19 @@ typedef enum e_tkntype
 	PARENTHESIS
 }	t_tkntype;
 
+/*
+All structures are contained in minishell structure
+*/
+
 typedef struct s_io
 {
 	int	fd_in;
 	int	fd_out;
 }	t_io;
+
+/*
+All structures are contained in minishell structure
+*/
 
 typedef struct s_btree
 {
@@ -113,6 +121,10 @@ typedef struct s_btree
 	struct s_btree	*right;
 }	t_btree;
 
+/*
+All structures are contained in minishell structure
+*/
+
 typedef enum e_error
 {
 	NOTHING = -1,
@@ -120,6 +132,10 @@ typedef enum e_error
 	FILE_E,
 	TYPE_E
 }	t_error;
+
+/*
+All structures are contained in minishell structure
+*/
 
 typedef struct s_token
 {
@@ -133,11 +149,19 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+/*
+All structures are contained in minishell structure
+*/
+
 typedef struct tkn_list
 {
 	struct s_token	*head;
 	struct s_token	*tail;
 }	t_tknlist;
+
+/*
+All structures are contained in minishell structure
+*/
 
 typedef struct e_env
 {
@@ -146,13 +170,17 @@ typedef struct e_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_mini
+/*
+All structures are contained in minishell structure
+*/
+
+typedef struct s_minishell
 {
 	t_env		*env;
 	t_tknlist	*tknlist;
 	t_btree		*btree;
 	t_io		*io_global;
 	int			last_gstatus;
-}	t_mini;
+}	t_minishell;
 
 #endif
