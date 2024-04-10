@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:40:20 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/10 11:23:44 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:25:37 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define ERR_MALLOC "Minishell: Allocation error\n"
 # define ERR_QUOTES "Minishell: open quotes are not interpreted.\n"
 # define ERR_INFILE "Minishell: open quotes are not interpreted.\n"
-# define ERR_PARENTHESIS "Minishell: \
+# define ERR_PARENTHESE "Minishell: \
 open parenthesis are not interpreted.\n"
 # define ERR_OPEN_PIPE "Minishell: open pipe are not interpreted.\n"
 # define ERR_OPEN_LOGICAL_OP "Minishell: \
