@@ -1,5 +1,67 @@
 #include "../../include/minishell.h"
 
+int	detect_type(const char c1, const char c2)
+{
+	if (c1 == '<' && c2 != '<')
+		return (IN);
+	else if (c1 == '>' && c2 != '>')
+		return (OUT);
+	else if (c1 == '<' && c2 == '<')
+		return (HEREDOC);
+	else if (c1 == '>' && c2 == '>')
+		return (APPEND);
+	else if (c1 == '|' && c2 != '|')
+		return (PIPE);
+	else if (c1 == '&' && c2 == '&')
+		return (AND);
+	else if (c1 == '|' && c2 == '|')
+		return (OR);
+	else if (c1 == '\'')
+		return (S_QUOTE);
+	else if (c1 == '\"')
+		return (D_QUOTE);
+	else if (c1 == '(')
+		return (PARENTHESIS);
+	else if (c1 == '&' && c2 != '&')
+		print_without_exit("Minishell: \
+			syntax error near unexpected token `&'\n", RED, 2);
+	return (WORD);
+}
+
+void	handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i)
+{
+	if (type == IN || type == OUT || type == HEREDOC || type == APPEND)
+		*i += handle_file(buffer, list, type);
+	else if (type == pipe)
+		*i += handle_pipe(buffer, list);
+	else if (type == AND || type == OR)
+		*i += handle_operator(buffer, list, type);
+	else if (type == S_QUOTE)
+		*i += handle_s_quote(buffer, list);
+	else if (type == D_QUOTE)
+		*i += handle_d_quote(buffer, list);
+	else if (type == PARENTHESE)
+		*i += handle_parenthese(buffer, list);
+	else if (type == WORD)
+		*i += handle_word(buffer, list);
+}
+
+int	is_only_space(char *buffer)
+{
+	size_t	i;
+
+	i = 0;
+	if (!buffer)
+		return (1);
+	while (buffer[i])
+	{
+		if (is_space(buffer[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 t_tknlist	*lexer(char *buffer)
 {
 	int			i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 12:40:20 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/09 14:33:53 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/04/10 11:23:44 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,30 @@
 # define FD_OUT 0
 
 // MESSAGE
-# define ARGS_ERR_MSG "Error : Invalid number of arguments.\n"
-# define UNAVAILABLE_ENV "Minishell: Environment unavailable.\n"
-# define MALLOC_ERR_MSG "Minishell: Allocation error\n"
-# define QUOTES_ERR_MSG "Minishell: open quotes are not interpreted.\n"
-# define INFILE_ERR_MSG "Minishell: open quotes are not interpreted.\n"
-# define PARENTHESIS_ERR_MSG "Minishell: \
+# define ERR_ARGS "Error : Invalid number of arguments.\n"
+# define ERR_UNAVAILABLE_ENV "Minishell: Environment unavailable.\n"
+# define ERR_MALLOC "Minishell: Allocation error\n"
+# define ERR_QUOTES "Minishell: open quotes are not interpreted.\n"
+# define ERR_INFILE "Minishell: open quotes are not interpreted.\n"
+# define ERR_PARENTHESIS "Minishell: \
 open parenthesis are not interpreted.\n"
-# define OPEN_PIPE_ERR_MSG "Minishell: open pipe are not interpreted.\n"
-# define OPEN_LOGICAL_OP_ERR_MSG "Minishell: \
+# define ERR_OPEN_PIPE "Minishell: open pipe are not interpreted.\n"
+# define ERR_OPEN_LOGICAL_OP "Minishell: \
 open logical operators are not interpreted.\n"
-# define WRONG_CHAR_ERR_MSG "Minishell: uninterpreted token \
+# define ERR_WRONG_CHAR "Minishell: uninterpreted token \
 present outside quotes.\n"
-# define NEAR_TOKEN_ERR_MSG "Minishell: syntax error near unexpected token"
-# define STAR_TOKEN_ERR_MSG "Minishell: *: ambiguous redirect\n"
-# define UNEXPECTED_EOF "Minishell: syntax error: unexpected end of file.\n"
-# define EOF_HEREDOC "Minishell:\
+# define ERR_NEAR_TOKEN "Minishell: syntax error near unexpected token"
+# define ERR_STAR_TOKEN "Minishell: *: ambiguous redirect\n"
+# define ERR_EOF_UNEXPECTED "Minishell: syntax error: unexpected end of file.\n"
+# define ERR_EOF_HEREDOC "Minishell:\
  warning: here-document at line 1 delimited by end-of-file"
-# define PWD_ERR_MSG "pwd: error retrieving current directory: getcwd: \
+# define ERR_PWD "pwd: error retrieving current directory: getcwd: \
 cannot access parent directories: No such file or directory"
-# define SHLVL_ERR_MSG "minishell: warning: shell level (%d) too high, \
+# define ERR_SHLVL "minishell: warning: shell level (%d) too high, \
 resetting to 1"
-# define HEREDOC_MSG "%sMinishell: warning: here-document \
+# define ERR_HEREDOC "%sMinishell: warning: here-document \
 at line %d delimited by end-of-file (wanted `%s')%s\n"
-# define DOT_MSG_ERR ": filename argument required\n.: \
+# define ERR_DOT ": filename argument required\n.: \
 usage: . filename [arguments]\n"
 
 extern int	g_status;
@@ -95,7 +95,7 @@ typedef enum e_tkntype
 	S_QUOTE,
 	D_QUOTE,
 	LEFT_P,
-	PARENTHESIS
+	PARENTHESE
 }	t_tkntype;
 
 /*
@@ -174,13 +174,13 @@ typedef struct e_env
 All structures are contained in minishell structure
 */
 
-typedef struct s_minishell
+typedef struct s_shell
 {
 	t_env		*env;
 	t_tknlist	*tknlist;
 	t_btree		*btree;
 	t_io		*io_global;
 	int			last_gstatus;
-}	t_minishell;
+}	t_shell;
 
 #endif
