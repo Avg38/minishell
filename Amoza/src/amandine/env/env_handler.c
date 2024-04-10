@@ -1,5 +1,34 @@
 #include "../../include/minishell.h"
 
+void	env_add_back(t_env **env, t_env *new)
+{
+	t_env	*tmp;
+
+	if (*env == NULL)
+		*env = new;
+	else
+	{
+		tmp = *env;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+}
+
+void	*get_env_name_var(char *dest, char *src)
+{
+	int	i;
+
+	i = 0;
+	while (src[i] && src[i] != '=')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
+}
+
 t_env	*init_env(char **env_array)
 {
 	t_env	*env;
