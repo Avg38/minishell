@@ -80,6 +80,7 @@ int		ft_isascii(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
 char	*ft_itoa(int n);
+int		ft_isspace(char c);
 /*-----------------------printf------------------------*/
 int		ft_printf(const char *str, ...);
 /*-------------------------str-------------------------*/

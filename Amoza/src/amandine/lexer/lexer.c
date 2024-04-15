@@ -1,5 +1,18 @@
 #include "../../include/minishell.h"
 
+/*
+handle_error_lexer sert a fermer le programme proprement en cas d'erreur
+*/
+int	handle_error_lexer(int gc_id, char *msg)
+{
+	gc_clear(gc_id, free);
+	ft_putstr_fd(msg, 2);
+	g_status = 2;
+	return (-1);
+}
+/*
+detect_type permet de definir lee type de chaque "mot" de la commande
+*/
 int	detect_type(const char c1, const char c2)
 {
 	if (c1 == '<' && c2 != '<')
@@ -27,7 +40,9 @@ int	detect_type(const char c1, const char c2)
 			syntax error near unexpected token `&'\n", RED, 2);
 	return (WORD);
 }
-
+/*
+handle_token sert a gerer chaque "mot" de la commande selon son type
+*/
 void	handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i)
 {
 	if (type == IN || type == OUT || type == HEREDOC || type == APPEND)
@@ -45,7 +60,9 @@ void	handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i)
 	else if (type == WORD)
 		*i += handle_word(buffer, list);
 }
-
+/*
+Savoir s'il n'y a que des espaces dans la commande
+*/
 int	is_only_space(char *buffer)
 {
 	size_t	i;
@@ -62,6 +79,10 @@ int	is_only_space(char *buffer)
 	return (1);
 }
 
+/*
+Le lexer sert a determiner le type de chaque "mot" dans la commande tape par l'utilisateur
+*/
+
 t_tknlist	*lexer(char *buffer)
 {
 	int			i;
@@ -74,7 +95,7 @@ t_tknlist	*lexer(char *buffer)
 	i = 0;
 	while (buffer[i])
 	{
-		if (is_space(buffer[i]))
+		if (ft_isspace(buffer[i]))
 		{
 			if (detect_error_type(buffer[i]) == 1)
 				break;
