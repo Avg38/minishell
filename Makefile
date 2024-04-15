@@ -2,9 +2,30 @@
 
 NAME = minishell
 
-SRC		=	src/main.c\
+SRC		=	\
+			src/builtins/cd.c\
+			src/builtins/echo.c\
+			src/builtins/exit.c\
+			src/builtins/export.c\
 			\
-			src/lexer/lexer.c
+			src/env/env_handler.c\
+			src/env/env_sort.c\
+			src/env/env_utils.c\
+			\
+			src/lexer/handle_token.c\
+			src/lexer/handle_token2.c\
+			src/lexer/lexer_utils.c\
+			src/lexer/lexer.c\
+			\
+			src/parser/parser.c\
+			\
+			src/terminal/loop.c\
+			src/terminal/prompt.c\
+			\
+			src/utils/ft_exit.c\
+			\
+			src/main.c
+
 
 OBJDIR	=	obj
 OBJ		=	$(patsubst src/%.c, obj/%.o, $(SRC))
@@ -32,29 +53,36 @@ MESSAGE_CLEAN_DONE	=	$(COLOR_PURPLE)Cleanup completed.$(COLOR_RESET)
 all:	force $(NAME)
 
 $(NAME):
-		echo $(MESSAGE_COMPILE)
-		$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LINKS) -o $(NAME)
-		echo $(MESSAGE_DONE)
+		@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LINKS) -o $(NAME)
+# @echo $(MESSAGE_COMPILE)
+# @echo $(MESSAGE_DONE)
 
 obj/%.o:	src/%.c include/minishell.h libft/libft.h Makefile | $(OBJDIR)
-		$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+		@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJDIR):
 		mkdir -p $(OBJDIR)
+		mkdir -p $(OBJDIR)/builtins
+		mkdir -p $(OBJDIR)/env
+		mkdir -p $(OBJDIR)/exec
 		mkdir -p $(OBJDIR)/lexer
+		mkdir -p $(OBJDIR)/libft_extension
+		mkdir -p $(OBJDIR)/parser
+		mkdir -p $(OBJDIR)/terminal
+		mkdir -p $(OBJDIR)/utils
 
 clean:
 		echo $(MESSAGE_CLEAN)
-		$(RM) $(OBJDIR)
-		make clean -C libft
+		@$(RM) $(OBJDIR)
+		@make clean -C libft
 		echo $(MESSAGE_CLEAN_DONE)
 
 fclean:
-		$(RM) $(NAME)
-		make fclean -C libft
+		@$(RM) $(NAME)
+		@make fclean -C libft
 
 force:
-		make -C libft
+		@make -C libft -s
 
 re:		fclean all
 

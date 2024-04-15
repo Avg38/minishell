@@ -1,15 +1,24 @@
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
+
+void	clear_loop(void)
+{
+	gc_clear(TMP, free);
+	gc_clear(TKN_LIST, free);
+	gc_clear(B_TREE, free);
+}
 
 void	clear_ctrl_c(int *stdin_cpy, char **line_read)
 {
-
+	if (*line_read)
+		free(*line_read);
+	*line_read = NULL;
+	dup2(*stdin_cpy);
+	clear_loop();
 }
 
 /*
 STDIN FILENO = 
-
-
 */
 
 void	sig_handler(int sigcode)
@@ -45,21 +54,12 @@ void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)
 	clear_loop();
 }
 
-
-
-
-
-
-
-
 /*
+prompt_loop sert...
 la fontion 'signal()' patiente et attent un signal INT, QUIT, ou TSTP
 et activera dans ces cas sig_handler.
 la fonction dup sert ..
 */
-
-
-
 
 void	prompt_loop(t_shell *shell)
 {
@@ -83,6 +83,6 @@ void	prompt_loop(t_shell *shell)
 		if (!line_read)
 			builtin_exit(shell, NULL);
 		if (line_read && *line_read)
-			process_shell(shell, line_read, &stdin_cpy)
+			process_shell(shell, line_read, &stdin_cpy);
 	}
 }

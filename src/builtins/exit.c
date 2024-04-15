@@ -10,7 +10,7 @@ int	check_limit(int sign, long result, long digit) //optimisalbe
 	return (1);
 }
 
-int	is_valid_long(const char *str) //optimisalbe
+int	is_valid_long(const char *str) //optimisable
 {
 	long	result;
 	long	digit;

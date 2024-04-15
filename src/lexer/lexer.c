@@ -34,7 +34,7 @@ int	detect_type(const char c1, const char c2)
 	else if (c1 == '\"')
 		return (D_QUOTE);
 	else if (c1 == '(')
-		return (PARENTHESIS);
+		return (PARENTHESE);
 	else if (c1 == '&' && c2 != '&')
 		print_without_exit("Minishell: \
 			syntax error near unexpected token `&'\n", RED, 2);
@@ -87,7 +87,7 @@ t_tknlist	*lexer(char *buffer)
 {
 	int			i;
 	t_tkntype	type;
-	t_tknlist	list;
+	t_tknlist	*list;
 
 	if (!buffer || g_status != 0 || is_only_space(buffer) == 1)
 		return (NULL);

@@ -1,5 +1,6 @@
 
 
+#include "../../include/minishell.h"
 
 
 

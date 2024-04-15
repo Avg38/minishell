@@ -1,4 +1,4 @@
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	env_add_back(t_env **env, t_env *new)
 {

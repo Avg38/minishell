@@ -1,4 +1,4 @@
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 size_t	strlen_env(t_env *env)
 {
