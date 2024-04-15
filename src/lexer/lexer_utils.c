@@ -1,6 +1,7 @@
 #include "../../include/minishell.h"
 /*
-ft_strndp sert a allouer de la memoire (dans le garbage collector) pour chaque "mot" de la commande
+ft_strndp sert a allouer de la memoire
+(dans le garbage collector) pour chaque "mot" de la commande
 */
 char	*ft_strndup(char *buffer, int len, t_gc_id id)
 {
@@ -22,9 +23,11 @@ char	*ft_strndup(char *buffer, int len, t_gc_id id)
 	new[i] = 0;
 	return (new);
 }
+
 /*
 is_operator sert a savoir si le "mot" est un operateur ou pas
 */
+
 int	is_operator(const char c1, const char c2)
 {
 	if (c1 == '|' && c2 != '|')
@@ -35,9 +38,11 @@ int	is_operator(const char c1, const char c2)
 		return (1);
 	return (0);
 }
+
 /*
 detect_error_type sert a detecter les erreurs de type 
 */
+
 int	detect_error_type(const char c)
 {
 	if (c == '(' || c == ';' || c == '\\')

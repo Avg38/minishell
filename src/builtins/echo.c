@@ -1,9 +1,8 @@
-
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	size_cmds(char **cmds)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (cmds[size])
@@ -11,12 +10,12 @@ int	size_cmds(char **cmds)
 	return (size);
 }
 
-static int is_valid_option(char *option)
+static int	is_valid_option(char *option)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	if (option[1] == "\0")
+	if (option[1] == '\0')
 		return (1);
 	while (option[i])
 	{

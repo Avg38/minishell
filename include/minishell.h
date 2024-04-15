@@ -62,13 +62,21 @@ usage: . filename [arguments]\n"
 
 extern int	g_status;
 
-typedef enum e_id_gc
+/*
+Enumeration 
+*/
+
+typedef enum e_gc_id
 {
 	TKN_LIST = 1,
 	B_TREE,
 	ENV,
 	TMP
-}	t_id_gc;
+}	t_gc_id;
+
+/*
+Enumeration des type de token possible
+*/
 
 typedef enum e_tkntype
 {
@@ -87,7 +95,7 @@ typedef enum e_tkntype
 }	t_tkntype;
 
 /*
-All structures are contained in minishell structure
+Structure qui contient les file descriptor d'entree et de sortie
 */
 
 typedef struct s_io
@@ -97,7 +105,7 @@ typedef struct s_io
 }	t_io;
 
 /*
-All structures are contained in minishell structure
+Structure de l'arbre binaire
 */
 
 typedef struct s_btree
@@ -110,7 +118,7 @@ typedef struct s_btree
 }	t_btree;
 
 /*
-All structures are contained in minishell structure
+Enumeration des differents types d'erreur
 */
 
 typedef enum e_error
@@ -122,7 +130,7 @@ typedef enum e_error
 }	t_error;
 
 /*
-All structures are contained in minishell structure
+Structure des token
 */
 
 typedef struct s_token
@@ -138,7 +146,8 @@ typedef struct s_token
 }	t_token;
 
 /*
-All structures are contained in minishell structure
+Structure qui contient un pointeur vers le premier element
+et le dernier element de la structure t_token
 */
 
 typedef struct tkn_list
@@ -148,10 +157,10 @@ typedef struct tkn_list
 }	t_tknlist;
 
 /*
-All structures are contained in minishell structure
+Structure qui contient toutes les variables d'environnement et leurs valeurs
 */
 
-typedef struct e_env
+typedef struct s_env
 {
 	char			*value;
 	int				secret;
@@ -174,8 +183,100 @@ typedef struct s_shell
 	t_env		*env;
 	t_tknlist	*tknlist;
 	t_btree		*btree;
-	t_io		*io_global;
+	t_io		io_global;
 	int			last_gstatus;
 }	t_shell;
+
+// ============== BUILTINS ==============
+// -------------- cd.c --------------
+int			update_oldpwd(t_env **env);
+int			update_pwd(t_env **env, int slash);
+int			go_to_path(t_env **env);
+int			process_cd(char **cmds, t_env **env);
+int			cd(char **cmds, t_env **env);
+// -------------- echo.c --------------
+int			size_cmds(char **cmds);
+// static int is_valid_option(char *option);
+int			echo(char **cmds, t_io fds);
+// -------------- env.c --------------
+int			env(t_env *env, t_io fds);
+// -------------- exit.c --------------
+int			check_limit(int sign, long result, long digit);
+int			is_valid_long(const char *str);
+int			check_status_code(char *status_code);
+int			process_exit(char **cmds, int *exit_status);
+int			builtin_exit(t_shell *shell, char **cmds);
+// -------------- export.c --------------
+int			print_error_export(char *args, int error);
+int			env_add(char *value, t_env **env, int mod);
+int			export_handler(char *args, t_env **env);
+int			ft_export(char **args, t_env **envt, t_io fds);
+// -------------- pwd.c --------------
+int			pwd(t_io fds, t_env *env);
+
+// ============== ENV ==============
+// -------------- env_handler.c --------------
+void		env_add_back(t_env **env, t_env *new);
+void		*get_env_name(char *dest, char *src);
+t_env		*init_env(char **env_array);
+// -------------- env_sort.c --------------
+int			strlen_2d(char **tab);
+void		sort_env(char **tab, int len_env);
+void		print_export(char **tab, t_io fds);
+void		print_sorted_env(t_env *env, t_io fds);
+// -------------- env_utils.c --------------
+size_t		strlen_env(t_env *env);
+char		*get_env_value(t_env *env, const char *var, size_t len);
+size_t		size_all_value(t_env *lst);
+char		*env_to_str(t_env *lst);
+int			is_in_env(t_env *env, char *args);
+
+// ============== EXEC ==============
+
+// ============== LEXER ==============
+// -------------- handle_token.c --------------
+int			handle_file(char *buffer, t_tknlist *list, t_tkntype type);
+int			handle_pipe(char *buffer, t_tknlist *list);
+int			handle_s_quote(char *buffer, t_tknlist *list);
+int			handle_d_quote(char *buffer, t_tknlist *list);
+// -------------- handle_token2.c --------------
+int			is_special_char(char c);
+int			handle_parenthese(char *buffer, t_tknlist *list);
+int			handle_word(char *buffer, t_tknlist *list);
+// -------------- lexer_utils.c --------------
+char		*ft_strndup(char *buffer, int len, t_gc_id id);
+int			is_operator(const char c1, const char c2);
+int			detect_error_type(const char c);
+// -------------- lexer.c --------------
+int			handle_error_lexer(int gc_id, char *msg);
+int			detect_type(const char c1, const char c2);
+void		handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i);
+int			is_only_space(char *buffer);
+t_tknlist	*lexer(char *buffer);
+
+// ============== LIBFT_EXTENSION ==============
+
+// ============== PARSER ==============
+// -------------- parser.c --------------
+
+// ============== TERMINAL ==============
+// -------------- loop.c --------------
+// -------------- prompt.c --------------
+
+// ============== UTILS ==============
+// -------------- ft_exit.c --------------
+void	free_and_exit(int exit_code);
+void	print_and_exit(char *msg, char *color, int exit_code);
+void	print_without_exit(char *msg, char *color, int exit_code);
+void	print_path_error(char *arg, int exit_code, int error);
+void	print_str_error(char *arg, char *color, int new_status);
+
+
+
+// ============== MAIN ==============
+// -------------- main.c --------------
+int			main(int ac, char **av, char **envp);
+t_shell		*singleton_minishell(t_shell *addr_shell);
+void		handle_shell_level(t_env *env, int nb);
 
 #endif

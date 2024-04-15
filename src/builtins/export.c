@@ -1,14 +1,29 @@
-
-#include "../../../include/minishell.h"
-
-
-
-print_sorted_env
-
+#include "../../include/minishell.h"
 
 int	print_error_export(char *args, int error)
 {
-	
+	if (error == 1)
+		ft_printfd(2, "%sMinishell: export: `%s': not a valid identifier\n%s",
+			RED, args, RESET);
+	return (1);
+}
+
+int	is_valid_args(const char *args)
+{
+	int	i;
+
+	i = 0;
+	if (ft_isdigit(args[i]) == 1 || args[i] == '=')
+		return (print_error_export((char *)args, 1));
+	while (args[i] && args[i] != '=')
+	{
+		if (ft_isdigit(args[i]) == 0 || args[i] == '_')
+			return (print_error_export((char *)args, 1));
+		i++;
+	}
+	if (args[i] != '=')
+		return (2);
+	return (0);
 }
 
 /*

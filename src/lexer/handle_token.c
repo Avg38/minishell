@@ -37,15 +37,15 @@ int	handle_s_quote(char *buffer, t_tknlist *list)
 	while (buffer[i])
 	{
 		if (buffer[i] == '\'')
-			break;
+			break ;
 		i++;
 	}
-	if (buffer[i] = 0)
+	if (buffer[i] == 0)
 		return (handle_error_lexer(TKN_LIST, ERR_QUOTES));
 	if (ft_isspace(buffer[i + 1]) == 0)
 		link = 1;
 	if (!add_node(list,
-			create_node(S_QUOTE, ft_strndup(buffer, i + 1, TKN_LIST), link)));
+			create_node(S_QUOTE, ft_strndup(buffer, i + 1, TKN_LIST), link)))
 		print_and_exit(ERR_MALLOC, RED, 1);
 	return (i + 1);
 }
@@ -60,7 +60,7 @@ int	handle_d_quote(char *buffer, t_tknlist *list)
 	while (buffer[i])
 	{
 		if (buffer[i] == '\"')
-			break;
+			break ;
 		i++;
 	}
 	if (buffer[i] == 0)

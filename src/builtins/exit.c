@@ -1,11 +1,12 @@
-
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	check_limit(int sign, long result, long digit) //optimisalbe
 {
-	if (sign == 1 && (result > LONG_MAX / 10 || (result == LONG_MAX / 10 && digit > LONG_MAX %10)))
+	if (sign == 1 && (result > LONG_MAX / 10
+			|| (result == LONG_MAX / 10 && digit > LONG_MAX % 10)))
 		return (0);
-	if (sign == -1 && (result > -(LONG_MIN / 10) || (result == -(LONG_MIN / 10) && digit > -(LONG_MIN %10))))
+	if (sign == -1 && (result > -(LONG_MIN / 10)
+			|| (result == -(LONG_MIN / 10) && digit > -(LONG_MIN % 10))))
 		return (0);
 	return (1);
 }
@@ -50,7 +51,8 @@ int	check_status_code(char *status_code)
 	{
 		if (status_code[i] == '-' || status_code[i] == '+')
 			sign++;
-		if (!(status_code[i] >= 48 && status_code <= 57) && (status_code[i] != '-' && status_code[i] != '+'))
+		if (!(status_code[i] >= 48 && status_code[i] <= 57)
+			&& (status_code[i] != '-' && status_code[i] != '+'))
 			return (1);
 		i++;
 	}
@@ -63,7 +65,8 @@ int	process_exit(char **cmds, int *exit_status)
 {
 	if (check_status_code(cmds[1]) == 1 || is_valid_long(cmds[1]) == 0)
 	{
-		ft_printf_fd(2, "Minishell: exit: %s : numeric argument required\n", cmds[1]);
+		ft_printfd(2, "Minishell: exit: \
+			%s : numeric argument required\n", cmds[1]);
 		*exit_status = 2;
 	}
 	else if (cmds[2])
@@ -89,7 +92,8 @@ int	builtin_exit(t_shell *shell, char **cmds)
 	write(2, "exit\n", 5);
 	if (cmds)
 	{
-		if (cmds[1] && (cmds[1][0] == '-' || cmds[1][0] == '+') && cmds[1][1] == 0 && cmds[2])
+		if (cmds[1] && (cmds[1][0] == '-'
+			|| cmds[1][0] == '+') && cmds[1][1] == 0 && cmds[2])
 		{
 			tmp = gc_strjoin(cmds[1], cmds[2], TMP);
 			cmds[1] = tmp;

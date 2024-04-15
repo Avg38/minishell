@@ -47,7 +47,7 @@ int	handle_word(char *buffer, t_tknlist *list)
 	{
 		if (buffer[i] == '\'' || buffer[i] == '\"'
 			|| buffer[i] == '<' || buffer[i] == '>')
-			break;
+			break ;
 		i++;
 	}
 	if (!(buffer[i] == '<' || buffer[i] == '>')
@@ -58,4 +58,3 @@ int	handle_word(char *buffer, t_tknlist *list)
 		print_and_exit(ERR_MALLOC, RED, 1);
 	return (i);
 }
-

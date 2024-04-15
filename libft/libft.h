@@ -61,9 +61,24 @@ char	*buffer_init(int fd, t_fd *buffer_memory);
 #  define GC_SIZE 42
 # endif
 
+void	*gc_add(void *ptr, int gc_id);
+void	*gc_calloc(size_t nmemb, size_t size, int id_gc);
+void	gc_clear(int gc_id, void (*del)(void*));
+void	gc_del_one(void *ptr_to_free, int gc_id);
+char	*gc_itoa(int n, int gc_id);
 t_list	*gc_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *),
 	int id_gc);
-
+t_list	*gc_lstnew(void *content, int gc_id);
+void	*gc_malloc(size_t size, int id_gc);
+t_list	**gc_ptr(int gc_id);
+void	*gc_realloc(void *ptr, size_t old_size, size_t new_size, int id_gc);
+char	**gc_split(char const *s, char c, int id_gc);
+char	*gc_strdup(const char *str, int id_gc);
+char	*gc_strjoin(char const *s1, char const *s2, int id_gc);
+char	*gc_strmapi(char const *s, char (*f)(unsigned int, char), int id_gc);
+char	*gc_strndup(char *buffer, int len, int id_gc);
+char	*gc_strtrim(char const *s1, char const *set, int id_gc);
+char	*gc_substr(char const *s, unsigned int start, size_t len, int id_gc);
 /*-------------------------mem-------------------------*/
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -82,10 +97,23 @@ int		ft_isprint(int c);
 char	*ft_itoa(int n);
 int		ft_isspace(char c);
 /*-----------------------printf------------------------*/
+void	ft_print_ptr(unsigned long long addr, size_t *len);
+void	ft_print_nbr(int nb, size_t *len);
+void	ft_print_hexa(unsigned int nb, char *base, size_t *len);
+void	ft_print_unsigned(unsigned int nb, size_t *len);
 int		ft_printf(const char *str, ...);
+void	print_ptr_fd(int fd, void *ptr, size_t *count_char);
+void	print_hexa_fd(int fd, unsigned int nbr, size_t *count_char, char *base);
+void	print_nbr_fd(int fd, int nbr, size_t *count_char);
+void	print_unbr_fd(int fd, unsigned int nbr, size_t *count_char);
+void	print_char_fd(int fd, char c, size_t *count_char);
+void	print_str_fd(int fd, char *s, size_t *count_char);
+void	print_flag_fd(int fd, va_list args, char *str, size_t *count_char);
+int		ft_printfd(int fd, const char *str, ...);
 /*-------------------------str-------------------------*/
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *str);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(char const *s1, char const *s2);

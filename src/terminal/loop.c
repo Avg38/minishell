@@ -1,4 +1,3 @@
-
 #include "../../include/minishell.h"
 
 void	clear_loop(void)
@@ -13,7 +12,8 @@ void	clear_ctrl_c(int *stdin_cpy, char **line_read)
 	if (*line_read)
 		free(*line_read);
 	*line_read = NULL;
-	dup2(*stdin_cpy);
+	dup2(*stdin_cpy, STDIN_FILENO);
+	close(*stdin_cpy);
 	clear_loop();
 }
 
@@ -66,7 +66,7 @@ void	prompt_loop(t_shell *shell)
 	char	*line_read;
 	int		stdin_cpy;
 
-	signal(SIGINT, sig_handler); 
+	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	signal(SIGTSTP, sig_handler);
 	while (1)

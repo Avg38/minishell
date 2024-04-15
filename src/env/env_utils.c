@@ -58,24 +58,23 @@ char	*env_to_str(t_env *lst)
 	int		j;
 
 	env = (char *)malloc((size_all_value(lst) + 1) * sizeof(char));
+	if (!env)
+		print_and_exit(ERR_MALLOC, RED, 1);
+	i = 0;
 	while (lst)
 	{
 		if (lst->value != NULL)
 		{
 			j = 0;
-			while (lst->value != NULL)
+			while (lst->value[j])
 			{
-				j = 0;
-				while (lst->value[j])
-				{
-					env[i] = lst->value[j++];
-					i++;
-				}
+				env[i] = lst->value[j++];
+				i++;
 			}
-			if (lst->next)
-				env[i++] = '\n';
-			lst = lst->next;
 		}
+		if (lst->next)
+			env[i++] = '\n';
+		lst = lst->next;
 	}
 	env[i] = 0;
 	return (env);

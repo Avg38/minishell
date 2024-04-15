@@ -32,6 +32,7 @@ SRCS	=	\
 			\
 			ft_str/ft_strjoin.c \
 			ft_str/ft_strdup.c\
+			ft_str/ft_strcmp.c \
 			ft_str/ft_tolower.c \
 			ft_str/ft_strtrim.c \
 			ft_str/ft_strlcat.c \
@@ -49,6 +50,8 @@ SRCS	=	\
 			\
 			ft_printf/ft_printf1.c\
 			ft_printf/ft_printf2.c\
+			ft_printf/ft_printfd_utils.c\
+			ft_printf/ft_printfd.c\
 			\
 			gnl/get_next_line.c\
 			gnl/get_next_line_utils.c\

@@ -50,12 +50,12 @@ MESSAGE_DONE		=	$(COLOR_GREEN)Compilation completed.$(COLOR_RESET)
 MESSAGE_CLEAN		=	$(COLOR_PURPLE)Cleaning up...$(COLOR_RESET)
 MESSAGE_CLEAN_DONE	=	$(COLOR_PURPLE)Cleanup completed.$(COLOR_RESET)
 
-all:	force $(NAME)
+all:		force $(NAME)
 
-$(NAME):
+$(NAME):	$(OBJ) libft/libft.a
+		@echo "$(MESSAGE_COMPILE)"
 		@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LINKS) -o $(NAME)
-# @echo $(MESSAGE_COMPILE)
-# @echo $(MESSAGE_DONE)
+		@echo "$(MESSAGE_DONE)"
 
 obj/%.o:	src/%.c include/minishell.h libft/libft.h Makefile | $(OBJDIR)
 		@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
@@ -72,12 +72,12 @@ $(OBJDIR):
 		mkdir -p $(OBJDIR)/utils
 
 clean:
-		echo $(MESSAGE_CLEAN)
+		echo "$(MESSAGE_CLEAN)"
 		@$(RM) $(OBJDIR)
 		@make clean -C libft
-		echo $(MESSAGE_CLEAN_DONE)
+		echo "$(MESSAGE_CLEAN_DONE)"
 
-fclean:
+fclean:		clean
 		@$(RM) $(NAME)
 		@make fclean -C libft
 

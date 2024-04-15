@@ -39,7 +39,7 @@ void	print_path_error(char *arg, int exit_code, int error)
 	if (error == 4)
 		ft_printf_fd(2, ": is a directory");
 	if (error == 5)
-		ft_printf_fd(2, MSG_DOT_ERR);
+		ft_printf_fd(2, ERR_DOT);
 	free_and_exit(exit_code);
 }
 
