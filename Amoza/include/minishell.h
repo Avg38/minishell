@@ -160,6 +160,13 @@ typedef struct e_env
 
 /*
 All structures are contained in minishell structure
+env : une structure pour un double tableau **env, qui
+contiendra toutes les variables d'environnements.
+tknlist : c'est la liste de token avec un pointeur sur le debut,
+et la fin.
+btree: l'arbre binaire qui contient un chque commande tokenise.
+io_global : jsplus
+last_gstatus : contient l'int de sortie, ex: 127 = exit, 130 = Ctrl+C.
 */
 
 typedef struct s_shell

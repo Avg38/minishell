@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void	env_add_back(t_env **env, t_env *new)
 {
@@ -15,7 +15,7 @@ void	env_add_back(t_env **env, t_env *new)
 	}
 }
 
-void	*get_env_name_var(char *dest, char *src)
+void	*get_env_name(char *dest, char *src)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ t_env	*init_env(char **env_array)
 			free_and_exit(1);
 		new->value = ft_strndup(env_array[i], ft_strlen(env_array[i], ENV));
 		if (!new->value)
-			print_and_exit(MSG_MALLOC_ERR, RED, 1);
+			print_and_exit(ERR_MALLOC, RED, 1);
 		new->value = NULL;
 		new->secret = 0;
 		env_add_back(&env, new);
