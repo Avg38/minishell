@@ -270,6 +270,8 @@ bool		s1_is_s2_prefix(char *s1, char *s2);
 void		set_token_index(t_token *cur);
 t_btree	*	parser(t_shell *shell);
 // -------------- verify_syntax.c --------------
+int			printfd_err(int fd, int ret, char *err_msg, char *issue);
+void		verify_syntax_tknlist(t_tknlist *lst);
 
 // ~~~~~~~~~~~~~~ BINARY_TREE ~~~~~~~~~~~~~~
 // -------------- b_tree_utils.c --------------
@@ -307,9 +309,23 @@ void		print_and_exit(char *msg, char *color, int exit_code);
 void		print_without_exit(char *msg, char *color, int exit_code);
 void		print_path_error(char *arg, int exit_code, int error);
 void		print_str_error(char *arg, char *color, int new_status);
-// -------------- utils_error.c --------------
-int			printfd_err(int fd, int ret, char *err_msg, char *issue);
+// -------------- utils_tknlist1.c --------------
+t_token	*create_node(t_tkntype typed, char *value, int linked);
+int	add_node(t_tknlist *list, t_token *node);
+void	init_list(t_tknlist **list);
+// -------------- utils_tknlist2.c --------------
+void	add_after_another(t_tknlist *list, t_token *tkn1, t_token *tkn2);
+void	pop_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
+void	add_tknlist_after_target(t_tknlist *lst1 \
+	, t_token *tkn_flag, t_tknlist *lst2);
+void	swap_tokens(t_tknlist *lst, t_token *tkn1, t_token *tkn2);
+size_t	tknlist_size(t_tknlist *tknlist);
+// -------------- utils_tknlist3.c --------------
+void	unbound_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
+void	tknlist_addfront(t_token *cur, t_tknlist *tknlist);
+void	tknlist_addback(t_token *cur, t_tknlist *tknlist);
 // -------------- utils_tkntype.c --------------
+int			brackets_is_empty(char *content);
 int			tkn_is_logic(t_tkntype tkntype);
 int			tkn_is_cmd(t_tkntype tkntype);
 int			tkn_is_redir(t_tkntype tkntype);
