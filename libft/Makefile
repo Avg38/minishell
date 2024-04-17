@@ -53,6 +53,25 @@ SRCS	=	\
 			ft_printf/ft_printfd_utils.c\
 			ft_printf/ft_printfd.c\
 			\
+			gc/gc_add.c\
+			gc/gc_calloc.c\
+			gc/gc_clear.c\
+			gc/gc_del_one.c\
+			gc/gc_itoa.c\
+			gc/gc_lst_map.c\
+			gc/gc_lstnew.c\
+			gc/gc_malloc.c\
+			gc/gc_ptr.c\
+			gc/gc_realloc.c\
+			gc/gc_split.c\
+			gc/gc_strcut.c\
+			gc/gc_strdup.c\
+			gc/gc_strjoin.c\
+			gc/gc_strmapi.c\
+			gc/gc_strndup.c\
+			gc/gc_strtrim.c\
+			gc/gc_substr.c\
+			\
 			gnl/get_next_line.c\
 			gnl/get_next_line_utils.c\
 

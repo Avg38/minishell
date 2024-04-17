@@ -28,37 +28,31 @@
 # define CYAN	"\x1b[36m"
 
 // FD
-# define FD_READ 0
-# define FD_WRITE 0
-# define FD_IN 0
-# define FD_OUT 0
+# define FD_READ	0
+# define FD_WRITE	0
+# define FD_IN		0
+# define FD_OUT		0
 
 // MESSAGE
-# define ERR_ARGS "Error : Invalid number of arguments.\n"
-# define ERR_UNAVAILABLE_ENV "Minishell: Environment unavailable.\n"
-# define ERR_MALLOC "Minishell: Allocation error\n"
-# define ERR_QUOTES "Minishell: open quotes are not interpreted.\n"
-# define ERR_INFILE "Minishell: open quotes are not interpreted.\n"
-# define ERR_PARENTHESE "Minishell: \
-open parenthesis are not interpreted.\n"
-# define ERR_OPEN_PIPE "Minishell: open pipe are not interpreted.\n"
-# define ERR_OPEN_LOGICAL_OP "Minishell: \
-open logical operators are not interpreted.\n"
-# define ERR_WRONG_CHAR "Minishell: uninterpreted token \
-present outside quotes.\n"
-# define ERR_NEAR_TOKEN "Minishell: syntax error near unexpected token"
-# define ERR_STAR_TOKEN "Minishell: *: ambiguous redirect\n"
-# define ERR_EOF_UNEXPECTED "Minishell: syntax error: unexpected end of file.\n"
-# define ERR_EOF_HEREDOC "Minishell:\
- warning: here-document at line 1 delimited by end-of-file"
-# define ERR_PWD "pwd: error retrieving current directory: getcwd: \
-cannot access parent directories: No such file or directory"
-# define ERR_SHLVL "minishell: warning: shell level (%d) too high, \
-resetting to 1"
-# define ERR_HEREDOC "%sMinishell: warning: here-document \
-at line %d delimited by end-of-file (wanted `%s')%s\n"
-# define ERR_DOT ": filename argument required\n.: \
-usage: . filename [arguments]\n"
+# define ERR_ARGS 				"Error : Invalid number of arguments.\n"
+# define ERR_UNAVAILABLE_ENV	"Minishell: Environment unavailable.\n"
+# define ERR_MALLOC				"Minishell: Allocation error\n"
+# define ERR_QUOTES				"Minishell: open quotes are not interpreted.\n"
+# define ERR_INFILE				"Minishell: open quotes are not interpreted.\n"
+# define ERR_PARENTHESE			"Minishell: open parenthesis are not interpreted.\n"
+# define ERR_OPEN_PIPE			"Minishell: open pipe are not interpreted.\n"
+# define ERR_OPEN_LOGICAL_OP	"Minishell: open logical operators are not interpreted.\n"
+# define ERR_WRONG_CHAR			"Minishell: uninterpreted token present outside quotes.\n"
+# define ERR_NEAR_TOKEN			"Minishell: syntax error near unexpected token"
+# define ERR_STAR_TOKEN			"Minishell: *: ambiguous redirect\n"
+# define ERR_EOF_UNEXPECTED		"Minishell: syntax error: unexpected end of file.\n"
+# define ERR_EOF_HEREDOC		"Minishell:warning: here-document at line 1 delimited by end-of-file"
+# define ERR_PWD				"pwd: error retrieving current directory: getcwd: \
+								cannot access parent directories: No such file or directory"
+# define ERR_SHLVL				"minishell: warning: shell level (%d) too high, resetting to 1"
+# define ERR_HEREDOC			"%sMinishell: warning: here-document at line %d \
+								delimited by end-of-file (wanted `%s')%s\n"
+# define ERR_DOT				": filename argument required\n.: usage: . filename [arguments]\n"
 
 extern int	g_status;
 
@@ -255,23 +249,71 @@ int			is_only_space(char *buffer);
 t_tknlist	*lexer(char *buffer);
 
 // ============== LIBFT_EXTENSION ==============
+// -------------- libft_extension1.c --------------
+char		*ft_strcut(char const *str, size_t cut_begin, size_t cut_end);
+char		*replace_substr(char *str, char *replacement, size_t start, size_t len);
+char		*remove_substr(char *str, size_t start, size_t len_toremove);
+// -------------- libft_extension2.c --------------
+size_t		ft_strlen_utils(const char *str, int (*f)(char));
+size_t		ft_strlen_untils_char(const char *str, char c);
+size_t		ft_strlen_until_not(const char *str, int (*f)(char));
+size_t		ft_strlen_until_not_char(const char *str, char c);
+int			str_contains_all_subs_ordered(char *str, char **subs);
+// -------------- libft_extension3.c --------------
+int			char_is_in_str(char c, char *str);
+int			ft_strcmp_case_insensitive(char *s1, char *s2);
+int			s1_is_s2_suffix(char *s1, char *s2);
+bool		s1_is_s2_prefix(char *s1, char *s2);
 
 // ============== PARSER ==============
 // -------------- parser.c --------------
+void		set_token_index(t_token *cur);
+t_btree	*	parser(t_shell *shell);
+// -------------- verify_syntax.c --------------
+
+// ~~~~~~~~~~~~~~ BINARY_TREE ~~~~~~~~~~~~~~
+// -------------- b_tree_utils.c --------------
+// -------------- b_tree.c --------------
+
+// ~~~~~~~~~~~~~~ EXPANDER ~~~~~~~~~~~~~~
+// -------------- expand_dollars.c --------------
+// -------------- expand_wildcards.c --------------
+// -------------- expander.c --------------
+
+// ~~~~~~~~~~~~~~ LINKER ~~~~~~~~~~~~~~
+// -------------- linker.c --------------
+
+// ~~~~~~~~~~~~~~ REDUCER ~~~~~~~~~~~~~~
+// -------------- reducer.c --------------
+
+// ~~~~~~~~~~~~~~ TKNLIST_HANDLER ~~~~~~~~~~~~~~
+// -------------- recorder_tknlist.c --------------
+// -------------- recorder_tknlist2.c --------------
 
 // ============== TERMINAL ==============
 // -------------- loop.c --------------
+void		clear_loop(void);
+void		clear_ctrl_c(int *stdin_cpy, char **line_read);
+void		sig_handler(int sigcode);
+void		process_shell(t_shell *shell, char *line_read, int *stdin_cpy);
+void		prompt_loop(t_shell *shell);
 // -------------- prompt.c --------------
+char	*create_prompt(t_shell *shell);
 
 // ============== UTILS ==============
 // -------------- ft_exit.c --------------
-void	free_and_exit(int exit_code);
-void	print_and_exit(char *msg, char *color, int exit_code);
-void	print_without_exit(char *msg, char *color, int exit_code);
-void	print_path_error(char *arg, int exit_code, int error);
-void	print_str_error(char *arg, char *color, int new_status);
-
-
+void		free_and_exit(int exit_code);
+void		print_and_exit(char *msg, char *color, int exit_code);
+void		print_without_exit(char *msg, char *color, int exit_code);
+void		print_path_error(char *arg, int exit_code, int error);
+void		print_str_error(char *arg, char *color, int new_status);
+// -------------- utils_error.c --------------
+int			printfd_err(int fd, int ret, char *err_msg, char *issue);
+// -------------- utils_tkntype.c --------------
+int			tkn_is_logic(t_tkntype tkntype);
+int			tkn_is_cmd(t_tkntype tkntype);
+int			tkn_is_redir(t_tkntype tkntype);
+int			tkn_is_operator(t_tkntype tkntype);
 
 // ============== MAIN ==============
 // -------------- main.c --------------

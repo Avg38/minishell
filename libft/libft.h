@@ -73,6 +73,7 @@ void	*gc_malloc(size_t size, int id_gc);
 t_list	**gc_ptr(int gc_id);
 void	*gc_realloc(void *ptr, size_t old_size, size_t new_size, int id_gc);
 char	**gc_split(char const *s, char c, int id_gc);
+char	*gc_strcut(char const *str, size_t cut_begin, size_t cut_end, int gc_id);
 char	*gc_strdup(const char *str, int id_gc);
 char	*gc_strjoin(char const *s1, char const *s2, int id_gc);
 char	*gc_strmapi(char const *s, char (*f)(unsigned int, char), int id_gc);
