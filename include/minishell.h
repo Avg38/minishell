@@ -226,6 +226,28 @@ char		*env_to_str(t_env *lst);
 int			is_in_env(t_env *env, char *args);
 
 // ============== EXEC ==============
+// -------------- browse_heredoc.c --------------
+void		handle_signals_heredoc(char *input, size_t nb_lines, char *delim);
+int			readline_heredoc(t_btree *block, char *line \
+	, size_t *nb_lines, int fd_pipe[2]);
+void		cross_heredoc_node(t_shell *shell, t_btree *block, t_io io_inherited);
+// -------------- browse_node.c --------------
+void		cross_redir_input_node(t_shell *shell, t_btree *block \
+	, t_io io_inherited);
+void		cross_redir_output(t_shell *shell, t_btree *block \
+	, t_io io_inherited);
+void		cross_pipe(t_shell *shell, t_btree *block, t_io io_inherited);
+void		cross_logical_operator(t_shell *shell, t_btree *block \
+	, t_io io_inherited);
+int			cross_brackets(t_shell *shell, t_btree *block, t_io io_inherited);
+// -------------- browse_tree.c --------------
+int			wait_child(pid_t pid);
+void		browse_tree(t_shell *shell, t_btree *bloc, t_io io_inherited);
+// -------------- exec_bin.c --------------
+// -------------- exec_builtins.c --------------
+// -------------- exec_handler.c --------------
+int	exec_handler(t_shell *shell, t_btree *block, t_io fds);
+// -------------- get_path.c --------------
 
 // ============== LEXER ==============
 // -------------- handle_token.c --------------
@@ -300,7 +322,7 @@ void		sig_handler(int sigcode);
 void		process_shell(t_shell *shell, char *line_read, int *stdin_cpy);
 void		prompt_loop(t_shell *shell);
 // -------------- prompt.c --------------
-char	*create_prompt(t_shell *shell);
+char		*create_prompt(t_shell *shell);
 
 // ============== UTILS ==============
 // -------------- ft_exit.c --------------
@@ -310,20 +332,20 @@ void		print_without_exit(char *msg, char *color, int exit_code);
 void		print_path_error(char *arg, int exit_code, int error);
 void		print_str_error(char *arg, char *color, int new_status);
 // -------------- utils_tknlist1.c --------------
-t_token	*create_node(t_tkntype typed, char *value, int linked);
-int	add_node(t_tknlist *list, t_token *node);
-void	init_list(t_tknlist **list);
+t_token		*create_node(t_tkntype typed, char *value, int linked);
+int			add_node(t_tknlist *list, t_token *node);
+void		init_list(t_tknlist **list);
 // -------------- utils_tknlist2.c --------------
-void	add_after_another(t_tknlist *list, t_token *tkn1, t_token *tkn2);
-void	pop_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
-void	add_tknlist_after_target(t_tknlist *lst1 \
+void		add_after_another(t_tknlist *list, t_token *tkn1, t_token *tkn2);
+void		pop_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
+void		add_tknlist_after_target(t_tknlist *lst1 \
 	, t_token *tkn_flag, t_tknlist *lst2);
-void	swap_tokens(t_tknlist *lst, t_token *tkn1, t_token *tkn2);
-size_t	tknlist_size(t_tknlist *tknlist);
+void		swap_tokens(t_tknlist *lst, t_token *tkn1, t_token *tkn2);
+size_t		tknlist_size(t_tknlist *tknlist);
 // -------------- utils_tknlist3.c --------------
-void	unbound_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
-void	tknlist_addfront(t_token *cur, t_tknlist *tknlist);
-void	tknlist_addback(t_token *cur, t_tknlist *tknlist);
+void		unbound_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
+void		tknlist_addfront(t_token *cur, t_tknlist *tknlist);
+void		tknlist_addback(t_token *cur, t_tknlist *tknlist);
 // -------------- utils_tkntype.c --------------
 int			brackets_is_empty(char *content);
 int			tkn_is_logic(t_tkntype tkntype);

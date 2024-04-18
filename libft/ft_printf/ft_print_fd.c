@@ -40,7 +40,7 @@ void	print_flag_fd(int fd, va_list args, char *str, size_t *len)
 		print_char_fd(fd, '%', len);
 }
 
-int	ft_printfd(int fd, const char *str, ...)
+int	ft_print_fd(int fd, const char *str, ...)
 {
 	va_list	args;
 	size_t	i;

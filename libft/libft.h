@@ -110,7 +110,7 @@ void	print_unbr_fd(int fd, unsigned int nbr, size_t *count_char);
 void	print_char_fd(int fd, char c, size_t *count_char);
 void	print_str_fd(int fd, char *s, size_t *count_char);
 void	print_flag_fd(int fd, va_list args, char *str, size_t *count_char);
-int		ft_printfd(int fd, const char *str, ...);
+int		ft_print_fd(int fd, const char *str, ...);
 /*-------------------------str-------------------------*/
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
