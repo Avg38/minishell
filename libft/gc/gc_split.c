@@ -1,14 +1,14 @@
 
 #include "../libft.h"
 
-static void	free_subs(char	**strs, size_t nb_subs, int id_gc)
+static void	free_subs(char	**strs, size_t nb_subs, int gc_id)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < nb_subs)
 	{
-		del_one_garbage(strs, id_gc);
+		gc_del_one(strs, gc_id);
 		strs[i] = NULL;
 		i++;
 	}
@@ -33,7 +33,7 @@ static int	count_subchain(char *s, char c)
 	return (count);
 }
 
-static char	*create_subchain(char *s, char c, int id_gc)
+static char	*create_subchain(char *s, char c, int gc_id)
 {
 	size_t	i;
 	size_t	len;
@@ -44,7 +44,7 @@ static char	*create_subchain(char *s, char c, int id_gc)
 	str = NULL;
 	while (s[len] && s[len] != c)
 		len++;
-	str = (char *)malloc_gc((len + 1) * sizeof(char), id_gc);
+	str = (char *)gc_malloc((len + 1) * sizeof(char), gc_id);
 	if (!str)
 		return (NULL);
 	while (s[i] && s[i] != c)
@@ -56,7 +56,7 @@ static char	*create_subchain(char *s, char c, int id_gc)
 	return (str);
 }
 
-static int	create_strs(char const *s, char **strs, char c, int id_gc)
+static int	create_strs(char const *s, char **strs, char c, int gc_id)
 {
 	size_t	i;
 	size_t	j;
@@ -69,10 +69,10 @@ static int	create_strs(char const *s, char **strs, char c, int id_gc)
 			i++;
 		if (s[i] != '\0')
 		{
-			strs[j] = create_subchain((char *)&s[i], c, id_gc);
+			strs[j] = create_subchain((char *)&s[i], c, gc_id);
 			if (strs[j] == NULL)
 			{
-				free_subs(strs, j, id_gc);
+				free_subs(strs, j, gc_id);
 				return (0);
 			}
 			j++;
@@ -84,7 +84,7 @@ static int	create_strs(char const *s, char **strs, char c, int id_gc)
 	return (1);
 }
 
-char	**gc_split(char const *s, char c, int id_gc)
+char	**gc_split(char const *s, char c, int gc_id)
 {
 	char	**strs;
 	size_t	len_subchain;
@@ -92,10 +92,10 @@ char	**gc_split(char const *s, char c, int id_gc)
 	if (s == NULL)
 		return (NULL);
 	len_subchain = count_subchain((char *)s, c);
-	strs = (char **)malloc_gc((len_subchain + 1) * sizeof(char *), id_gc);
+	strs = (char **)gc_malloc((len_subchain + 1) * sizeof(char *), gc_id);
 	if (!strs)
 		return (NULL);
-	if (!create_strs(s, strs, c, id_gc))
-		return (del_one_garbage(strs, id_gc), NULL);
+	if (!create_strs(s, strs, c, gc_id))
+		return (gc_del_one(strs, gc_id), NULL);
 	return (strs);
 }

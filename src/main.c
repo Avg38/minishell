@@ -55,7 +55,7 @@ int	main(int ac, char **av, char **envp)
 		print_and_exit(ERR_ARGS, RED, 1);
 	if (!envp[0])
 		print_and_exit(ERR_UNAVAILABLE_ENV, RED, 1);
-	shell.env = init_env(envp);
+	shell.env = env_init(envp);
 	shell.io_global = (t_io){0, 1};
 	shell.last_gstatus = 0;
 	singleton_shell(&shell);

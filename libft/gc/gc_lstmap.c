@@ -2,7 +2,7 @@
 #include "../libft.h"
 
 t_list	*gc_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *),
-	int id_gc)
+	int gc_id)
 {
 	t_list	*nlst;
 	t_list	*elem;
@@ -12,10 +12,10 @@ t_list	*gc_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *),
 	nlst = NULL;
 	while (lst)
 	{
-		elem = gc_lstnew(f(lst->content), id_gc);
+		elem = gc_lstnew(f(lst->content), gc_id);
 		if (!elem)
 		{
-			gc_clear(id_gc, del);
+			gc_clear(gc_id, del);
 			return (NULL);
 		}
 		ft_lstadd_back(&nlst, elem);

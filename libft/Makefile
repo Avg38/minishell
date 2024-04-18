@@ -58,7 +58,7 @@ SRCS	=	\
 			gc/gc_clear.c\
 			gc/gc_del_one.c\
 			gc/gc_itoa.c\
-			gc/gc_lst_map.c\
+			gc/gc_lstmap.c\
 			gc/gc_lstnew.c\
 			gc/gc_malloc.c\
 			gc/gc_ptr.c\

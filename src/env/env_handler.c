@@ -15,7 +15,7 @@ void	env_add_back(t_env **env, t_env *new)
 	}
 }
 
-void	*get_env_name(char *dest, char *src)
+void	*env_get_name(char *dest, char *src)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ void	*get_env_name(char *dest, char *src)
 	return (dest);
 }
 
-t_env	*init_env(char **env_array)
+t_env	*env_init(char **env_array)
 {
 	t_env	*env;
 	t_env	*new;
@@ -45,7 +45,7 @@ t_env	*init_env(char **env_array)
 		new = gc_malloc(sizeof(t_env), ENV);
 		if (!new)
 			free_and_exit(1);
-		new->value = ft_strndup(env_array[i], ft_strlen(env_array[i], ENV));
+		new->value = ft_strndup(env_array[i], ft_strlen(env_array[i]), ENV);
 		if (!new->value)
 			print_and_exit(ERR_MALLOC, RED, 1);
 		new->value = NULL;

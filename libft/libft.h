@@ -113,6 +113,7 @@ void	print_flag_fd(int fd, va_list args, char *str, size_t *count_char);
 int		ft_print_fd(int fd, const char *str, ...);
 /*-------------------------str-------------------------*/
 char	**ft_split(char const *s, char c);
+char	*ft_strcat(char *dest, const char *src);
 char	*ft_strchr(const char *s, int c);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *str);

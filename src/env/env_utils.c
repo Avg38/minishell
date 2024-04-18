@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-size_t	strlen_env(t_env *env)
+size_t	env_strlen(t_env *env)
 {
 	size_t	len;
 
@@ -16,7 +16,7 @@ size_t	strlen_env(t_env *env)
 	return (len);
 }
 
-char	*get_env_value(t_env *env, const char *var, size_t len)
+char	*env_get_value(t_env *env, const char *var, size_t len)
 {
 	char	*path;
 

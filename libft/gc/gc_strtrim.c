@@ -29,7 +29,7 @@ static int	len_dest(char const *set, char const *s1)
 	return (end - start);
 }
 
-char	*gc_strtrim(char const *s1, char const *set, int id_gc)
+char	*gc_strtrim(char const *s1, char const *set, int gc_id)
 {
 	char	*dest;
 	size_t	i;
@@ -39,8 +39,8 @@ char	*gc_strtrim(char const *s1, char const *set, int id_gc)
 		return (NULL);
 	len = len_dest(set, s1);
 	if (len <= 0)
-		return (strdup_gc("", id_gc));
-	dest = (char *)malloc_gc((len + 1) * sizeof(char), id_gc);
+		return (gc_strdup("", gc_id));
+	dest = (char *)gc_malloc((len + 1) * sizeof(char), gc_id);
 	if (!dest)
 		return (NULL);
 	i = 0;

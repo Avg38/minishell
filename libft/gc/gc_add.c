@@ -10,5 +10,6 @@ void	*gc_add(void *ptr, int gc_id)
 	element = ft_lstnew(ptr);
 	if (element == NULL)
 		return (free(ptr), NULL);
-	ft_lstadd_front(garbage_ptr(gc_id), element);
+	ft_lstadd_front(gc_ptr(gc_id), element);
+	return (ptr);
 }

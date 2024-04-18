@@ -1,7 +1,7 @@
 
 #include "../libft.h"
 
-char	*gc_substr(char const *s, unsigned int start, size_t len, int id_gc)
+char	*gc_substr(char const *s, unsigned int start, size_t len, int gc_id)
 {
 	char	*dest;
 	size_t	s_len;
@@ -11,7 +11,7 @@ char	*gc_substr(char const *s, unsigned int start, size_t len, int id_gc)
 	s_len = ft_strlen(s);
 	if (start >= s_len)
 	{
-		dest = (char *)malloc_gc(sizeof(char), id_gc);
+		dest = (char *)gc_malloc(sizeof(char), gc_id);
 		if (!dest)
 			return (NULL);
 		dest[0] = '\0';
@@ -19,7 +19,7 @@ char	*gc_substr(char const *s, unsigned int start, size_t len, int id_gc)
 	}
 	if (start + len > s_len)
 		len = s_len - start;
-	dest = (char *)malloc_gc((len + 1) * sizeof(char), id_gc);
+	dest = (char *)gc_malloc((len + 1) * sizeof(char), gc_id);
 	if (!dest)
 		return (NULL);
 	ft_memcpy(dest, &s[start], len);

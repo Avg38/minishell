@@ -1,13 +1,13 @@
 
 #include "../libft.h"
 
-char	*gc_strdup(const char *str, int id_gc)
+char	*gc_strdup(const char *str, int gc_id)
 {
 	char	*result;
 	size_t	length;
 
 	length = ft_strlen(str);
-	result = (char *)malloc_gc((length + 1) * sizeof(char), id_gc);
+	result = (char *)gc_malloc((length + 1) * sizeof(char), gc_id);
 	if (!result)
 		return (NULL);
 	length = 0;

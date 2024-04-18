@@ -10,7 +10,7 @@ int	strlen_2d(char **tab)
 	return (i);
 }
 
-void	sort_env(char **tab, int len_env)
+void	env_sort(char **tab, int len_env)
 {
 	int		i;
 	int		flag;
@@ -64,7 +64,7 @@ void	print_export(char **tab, t_io fds)
 	}
 }
 
-void	print_sorted_env(t_env *env, t_io fds)
+void	env_print_sorted(t_env *env, t_io fds)
 {
 	char	**tab;
 	char	*str_env;

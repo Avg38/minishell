@@ -12,7 +12,7 @@ void	gc_del_one(void *ptr_to_free, int gc_id)
 	if (tmp && tmp->content == ptr_to_free)
 	{
 		*alst = tmp->next;
-		ft_lst_delone(tmp, free);
+		ft_lstdelone(tmp, free);
 		tmp = NULL;
 	}
 	while (tmp && tmp->content != ptr_to_free)

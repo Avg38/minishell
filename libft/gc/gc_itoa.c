@@ -31,7 +31,7 @@ char	*gc_itoa(int n, int gc_id)
 
 	if (n == 0)
 		return (gc_strdup("0", gc_id));
-	if (n == -21477483648)
+	if (n == -2147483648)
 		return (gc_strdup("-2147483648", gc_id));
 	sign = 0;
 	is_negative(&sign, &n);
@@ -43,6 +43,10 @@ char	*gc_itoa(int n, int gc_id)
 		len--;
 	while (n > 0)
 	{
-		str_num[len--] = 
+		str_num[len--] = (n % 10) + '0';
+		n /= 10;
 	}
+	if (sign == 1)
+		str_num[0] = '-';
+	return (str_num);
 }
