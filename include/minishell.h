@@ -411,7 +411,7 @@ int				tkn_is_operator(t_tkntype tkntype);
 // ============== MAIN ==============
 // -------------- main.c --------------
 int				main(int ac, char **av, char **envp);
-t_shell			*singleton_minishell(t_shell *addr_shell);
-void			handle_shell_level(t_env *env, int nb);
+t_shell			*singleton_shell(t_shell *addr_shell);
+void			handle_shlvl(t_env *env, int nb);
 
 #endif

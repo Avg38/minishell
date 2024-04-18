@@ -1,4 +1,3 @@
-
 #include "../../../include/minishell.h"
 
 static void	sort_tknlst_like_wildcard(t_tknlist *list_expnd)

@@ -2,7 +2,7 @@
 
 t_token	*find_prio_token(t_token *cur)
 {
-	t_token *target;
+	t_token	*target;
 
 	target = cur;
 	while (cur && cur->used_flag != 1)
@@ -31,7 +31,7 @@ Pas sur de comprendre ...
 
 t_btree	*btree_new(t_token *tkn_to_convert)
 {
-	t_btree	*node;  //tree_el ? or node ?
+	t_btree	*node; //tree_el ? or node ?
 
 	tkn_to_convert->used_flag = 1;
 	node = gc_calloc(1, sizeof(t_btree), B_TREE);

@@ -31,7 +31,7 @@ void	exec_process(t_btree *block, t_env *env, t_io fds)
 {
 	char		cmd_path;
 	struct stat	stats;
-	
+
 	cmd_path = handle_path(block, env);
 	if (sup2(fds.fd_in, STDIN_FILENO) == -1)
 		print_and_exit(strerror(errno), RED, 1);

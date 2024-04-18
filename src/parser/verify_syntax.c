@@ -1,4 +1,3 @@
-
 #include "../../include/minishell.h"
 
 int	printfd_err(int fd, int ret, char *err_msg, char *issue)
@@ -36,9 +35,11 @@ static int	verif_body(t_token *curr)
 {
 	while (curr && curr->next && g_status == 0)
 	{
-		if ((tkn_is_operator(curr->type) || tkn_is_redir(curr->type)) && tkn_is_operator(curr->next->type))
+		if ((tkn_is_operator(curr->type)
+			|| tkn_is_redir(curr->type)) && tkn_is_operator(curr->next->type))
 			return (printfd_err(2, 2, ERR_NEAR_TOKEN, curr->next->type));
-		if (tkn_is_redir(curr->type) && curr->next->type == WORD && char_is_in_str('*', curr->next->content))
+		if (tkn_is_redir(curr->type) && curr->next->type == WORD
+			&& char_is_in_str('*', curr->next->content))
 			return (printfd_err(2, 1, ERR_STAR_TOKEN, NULL));
 		if (curr->type == PARENTHESE && brackets_is_empty(curr->content) == 1)
 			return (printfd_err(2, 2, ERR_NEAR_TOKEN, "("));

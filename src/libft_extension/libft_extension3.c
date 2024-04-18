@@ -3,7 +3,7 @@
 int	char_is_in_str(char c, char *str)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (str[i])
 	{
@@ -22,7 +22,7 @@ int	ft_strcmp_case_insensitive(char *s1, char *s2)
 	while (s1[i])
 	{
 		if (ft_tolower(s1[i]) != ft_tolower(s2[i]))
-			break;
+			break ;
 		i++;
 	}
 	return (ft_tolower(s1[i] - ft_tolower(s2[i])));

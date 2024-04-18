@@ -1,4 +1,3 @@
-
 #include "../../../include/minishell.h"
 
 int	is_link_sensitive(t_tkntype type)

@@ -1,4 +1,3 @@
-
 #include "../../../include/minishell.h"
 
 t_token	*return_end_sequence(t_token *begin_seq)

@@ -37,12 +37,12 @@ void	cross_heredoc(t_shell *shell, t_btree *block, t_io io_inherited)
 	while (line)
 	{
 		if (readline_heredoc(block, line, &nb_lines, fd_pipe) == 1)
-			break;
+			break ;
 		line = readline("> ");
 	}
 	handle_signals_heredoc(line, nb_lines, block->cmds[0]);
 	close(fd_pipe[FD_WRITE]);
-	if(io_inherited.fd_in != 0)
+	if (io_inherited.fd_in != 0)
 		close(io_inherited.fd_in);
 	io_transmitted.fd_in = fd_pipe[FD_READ];
 	browse_tree(shell, block->left, io_transmitted);

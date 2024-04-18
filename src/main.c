@@ -4,7 +4,7 @@
 cette fonction sert a ....
 */
 
-t_shell	*singleton_minishell(t_shell *addr_shell)
+t_shell	*singleton_shell(t_shell *addr_shell)
 {
 	static t_shell	*shell_todeliver;
 
@@ -17,7 +17,7 @@ t_shell	*singleton_minishell(t_shell *addr_shell)
 
 */
 
-void	handle_shell_level(t_env *env, int nb)
+void	handle_shlvl(t_env *env, int nb)
 {
 	char	*shell_level;
 	int		lvl;
@@ -39,7 +39,7 @@ void	handle_shell_level(t_env *env, int nb)
 	if (!shell_level)
 		print_and_exit(ERR_MALLOC, RED, 1);
 	is_in_env(env, shell_level);
-	rl_outstream = stderr; //?
+	rl_outstream = stderr; //???
 }
 
 /*

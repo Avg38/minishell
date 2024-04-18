@@ -1,4 +1,3 @@
-
 #include "../../../include/minishell.h"
 
 int	type_need_reducing(t_tkntype type)

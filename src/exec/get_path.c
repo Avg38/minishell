@@ -64,7 +64,7 @@ char	**find_path(t_env *env)
 	return (path_split);
 }
 
-char *get_cmd_path(char *cmd, t_env *env)
+char	*get_cmd_path(char *cmd, t_env *env)
 {
 	char	*exec;
 	char	**path_env;

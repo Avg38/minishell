@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gemartel <gemartel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 13:47:27 by gemartel          #+#    #+#             */
-/*   Updated: 2024/03/07 10:51:49 by gemartel         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:57:44 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	exec_builtin( t_env **envt, t_btree *tree_el, t_io fds)
 		status = builtin_exit(singleton_mini(NULL), tree_el->cmds);
 	return (status);
 }
-
+// A modifier pour que les commandes s'execute toutes en paralelles
 int	fork_builtin(t_env **envt, t_btree *tree_el, t_io fds)
 {
 	pid_t	pid;

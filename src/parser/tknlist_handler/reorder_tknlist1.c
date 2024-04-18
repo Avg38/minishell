@@ -1,4 +1,3 @@
-
 #include "../../../include/minishell.h"
 
 static	void	extract_tkn_in_another_tknlist(t_token *tkn, \
