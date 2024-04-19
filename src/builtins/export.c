@@ -3,7 +3,7 @@
 int	print_error_export(char *args, int error)
 {
 	if (error == 1)
-		ft_printfd(2, "%sMinishell: export: `%s': not a valid identifier\n%s",
+		ft_printf_fd(2, "%sMinishell: export: `%s': not a valid identifier\n%s",
 			RED, args, RESET);
 	return (1);
 }
@@ -73,7 +73,7 @@ int	ft_export(char **args, t_env **envt, t_io fds)
 	i = 1;
 	if (!args[1])
 	{
-		print_sorted_env(*envt, fds);
+		env_print_sorted(*envt, fds);
 		return (0);
 	}
 	else

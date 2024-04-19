@@ -42,7 +42,7 @@ int	go_to_path(t_env **env)
 	int		ret;		// value to return
 
 	env_path = NULL;
-	env_path = get_env_value(*env, "HOME=", 4);
+	env_path = env_get_value(*env, "HOME=", 4);
 	if (!env_path)
 		free_and_exit(1);
 	else if (ft_strcmp(env_path, "") == 0)
@@ -65,7 +65,7 @@ int	process_cd(char **cmds, t_env **env)
 	ret_cd = chdir(cmds[1]);
 	if (ret_cd < 0)
 	{
-		ft_printfd(2, "Minishell: cd: %s: %s\n", cmds[1], strerror(errno));
+		ft_printf_fd(2, "Minishell: cd: %s: %s\n", cmds[1], strerror(errno));
 		return (1);
 	}
 	if (ft_strcmp(cmds[1], "//") == 0) // ?
@@ -80,6 +80,6 @@ int	cd(char **cmds, t_env **env)
 	if (cmds[1] == NULL)
 		return (go_to_path(env));
 	else if (cmds[2])
-		return (ft_printfd(2, "Minishell: cd: too many arguments\n"), 1);
+		return (ft_printf_fd(2, "Minishell: cd: too many arguments\n"), 1);
 	return (process_cd(cmds, env));
 }

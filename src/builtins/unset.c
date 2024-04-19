@@ -49,7 +49,7 @@ int	unset(char **value, t_env **env)
 		if (value[i][0] == 0)
 			return (print_without_exit \
 				("Minishell: unset: `': not a valid identifier\n", RED, 1), 1);
-		if (ft_strcmp(value[i], (*env)->value
+		if (ft_strncmp(value[i], (*env)->value
 				, (int)env_size((*env)->value)) == 0)
 		{
 			tmp = *env;

@@ -49,7 +49,7 @@ void	print_str_error(char *arg, char *color, int new_status)
 	ft_printf_fd(2, "Minishell: ");
 	if (arg)
 		ft_printf_fd(2, "%s: ", arg);
-	ft_printf_fd(2, "%s\n", str_error(errno));
+	ft_printf_fd(2, "%s\n", strerror(errno));
 	write(2, RESET, ft_strlen(RESET));
 	g_status = new_status;
 }

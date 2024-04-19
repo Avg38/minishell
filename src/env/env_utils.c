@@ -24,7 +24,7 @@ char	*env_get_value(t_env *env, const char *var, size_t len)
 	{
 		if (ft_strncmp(env->value, var, len) == 0)
 		{
-			path = strdup_gc(&env->value[len + 1], TMP);
+			path = gc_strdup(&env->value[len + 1], TMP);
 			if (!path)
 				print_and_exit(ERR_MALLOC, RED, 1);
 			return (path);
@@ -85,10 +85,10 @@ int	is_in_env(t_env *env, char *args)
 	char	var_name[PATH_MAX]; //PATH MAX ?
 	char	env_name[PATH_MAX]; //jsp, ah si c le nb de variable d'environnement max
 
-	get_env_name(var_name, args);
+	env_get_name(var_name, args);
 	while (env)
 	{
-		get_env_name(env_name, env->value);
+		env_get_name(env_name, env->value);
 		if (ft_strcmp(var_name, env_name) == 0)
 		{
 			gc_del_one(env->value, ENV);

@@ -7,7 +7,7 @@ int	env(t_env *env, t_io fds)
 		if (env->secret == 0 && env->value != NULL)
 		{
 			ft_putstr_fd(env->value, fds.fd_out);
-			wwrite(fds.fd_out, "\n", 1);
+			write(fds.fd_out, "\n", 1);
 		}
 		env = env->next;
 	}

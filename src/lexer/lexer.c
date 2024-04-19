@@ -52,7 +52,7 @@ void	handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i)
 {
 	if (type == IN || type == OUT || type == HEREDOC || type == APPEND)
 		*i += handle_file(buffer, list, type);
-	else if (type == pipe)
+	else if (type == PIPE)
 		*i += handle_pipe(buffer, list);
 	else if (type == AND || type == OR)
 		*i += handle_operator(buffer, list, type);
@@ -79,7 +79,7 @@ int	is_only_space(char *buffer)
 		return (1);
 	while (buffer[i])
 	{
-		if (is_space(buffer[i]))
+		if (isspace(buffer[i]))
 			return (0);
 		i++;
 	}

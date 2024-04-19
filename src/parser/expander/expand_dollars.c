@@ -14,7 +14,7 @@ static	t_token	*dollar_detected(t_shell *shell, char *to_expand, \
 	{
 		*var_len = 1;
 		return (create_node(type, \
-				itoa_gc(shell->last_gstatus, TKN_LIST), 1));
+				gc_itoa(shell->last_gstatus, TKN_LIST), 1));
 	}
 	else if (ft_isdigit(to_expand[1]))
 	{
@@ -25,11 +25,11 @@ static	t_token	*dollar_detected(t_shell *shell, char *to_expand, \
 	{
 		*var_len = 1;
 		return (create_node(type, \
-				strndup_gc(to_expand, *var_len + 1, TKN_LIST), 1));
+				gc_strndup(to_expand, *var_len + 1, TKN_LIST), 1));
 	}
 	*var_len = ft_strlen_until_not(&to_expand[1], is_charset_env);
 	return (create_node(type, \
-			get_env_value(shell->env, &to_expand[1], *var_len), 1));
+			env_get_value(shell->env, &to_expand[1], *var_len), 1));
 }
 
 static	t_token	*dollar_undetected(char *to_expand, \
@@ -37,7 +37,7 @@ static	t_token	*dollar_undetected(char *to_expand, \
 {
 	*var_len = ft_strlen_until_char(&to_expand[0], '$') - 1;
 	return (create_node(type,
-			strndup_gc(to_expand, *var_len + 1, TKN_LIST), 1));
+			gc_strndup(to_expand, *var_len + 1, TKN_LIST), 1));
 }
 
 static void	lstadd_dollar_expansions(t_shell *shell, \
@@ -69,10 +69,10 @@ t_token	*expand_dollar(t_shell *shell
 	t_tknlist	*dollar_lst;
 
 	init_list(&dollar_lst);
-	lstadd_dollar_expansion(shell, tkn_to_expand->type \
+	lstadd_dollar_expansions(shell, tkn_to_expand->type \
 		, tkn_to_expand->content, dollar_lst);
 	dollar_lst->tail->link = tkn_to_expand->link;
-	add_tknlst_in_tknlst_after_target(tkn_lst, tkn_to_expand, dollar_lst);
+	add_tknlist_after_target(tkn_lst, tkn_to_expand, dollar_lst);
 	pop_token_in_place(tkn_lst, tkn_to_expand);
 	return (dollar_lst->tail);
 }

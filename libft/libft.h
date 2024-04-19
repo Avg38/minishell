@@ -110,7 +110,7 @@ void	print_unbr_fd(int fd, unsigned int nbr, size_t *count_char);
 void	print_char_fd(int fd, char c, size_t *count_char);
 void	print_str_fd(int fd, char *s, size_t *count_char);
 void	print_flag_fd(int fd, va_list args, char *str, size_t *count_char);
-int		ft_print_fd(int fd, const char *str, ...);
+int		ft_printf_fd(int fd, const char *str, ...);
 /*-------------------------str-------------------------*/
 char	**ft_split(char const *s, char c);
 char	*ft_strcat(char *dest, const char *src);
@@ -132,5 +132,10 @@ int		ft_tolower(int c);
 int		ft_toupper(int c);
 /*-------------------------gnl-------------------------*/
 char	*get_next_line(int fd);
+/*-------------------------2d-------------------------*/
+char	**dup_2d(char **tab);
+void	free_2d(char **tab);
+size_t	len_2d(char **tab);
+void	putchar_2d(char **tab);
 
 #endif

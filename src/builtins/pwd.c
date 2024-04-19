@@ -5,7 +5,7 @@ int	pwd(t_io fds, t_env *env)
 	char	*cwd;
 	char	buffer[PATH_MAX];
 
-	cwd = get_env_value(env, "PWD", 3);
+	cwd = env_get_value(env, "PWD", 3);
 	if (cwd[0] == 0)
 		cwd = getcwd(buffer, sizeof(buffer));
 	if (cwd == NULL)

@@ -211,6 +211,8 @@ int				export_handler(char *args, t_env **env);
 int				ft_export(char **args, t_env **envt, t_io fds);
 // -------------- pwd.c --------------
 int				pwd(t_io fds, t_env *env);
+// -------------- unset.c --------------
+int				unset(char **value, t_env **env);
 
 // ============== ENV ==============
 // -------------- env_handler.c --------------
@@ -224,7 +226,7 @@ void			print_export(char **tab, t_io fds);
 void			env_print_sorted(t_env *env, t_io fds);
 // -------------- env_utils.c --------------
 size_t			env_strlen(t_env *env);
-char			*get_env_value(t_env *env, const char *var, size_t len);
+char			*env_get_value(t_env *env, const char *var, size_t len);
 size_t			size_all_value(t_env *lst);
 char			*env_to_str(t_env *lst);
 int				is_in_env(t_env *env, char *args);
@@ -269,6 +271,7 @@ char			*get_cmd_path(char *cmd, t_env *env);
 // -------------- handle_token.c --------------
 int				handle_file(char *buffer, t_tknlist *list, t_tkntype type);
 int				handle_pipe(char *buffer, t_tknlist *list);
+int				handle_operator(char *buffer, t_tknlist *list, t_tkntype type);
 int				handle_s_quote(char *buffer, t_tknlist *list);
 int				handle_d_quote(char *buffer, t_tknlist *list);
 // -------------- handle_token2.c --------------
@@ -293,7 +296,7 @@ char			*replace_substr(char *str, char *replacement, size_t start, size_t len);
 char			*remove_substr(char *str, size_t start, size_t len_toremove);
 // -------------- libft_extension2.c --------------
 size_t			ft_strlen_utils(const char *str, int (*f)(char));
-size_t			ft_strlen_untils_char(const char *str, char c);
+size_t			ft_strlen_until_char(const char *str, char c);
 size_t			ft_strlen_until_not(const char *str, int (*f)(char));
 size_t			ft_strlen_until_not_char(const char *str, char c);
 int				str_contains_all_subs_ordered(char *str, char **subs);
@@ -326,24 +329,10 @@ t_btree			*create_bin_tree(t_tknlist *tknlst);
 
 // ~~~~~~~~~~~~~~ EXPANDER ~~~~~~~~~~~~~~
 // -------------- expand_dollars.c --------------
-static int		is_charset_env(char c);
-static t_token	*dollar_detected(t_shell *shell, char *to_expand, \
-	size_t *var_len, t_tkntype type);
-static t_token	*dollar_undetected(char *to_expand, \
-	size_t *var_len, t_tkntype type);
-static void		lstadd_dollar_expansions(t_shell *shell, \
-	t_tkntype tkntype, char *to_expand, t_tknlist *dollar_lst);
 t_token			*expand_dollar(t_shell *shell, t_token *tkn_to_expand, t_tknlist *tkn_lst);
 // -------------- expand_wildcards.c --------------
-static void		sort_tknlst_like_wildcard(t_tknlist *list_expnd);
-static int		is_compatible_file_wildcard(char *file, \
-	char **subs_needed, char *to_expand);
-static void		lstadd_wildcard_expansions(t_tknlist *wildcard_lst, \
-	char **subs_needed, char *to_expand);
 t_token			*expand_wildcard(t_token *tkn_toexpand, t_tknlist *tkn_lst);
 // -------------- expander.c --------------
-static bool		is_dollar_expansible(t_token *tkn);
-static bool		is_wildcard_expansible(t_token *tkn);
 void			expander(t_shell *shell, t_tknlist *tknlist);
 
 // ~~~~~~~~~~~~~~ LINKER ~~~~~~~~~~~~~~
@@ -354,16 +343,10 @@ void			linker(t_tknlist *tkn_lst);
 // ~~~~~~~~~~~~~~ REDUCER ~~~~~~~~~~~~~~
 // -------------- reducer.c --------------
 int				type_need_reducing(t_tkntype type);
-static char		*reduce_content(t_token *tkn);
 void			reducer(t_token	*tkn);
 
 // ~~~~~~~~~~~~~~ TKNLIST_HANDLER ~~~~~~~~~~~~~~
 // -------------- recorder_tknlist.c --------------
-static	void	extract_tkn_in_another_tknlist(t_token *tkn, \
-		t_tknlist *tknlst_src, t_tknlist *tknlst_dest);
-static void		reinsert_ordered_sequence(t_tknlist *tknlst, \
-		t_token *tkn_before, t_token *tkn_after, t_tknlist *reordered_lst);
-static t_token	*reorder_sequence(t_tknlist *tknlst, t_token *cur);
 void			rearrange_cmd_redir_order(t_tknlist *tknlst);
 // -------------- recorder_tknlist2.c --------------
 t_token			*return_end_sequence(t_token *begin_seq);
@@ -385,7 +368,7 @@ void			free_and_exit(int exit_code);
 void			print_and_exit(char *msg, char *color, int exit_code);
 void			print_without_exit(char *msg, char *color, int exit_code);
 void			print_path_error(char *arg, int exit_code, int error);
-void			print_str_error(char *arg, char *color, int new_status);
+void			print_strerror(char *arg, char *color, int new_status);
 // -------------- utils_tknlist1.c --------------
 t_token			*create_node(t_tkntype typed, char *value, int linked);
 int				add_node(t_tknlist *list, t_token *node);

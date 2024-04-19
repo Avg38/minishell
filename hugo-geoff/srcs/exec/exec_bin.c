@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gemartel <gemartel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 14:31:50 by gemartel          #+#    #+#             */
-/*   Updated: 2024/04/18 18:58:19 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:03:24 by gemartel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ char	*path_handler(t_btree *tree_el, t_env *env)
 }
 
 /*remplacer lexit par waitchild*/
-// A modifier pour que les commandes s'execute toutes en paralelles
 int	exec_bin(t_env *env, t_btree *tree_el, t_io fds)
 {
 	pid_t	pid;

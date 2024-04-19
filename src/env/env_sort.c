@@ -69,12 +69,12 @@ void	env_print_sorted(t_env *env, t_io fds)
 	char	**tab;
 	char	*str_env;
 
-	str_env = env_str(env);
+	str_env = env_to_str(env);
 	tab = ft_split(str_env, '\n');
 	free(str_env);
 	if (!tab)
 		print_and_exit(ERR_MALLOC, RED, 1);
-	sort_env(tab, strlen_2d(tab));
+	env_sort(tab, strlen_2d(tab));
 	print_export(tab, fds);
 	free_2d(tab);
 }

@@ -5,7 +5,7 @@ size_t	count_argc_cmd(t_token *cur)
 	size_t	argc;
 
 	argc = 0;
-	while (cur && is_cmd_tkn(cur->type))
+	while (cur && tkn_is_cmd(cur->type))
 	{
 		argc++;
 		cur = cur->next;

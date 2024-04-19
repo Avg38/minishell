@@ -21,11 +21,11 @@ void	linker(t_tknlist *tkn_lst)
 		if (next && cur->link == 1 \
 			&& is_link_sensitive(cur->type) && is_link_sensitive(next->type))
 		{
-			new_content = strjoin_gc(cur->content, next->content, TKN_LIST);
+			new_content = gc_strjoin(cur->content, next->content, TKN_LIST);
 			if (!new_content)
 				print_and_exit(ERR_MALLOC, RED, 1);
 			cur->link = next->link;
-			del_one_garbage(cur->content, TKN_LIST);
+			gc_del_one(cur->content, TKN_LIST);
 			pop_token_in_place(tkn_lst, next);
 			cur->content = new_content;
 			continue ;

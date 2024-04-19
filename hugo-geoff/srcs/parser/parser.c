@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gemartel <gemartel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 15:01:57 by gemartel          #+#    #+#             */
-/*   Updated: 2024/04/08 14:48:30 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:01:59 by gemartel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_btree	*parser(t_mini *mini)
 	reducer(mini->tkn_lst->head);
 	expander(mini, mini->tkn_lst);
 	linker(mini->tkn_lst);
-	
 	rearrange_cmd_redir_order(mini->tkn_lst);
 	set_token_index(mini->tkn_lst->head);
 	return (create_bin_tree(mini->tkn_lst));

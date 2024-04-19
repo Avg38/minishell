@@ -27,46 +27,46 @@ char	**env_to_char2(t_env *env)
 	return (env_2d);
 }
 
-void	exec_process(t_btree *block, t_env *env, t_io fds)
+void	exec_process(t_btree *node, t_env *env, t_io fds)
 {
-	char		cmd_path;
+	char		*cmd_path;
 	struct stat	stats;
 
-	cmd_path = handle_path(block, env);
-	if (sup2(fds.fd_in, STDIN_FILENO) == -1)
+	cmd_path = handle_path(node, env);
+	if (dup2(fds.fd_in, STDIN_FILENO) == -1)
 		print_and_exit(strerror(errno), RED, 1);
-	if (sup2(fds.fd_out, STDIN_FILENO) == -1)
+	if (dup2(fds.fd_out, STDIN_FILENO) == -1)
 		print_and_exit(strerror(errno), RED, 1);
 	if (fds.fd_out != 1)
 		close(fds.fd_out);
 	if (fds.fd_in != 0)
 		close(fds.fd_in);
-	if (lstat(cmd_path, &stat) != -1)
+	if (lstat(cmd_path, &stats) != -1)
 	{
 		if ((stats.st_mode & S_IXUSR) && (stats.st_mode & S_IFREG))
 		{
-			execve(cmd_path, block->cmds, env_to_char2(env));
+			execve(cmd_path, node->cmds, env_to_char2(env));
 			print_and_exit(strerror(errno), RED, 1);
 		}
 		else
-			print_path_error(block->cmds[0], 126, 2);
+			print_path_error(node->cmds[0], 126, 2);
 	}
 	else
-		print_path_error(block->cmds[0], 127, 3);
+		print_path_error(node->cmds[0], 127, 3);
 }
 
-char	*handle_path(t_btree *block, t_env *env)
+char	*handle_path(t_btree *node, t_env *env)
 {
 	char	*cmd_path;
 	char	*cmd;
 
-	cmd = block->cmds[0];
+	cmd = node->cmds[0];
 	cmd_path = NULL;
 	if (!cmd)
 		free_and_exit(1);
 	else if (cmd && (cmd[0] == '.' || cmd[0] == '\\' || cmd[0] == '/'))
 	{
-		if (ft_strcmp(cmd, '.') == 0 && !block->cmds[1])
+		if (ft_strcmp(cmd, ".") == 0 && !node->cmds[1])
 			print_path_error(cmd, 2, 5);
 		else if (ft_strcmp(cmd, "..") == 0)
 			print_path_error(cmd, 127, 1);
@@ -79,18 +79,19 @@ char	*handle_path(t_btree *block, t_env *env)
 	return (cmd_path);
 }
 
-int	exec_bin(t_env *env, t_btree *block, t_io fds)
+int	exec_bin(t_env *env, t_btree *node, t_io fds)
 {
 	pid_t	pid;
 	int		status;
 	int		exit_code;
 
 	status = 0;
+	exit_code = 0;
 	pid = fork();
 	if (pid == -1)
 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
 	if (pid == 0)
-		exec_process(block, env, fds);
+		exec_process(node, env, fds);
 	waitpid(pid, &status, 0);
 	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
 	{

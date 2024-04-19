@@ -8,7 +8,7 @@ int	handle_file(char *buffer, t_tknlist *list, t_tkntype type)
 		i = 2;
 	else
 		i = 1;
-	if (!add_node(list, create_node(type, ft_strndp(buffer, i, TKN_LIST), 1)))
+	if (!add_node(list, create_node(type, ft_strndup(buffer, i, TKN_LIST), 1)))
 		print_and_exit(ERR_MALLOC, RED, 1);
 	return (i);
 }

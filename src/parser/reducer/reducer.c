@@ -42,8 +42,8 @@ void	reducer(t_token	*tkn)
 			new_content = reduce_content(tkn);
 			if (!new_content)
 				print_and_exit(ERR_MALLOC, RED, 1);
-			add_to_garbage(new_content, TKN_LIST);
-			del_one_garbage(tkn->content, TKN_LIST);
+			gc_add(new_content, TKN_LIST);
+			gc_del_one(tkn->content, TKN_LIST);
 			tkn->content = new_content;
 		}
 		tkn = tkn->next;

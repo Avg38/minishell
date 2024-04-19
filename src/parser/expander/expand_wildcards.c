@@ -8,7 +8,7 @@ static void	sort_tknlst_like_wildcard(t_tknlist *list_expnd)
 	size_t		lst_size;
 
 	i = 0;
-	lst_size = tknlst_size(list_expnd);
+	lst_size = tknlist_size(list_expnd);
 	while (i < lst_size)
 	{
 		cur = list_expnd->head;
@@ -37,7 +37,7 @@ static int	is_compatible_file_wildcard(char *file, \
 	if (!str_contains_all_subs_ordered(file, subs_needed))
 		return (0);
 	if (to_expand[ft_strlen(to_expand) - 1] != '*' \
-		&& !s1_is_s2_suffix(subs_needed[char2len(subs_needed) - 1], file))
+		&& !s1_is_s2_suffix(subs_needed[len_2d(subs_needed) - 1], file))
 		return (0);
 	return (1);
 }
@@ -55,7 +55,7 @@ static void	lstadd_wildcard_expansions(t_tknlist *wildcard_lst, \
 	{
 		if (is_compatible_file_wildcard(entry->d_name, subs_needed, to_expand))
 		{
-			new_tkn = create_node(WORD, strdup_gc(entry->d_name, TKN_LIST), 0);
+			new_tkn = create_node(WORD, gc_strdup(entry->d_name, TKN_LIST), 0);
 			if (!new_tkn)
 			{
 				closedir(dir);
@@ -74,15 +74,15 @@ t_token	*expand_wildcard(t_token *tkn_toexpand, t_tknlist *tkn_lst)
 	t_tknlist	*wildcard_lst;
 	char		**splitted;
 
-	splitted = split_gc(tkn_toexpand->content, '*', TMP);
+	splitted = gc_split(tkn_toexpand->content, '*', TMP);
 	init_list(&wildcard_lst);
 	lstadd_wildcard_expansions(wildcard_lst, splitted, tkn_toexpand->content);
 	if (!wildcard_lst->head)
 		return (tkn_toexpand);
 	sort_tknlst_like_wildcard(wildcard_lst);
-	add_tknlst_in_tknlst_after_target(tkn_lst, tkn_toexpand, wildcard_lst);
+	add_tknlist_after_target(tkn_lst, tkn_toexpand, wildcard_lst);
 	pop_token_in_place(tkn_lst, tkn_toexpand);
 	tkn_toexpand = wildcard_lst->head;
-	clear_garbage(TMP, free);
+	gc_clear(TMP, free);
 	return (wildcard_lst->tail);
 }

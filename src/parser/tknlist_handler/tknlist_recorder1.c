@@ -5,7 +5,7 @@ t_token	*return_end_sequence(t_token *begin_seq)
 	t_token	*cur;
 
 	cur = begin_seq;
-	while (cur && !is_operator_tkn(cur->type))
+	while (cur && !tkn_is_operator(cur->type))
 	{
 		cur = cur->next;
 	}
@@ -19,7 +19,7 @@ size_t	size_sequence(t_token *begin_seq)
 
 	cur = begin_seq;
 	i = 0;
-	while (cur && !is_operator_tkn(cur->type))
+	while (cur && !tkn_is_operator(cur->type))
 	{
 		i++;
 		cur = cur->next;

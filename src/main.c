@@ -22,7 +22,7 @@ void	handle_shlvl(t_env *env, int nb)
 	char	*shell_level;
 	int		lvl;
 
-	lvl = ft_atoi(get_env_value(env, "SHLVL", 5));
+	lvl = ft_atoi(env_get_value(env, "SHLVL", 5));
 	if (lvl >= 999)
 	{
 		ft_printf_fd(2, ERR_SHLVL, lvl + 1);
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_shell	shell;
 
-	(void) ac;
+	(void)av;
 	if (ac > 1)
 		print_and_exit(ERR_ARGS, RED, 1);
 	if (!envp[0])
@@ -61,4 +61,5 @@ int	main(int ac, char **av, char **envp)
 	singleton_shell(&shell);
 	handle_shlvl(shell.env, 1);
 	prompt_loop(&shell);
+	return (0);
 }

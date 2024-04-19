@@ -3,9 +3,9 @@
 int	printfd_err(int fd, int ret, char *err_msg, char *issue)
 {
 	if (issue)
-		ft_printfd(fd, "%s%s `%s'%s\n", RED, err_msg, issue, RESET);
+		ft_printf_fd(fd, "%s%s `%s'%s\n", RED, err_msg, issue, RESET);
 	else
-		ft_printfd(fd, "%s%s%s\n", RED, err_msg, RESET);
+		ft_printf_fd(fd, "%s%s%s\n", RED, err_msg, RESET);
 	return (ret);
 }
 
@@ -37,7 +37,7 @@ static int	verif_body(t_token *curr)
 	{
 		if ((tkn_is_operator(curr->type)
 			|| tkn_is_redir(curr->type)) && tkn_is_operator(curr->next->type))
-			return (printfd_err(2, 2, ERR_NEAR_TOKEN, curr->next->type));
+			return (printfd_err(2, 2, ERR_NEAR_TOKEN, curr->next->content)); //ligne a verifier
 		if (tkn_is_redir(curr->type) && curr->next->type == WORD
 			&& char_is_in_str('*', curr->next->content))
 			return (printfd_err(2, 1, ERR_STAR_TOKEN, NULL));

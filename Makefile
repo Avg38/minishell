@@ -23,7 +23,7 @@ SRC		=	\
 			src/exec/exec_handler.c\
 			src/exec/get_path.c\
 			\
-			src/lexer/handle_token.c\
+			src/lexer/handle_token1.c\
 			src/lexer/handle_token2.c\
 			src/lexer/lexer_utils.c\
 			src/lexer/lexer.c\
@@ -35,7 +35,7 @@ SRC		=	\
 			src/parser/binary_tree/bin_tree.c\
 			src/parser/binary_tree/bin_tree_utils.c\
 			src/parser/expander/expand_dollars.c\
-			src/parser/expander/expand_wildcard.c\
+			src/parser/expander/expand_wildcards.c\
 			src/parser/expander/expander.c\
 			src/parser/linker/linker.c\
 			src/parser/expander/expander.c\
@@ -56,12 +56,10 @@ SRC		=	\
 			\
 			src/main.c
 
-
-OBJDIR	=	obj
+OBJDIR	=	obj/
 OBJ		=	$(patsubst src/%.c, obj/%.o, $(SRC))
 
-
-CC			=	gcc -g
+CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 INCLUDES	=	-Iinclude -Ilibft
 LINKS		=	-Llibft -lft
@@ -83,41 +81,92 @@ MESSAGE_CLEAN_DONE	=	$(COLOR_PURPLE)Cleanup completed.$(COLOR_RESET)
 all:		force $(NAME)
 
 $(NAME):	$(OBJ) libft/libft.a
-		echo "$(MESSAGE_COMPILE)"
-		$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LINKS) -o $(NAME)
-		echo "$(MESSAGE_DONE)"
+		@echo "$(MESSAGE_COMPILE)"
+		@$(CC) $(CFLAGS) $(INCLUDES) $(OBJ) $(LINKS) -o $(NAME)
+		@echo "$(MESSAGE_DONE)"
 
 obj/%.o:	src/%.c include/minishell.h libft/libft.h Makefile | $(OBJDIR)
 		@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+# $(OBJDIR):
+# 	mkdir -p $(OBJDIR) \
+# 	$(OBJDIR)builtins $(OBJDIR)env $(OBJDIR)/exec \
+# 	$(OBJDIR)lexer $(OBJDIR)libft_extension \
+# 	$(OBJDIR)parser $(OBJDIR)parser/binary_tree \
+# 	$(OBJDIR)parser/expander $(OBJDIR)parser/linker \
+# 	$(OBJDIR)parser/reducer $(OBJDIR)parsertknlist_handler \
+# 	$(OBJDIR)terminal $(OBJDIR)utils
+
 $(OBJDIR):
-		mkdir -p $(OBJDIR)
-		mkdir -p $(OBJDIR)/builtins
-		mkdir -p $(OBJDIR)/env
-		mkdir -p $(OBJDIR)/exec
-		mkdir -p $(OBJDIR)/lexer
-		mkdir -p $(OBJDIR)/libft_extension
-		mkdir -p $(OBJDIR)/parser
-		mkdir -p $(OBJDIR)/parser/binary_tree
-		mkdir -p $(OBJDIR)/parser/expander
-		mkdir -p $(OBJDIR)/parser/linker
-		mkdir -p $(OBJDIR)/parser/reducer
-		mkdir -p $(OBJDIR)/parser/tknlist_handler
-		mkdir -p $(OBJDIR)/terminal
-		mkdir -p $(OBJDIR)/utils
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)/builtins
+	@mkdir -p $(OBJDIR)/env
+	@mkdir -p $(OBJDIR)/exec
+	@mkdir -p $(OBJDIR)/lexer
+	@mkdir -p $(OBJDIR)/libft_extension
+	@mkdir -p $(OBJDIR)/parser
+	@mkdir -p $(OBJDIR)/parser/binary_tree
+	@mkdir -p $(OBJDIR)/parser/expander
+	@mkdir -p $(OBJDIR)/parser/linker
+	@mkdir -p $(OBJDIR)/parser/reducer
+	@mkdir -p $(OBJDIR)/parser/tknlist_handler
+	@mkdir -p $(OBJDIR)/terminal
+	@mkdir -p $(OBJDIR)/utils
+
+# $(OBJDIR):
+# 	mkdir -p $(OBJDIR)
+
+# $(OBJDIR)/builtins:
+# 		@mkdir -p $@
+
+# $(OBJDIR)/env:
+# 		@mkdir -p $@
+
+# $(OBJDIR)/exec:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/lexer:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/libft_extension:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/parser:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/parser/binary_tree:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/parser/expander:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/parser/linker:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/parser/reducer:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/parser/tknlist_handler:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/terminal:
+# 	@mkdir -p $@
+
+# $(OBJDIR)/utils:
+# 	@mkdir -p $@
 
 clean:
-		echo "$(MESSAGE_CLEAN)"
-		$(RM) $(OBJDIR)
-		make clean -C libft
-		echo "$(MESSAGE_CLEAN_DONE)"
+		@echo "$(MESSAGE_CLEAN)"
+		@$(RM) $(OBJDIR)
+		@make clean -C libft
+		@echo "$(MESSAGE_CLEAN_DONE)"
 
 fclean:		clean
-		$(RM) $(NAME)
-		make fclean -C libft
+		@$(RM) $(NAME)
+		@make fclean -C libft
 
 force:
-		make -C libft -s
+		@make -C libft -s
 
 re:		fclean all
 

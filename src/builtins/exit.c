@@ -65,7 +65,7 @@ int	process_exit(char **cmds, int *exit_status)
 {
 	if (check_status_code(cmds[1]) == 1 || is_valid_long(cmds[1]) == 0)
 	{
-		ft_printfd(2, "Minishell: exit: \
+		ft_printf_fd(2, "Minishell: exit: \
 			%s : numeric argument required\n", cmds[1]);
 		*exit_status = 2;
 	}

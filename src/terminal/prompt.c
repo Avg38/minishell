@@ -7,7 +7,7 @@ char	*create_prompt(t_shell *shell)
 	int		len_home;
 
 	home = getenv("HOME");
-	prompt = get_env_value(shell->env, "PWD", 3);
+	prompt = env_get_value(shell->env, "PWD", 3);
 	if (!prompt)
 		prompt = "Minishell";
 	if (home && ft_strnstr(prompt, home, ft_strlen(home)))

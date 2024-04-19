@@ -6,7 +6,7 @@ NAME_BONUS = minishell_bonus
 
 CC = cc
 
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Wall -Wextra
 
 RM = rm -rf
 

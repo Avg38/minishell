@@ -68,13 +68,13 @@ t_btree	*create_bin_tree(t_tknlist *tknlst)
 			pop_token_in_place(tknlst, tknlst->head);
 			continue ;
 		}
-		prio_tkn = find_prior_token(prio_tkn);
+		prio_tkn = find_prio_token(prio_tkn);
 		if (!btree_root)
 			btree_root = btree_new(prio_tkn);
 		else
 			place_in_tree(btree_root, btree_new(prio_tkn), prio_tkn->index);
 		prio_tkn->used_flag = 1;
 	}
-	clear_garbage(TKN_LIST, free);
+	gc_clear(TKN_LIST, free);
 	return (btree_root);
 }

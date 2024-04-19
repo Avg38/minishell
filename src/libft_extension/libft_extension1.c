@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-char	*ft_strcut(char const *str, size_t cut_begin, size_t cut_end)
+char	*ft_strcut(char const *str, size_t cut_begin, size_t cut_end) //?
 {
 	char	*dest;
 	int		len;
@@ -10,7 +10,8 @@ char	*ft_strcut(char const *str, size_t cut_begin, size_t cut_end)
 	len = ft_strlen(str) - cut_begin - cut_end;
 	if (len <= 0)
 		return (ft_strdup(""));
-	dest = (char *)ft_calloc((len + 1) * sizeof(char));
+	// dest = (char *)ft_calloc((len + 1) * sizeof(char));
+	dest = (char *)ft_calloc((len + 1), sizeof(char));
 	if (!dest)
 		return (NULL);
 	ft_strlcpy(dest, &str[cut_begin], len + 1);
@@ -23,7 +24,7 @@ char	*replace_substr(char *str, char *replacement, size_t start, size_t len)
 	char	*new;
 	size_t	size_new;
 
-	size_new = (ft_strlen(str) - len + ft_srlen(replacement) + 1);
+	size_new = (ft_strlen(str) - len + ft_strlen(replacement) + 1);
 	new = (char *)ft_calloc(size_new, sizeof(char));
 	if (!new)
 		return (NULL);
@@ -38,7 +39,7 @@ char	*remove_substr(char *str, size_t start, size_t len_toremove)
 	char	*new;
 	size_t	size_new;
 
-	size_new = _strlen(str) - len_toremove + 1;
+	size_new = ft_strlen(str) - len_toremove + 1;
 	new = (char *)ft_calloc(size_new, sizeof(char));
 	if (!new)
 		return (NULL);

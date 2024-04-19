@@ -37,7 +37,7 @@ int	tkn_is_redir(t_tkntype tkntype)
 
 int	tkn_is_operator(t_tkntype tkntype)
 {
-	if (tkntype == PIPR || tkntype == AND || tkntype == OR)
+	if (tkntype == PIPE || tkntype == AND || tkntype == OR)
 		return (1);
 	return (0);
 }
