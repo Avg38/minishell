@@ -2,8 +2,7 @@
 
 NAME = minishell
 
-SRC		=	\
-			src/builtins/cd.c\
+SRC		=	src/builtins/cd.c\
 			src/builtins/echo.c\
 			src/builtins/env.c\
 			src/builtins/exit.c\
@@ -38,7 +37,6 @@ SRC		=	\
 			src/parser/expander/expand_wildcards.c\
 			src/parser/expander/expander.c\
 			src/parser/linker/linker.c\
-			src/parser/expander/expander.c\
 			src/parser/reducer/reducer.c\
 			src/parser/tknlist_handler/tknlist_recorder1.c\
 			src/parser/tknlist_handler/tknlist_recorder2.c\
