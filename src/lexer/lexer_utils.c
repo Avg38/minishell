@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 /*
-ft_strndp sert a allouer de la memoire
+ft_strndup sert a allouer de la memoire
 (dans le garbage collector) pour chaque "mot" de la commande
 */
 char	*ft_strndup(char *buffer, int len, t_gc_id id)

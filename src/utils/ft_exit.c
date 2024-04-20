@@ -43,7 +43,7 @@ void	print_path_error(char *arg, int exit_code, int error)
 	free_and_exit(exit_code);
 }
 
-void	print_str_error(char *arg, char *color, int new_status)
+void	print_strerror(char *arg, char *color, int new_status)
 {
 	write(2, color, ft_strlen(color));
 	ft_printf_fd(2, "Minishell: ");

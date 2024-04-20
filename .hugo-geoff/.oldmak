@@ -38,8 +38,8 @@ SRC		=	src/builtins/cd.c\
 			src/parser/expander/expander.c\
 			src/parser/linker/linker.c\
 			src/parser/reducer/reducer.c\
-			src/parser/tknlist_handler/tknlist_recorder1.c\
-			src/parser/tknlist_handler/tknlist_recorder2.c\
+			src/parser/tknlist_handler/tknlist_reorder1.c\
+			src/parser/tknlist_handler/tknlist_reorder2.c\
 			src/parser/parser.c\
 			src/parser/verify_syntax.c\
 			\
@@ -54,7 +54,7 @@ SRC		=	src/builtins/cd.c\
 			\
 			src/main.c
 
-OBJDIR	=	obj/
+OBJDIR	=	obj
 OBJ		=	$(patsubst src/%.c, obj/%.o, $(SRC))
 
 CC			=	cc

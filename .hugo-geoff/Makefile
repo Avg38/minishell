@@ -6,7 +6,7 @@ NAME_BONUS = minishell_bonus
 
 CC = cc
 
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
@@ -114,5 +114,5 @@ re : fclean all
 
 bonus : force $(NAME_BONUS)
 
-.PHONY: all clean fclean re force bonus
+.PHONY: all clean fclean re force
 

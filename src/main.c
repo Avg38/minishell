@@ -1,5 +1,7 @@
 #include "../include/minishell.h"
 
+int	g_status = 0;
+
 /*
 cette fonction sert a ....
 */

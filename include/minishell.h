@@ -29,9 +29,9 @@
 
 // FD
 # define FD_READ	0
-# define FD_WRITE	0
+# define FD_WRITE	1
 # define FD_IN		0
-# define FD_OUT		0
+# define FD_OUT		1
 
 // MESSAGE
 # define ERR_ARGS 				"Error : Invalid number of arguments.\n"
@@ -47,11 +47,9 @@
 # define ERR_STAR_TOKEN			"Minishell: *: ambiguous redirect\n"
 # define ERR_EOF_UNEXPECTED		"Minishell: syntax error: unexpected end of file.\n"
 # define ERR_EOF_HEREDOC		"Minishell:warning: here-document at line 1 delimited by end-of-file"
-# define ERR_PWD				"pwd: error retrieving current directory: getcwd: \
-								cannot access parent directories: No such file or directory"
+# define ERR_PWD				"pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory"
 # define ERR_SHLVL				"minishell: warning: shell level (%d) too high, resetting to 1"
-# define ERR_HEREDOC			"%sMinishell: warning: here-document at line %d \
-								delimited by end-of-file (wanted `%s')%s\n"
+# define ERR_HEREDOC			"%sMinishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')%s\n"
 # define ERR_DOT				": filename argument required\n.: usage: . filename [arguments]\n"
 
 extern int	g_status;
@@ -85,7 +83,7 @@ typedef enum e_tkntype
 	S_QUOTE,
 	D_QUOTE,
 	LEFT_P,
-	PARENTHESE
+	PARENTHESE,
 }	t_tkntype;
 
 /*
@@ -139,8 +137,8 @@ typedef struct s_token
 	size_t			index;
 	int				priority;
 	int				used_flag;
-	struct s_token	*prev;
 	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 /*
@@ -163,7 +161,7 @@ typedef struct s_env
 	char			*value;
 	int				secret;
 	struct s_env	*next;
-}	t_env;
+}				t_env;
 
 /*
 All structures are contained in minishell structure
@@ -234,17 +232,13 @@ int				is_in_env(t_env *env, char *args);
 // ============== EXEC ==============
 // -------------- browse_heredoc.c --------------
 void			handle_signals_heredoc(char *input, size_t nb_lines, char *delim);
-int				readline_heredoc(t_btree *block, char *line \
-	, size_t *nb_lines, int fd_pipe[2]);
+int				readline_heredoc(t_btree *block, char *line , size_t *nb_lines, int fd_pipe[2]);
 void			cross_heredoc(t_shell *shell, t_btree *block, t_io io_inherited);
 // -------------- browse_node.c --------------
-void			cross_input(t_shell *shell, t_btree *block \
-	, t_io io_inherited);
-void			cross_output(t_shell *shell, t_btree *block \
-	, t_io io_inherited);
+void			cross_input(t_shell *shell, t_btree *block , t_io io_inherited);
+void			cross_output(t_shell *shell, t_btree *block , t_io io_inherited);
 void			cross_pipe(t_shell *shell, t_btree *block, t_io io_inherited);
-void			cross_operator(t_shell *shell, t_btree *block \
-	, t_io io_inherited);
+void			cross_operator(t_shell *shell, t_btree *block , t_io io_inherited);
 int				cross_brackets(t_shell *shell, t_btree *block, t_io io_inherited);
 // -------------- browse_tree.c --------------
 int				wait_child(pid_t pid);
@@ -376,8 +370,7 @@ void			init_list(t_tknlist **list);
 // -------------- utils_tknlist2.c --------------
 void			add_after_another(t_tknlist *list, t_token *tkn1, t_token *tkn2);
 void			pop_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
-void			add_tknlist_after_target(t_tknlist *lst1 \
-	, t_token *tkn_flag, t_tknlist *lst2);
+void			add_tknlist_after_target(t_tknlist *lst1 , t_token *tkn_flag, t_tknlist *lst2);
 void			swap_tokens(t_tknlist *lst, t_token *tkn1, t_token *tkn2);
 size_t			tknlist_size(t_tknlist *tknlist);
 // -------------- utils_tknlist3.c --------------

@@ -42,6 +42,7 @@ int	go_to_path(t_env **env)
 	int		ret;		// value to return
 
 	env_path = NULL;
+	update_oldpwd(env);
 	env_path = env_get_value(*env, "HOME=", 4);
 	if (!env_path)
 		free_and_exit(1);

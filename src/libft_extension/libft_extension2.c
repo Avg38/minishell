@@ -10,7 +10,7 @@ size_t	ft_strlen_utils(const char *str, int (*f)(char))
 	return (len);
 }
 
-size_t	ft_strlen_untils_char(const char *str, char c)
+size_t	ft_strlen_until_char(const char *str, char c)
 {
 	size_t	len;
 
