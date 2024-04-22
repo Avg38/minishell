@@ -1,13 +1,9 @@
 .DEFAULT_GOAL: $(NAME)
 
-NAME = minishell
-
-NAME_BONUS = minishell_bonus
-
+NAME		= minishell
+NAME_BONUS	= minishell_bonus
 CC			=	cc
-
 CFLAGS		=	-Wall -Wextra -Werror
-
 RM			=	rm -rf
 
 SRC		=	src/builtins/cd.c\
@@ -61,7 +57,6 @@ SRC		=	src/builtins/cd.c\
 			src/utils/utils_tkntype.c\
 			\
 			src/main.c
-
 
 OBJ		=	$(SRC:.c=.o)
 

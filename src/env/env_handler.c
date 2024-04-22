@@ -48,7 +48,7 @@ t_env	*env_init(char **env_array)
 		new->value = ft_strndup(env_array[i], ft_strlen(env_array[i]), ENV);
 		if (!new->value)
 			print_and_exit(ERR_MALLOC, RED, 1);
-		new->value = NULL;
+		new->next = NULL;
 		new->secret = 0;
 		env_add_back(&env, new);
 		i++;

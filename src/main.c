@@ -21,8 +21,8 @@ t_shell	*singleton_shell(t_shell *addr_shell)
 
 void	handle_shlvl(t_env *env, int nb)
 {
-	char	*shell_level;
 	int		lvl;
+	char	*shlvl;
 
 	lvl = ft_atoi(env_get_value(env, "SHLVL", 5));
 	if (lvl >= 999)
@@ -34,13 +34,13 @@ void	handle_shlvl(t_env *env, int nb)
 		lvl = 0;
 	else
 		lvl += nb;
-	shell_level = gc_itoa(lvl, ENV);
-	if (!shell_level)
+	shlvl = gc_itoa(lvl, ENV);
+	if (!shlvl)
 		print_and_exit(ERR_MALLOC, RED, 1);
-	shell_level = gc_strjoin("SHLVL=", shell_level, TMP);
-	if (!shell_level)
+	shlvl = gc_strjoin("SHLVL=", shlvl, TMP);
+	if (!shlvl)
 		print_and_exit(ERR_MALLOC, RED, 1);
-	is_in_env(env, shell_level);
+	is_in_env(env, shlvl);
 	rl_outstream = stderr; //???
 }
 
