@@ -68,7 +68,7 @@ t_btree	*create_bin_tree(t_tknlist *tknlst)
 			pop_token_in_place(tknlst, tknlst->head);
 			continue ;
 		}
-		prio_tkn = find_prio_token(prio_tkn);
+		prio_tkn = find_prio_token(tknlst->head);
 		if (!btree_root)
 			btree_root = btree_new(prio_tkn);
 		else

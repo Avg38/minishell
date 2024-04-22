@@ -29,8 +29,8 @@ void	check_path(char *cmd, char *path)
 		closedir(dir);
 		print_path_error(cmd, 126, 4);
 	}
-	if (!path)
-		print_path_error(cmd, 127, 1);
+	if (path == NULL)
+		print_path_error(cmd, 127, 1); // s'active quand une commande n'est pas reconnue
 }
 
 char	*check_cmd_path(char *cmd, char *path)

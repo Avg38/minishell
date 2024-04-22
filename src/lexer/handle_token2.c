@@ -42,7 +42,7 @@ int	handle_word(char *buffer, t_tknlist *list)
 
 	i = 0;
 	link = 0;
-	while (buffer[i] != 0 && ft_isspace(buffer[i] == 0)
+	while (buffer[i] != 0 && ft_isspace(buffer[i]) == 0
 		&& is_operator(buffer[i], buffer[i + 1]) == 0)
 	{
 		if (buffer[i] == '\'' || buffer[i] == '\"'
@@ -53,8 +53,7 @@ int	handle_word(char *buffer, t_tknlist *list)
 	if (!(buffer[i] == '<' || buffer[i] == '>')
 		&& buffer[i] != 0 && ft_isspace(buffer[i]) == 0)
 		link = 1;
-	if (!add_node(list,
-			create_node(WORD, ft_strndup(buffer, i, TKN_LIST), link)))
+	if (!add_node(list, create_node(WORD, ft_strndup(buffer, i, TKN_LIST), link)))
 		print_and_exit(ERR_MALLOC, RED, 1);
 	return (i);
 }

@@ -17,6 +17,18 @@ void	set_token_index(t_token *cur)
 		i++;
 		cur = cur->next;
 	}
+	
+
+}
+
+void	print_lexer(t_token *list)
+{
+	while (list != NULL)
+	{
+		ft_printf("content = %s, type  = %d, priority = %d\n", list->content, list->type, list->priority);
+		list = list->next;
+	}
+	
 }
 
 t_btree	*parser(t_shell *shell)
@@ -31,6 +43,7 @@ t_btree	*parser(t_shell *shell)
 	linker(shell->tknlist);
 	rearrange_cmd_redir_order(shell->tknlist);
 	set_token_index(shell->tknlist->head);
+	print_lexer(shell->tknlist->head);
 	return (create_bin_tree(shell->tknlist));
 }
 

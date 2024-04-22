@@ -41,7 +41,7 @@ int	add_node(t_tknlist *list, t_token *node)
 void	init_list(t_tknlist **list)
 {
 	(*list) = gc_malloc(sizeof(t_tknlist), TKN_LIST);
-	if (!(list))
+	if (!(*list))
 		print_and_exit(ERR_MALLOC, RED, 1);
 	(*list)->head = NULL;
 	(*list)->tail = NULL;

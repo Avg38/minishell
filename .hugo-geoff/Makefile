@@ -6,7 +6,7 @@ NAME_BONUS = minishell_bonus
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra 
 
 RM = rm -rf
 
@@ -98,7 +98,7 @@ ${NAME_BONUS}: ${OBJS} $(LIBFT_A)
 	@echo "$(_CLEAR)"
 
 force :
-	make -C libft
+	@make -C libft -s
 
 clean :
 	@$(MAKE) -C $(LIBFT_DIR) clean -s

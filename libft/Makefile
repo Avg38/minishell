@@ -93,13 +93,13 @@ RM		=	rm -rf
 
 ${NAME}:	${OBJS}
 		@ar rc ${NAME} ${OBJS}
-		@mv ${OBJS} obj/
 
 all : 		${NAME}
 
 clean:
-		${RM} obj/*.o
+		${RM} ${OBJS}
 
 fclean:		clean
 			${RM} ${NAME}
+
 re:			fclean all

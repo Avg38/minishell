@@ -146,7 +146,7 @@ Structure qui contient un pointeur vers le premier element
 et le dernier element de la structure t_token
 */
 
-typedef struct tkn_list
+typedef struct s_tknlist
 {
 	struct s_token	*head;
 	struct s_token	*tail;
@@ -383,6 +383,10 @@ int				tkn_is_logic(t_tkntype tkntype);
 int				tkn_is_cmd(t_tkntype tkntype);
 int				tkn_is_redir(t_tkntype tkntype);
 int				tkn_is_operator(t_tkntype tkntype);
+// -------------- print_tree.c --------------
+void			depth_first_search(t_btree *node, void (*visit)(t_btree *, int));
+void			root_first_search(t_btree *node, void (*visit)(t_btree *, int));
+void			display_node(t_btree *node, int depth);
 
 // ============== MAIN ==============
 // -------------- main.c --------------

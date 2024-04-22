@@ -51,6 +51,7 @@ SRC		=	src/builtins/cd.c\
 			src/terminal/prompt.c\
 			\
 			src/utils/ft_exit.c\
+			src/utils/print_tree.c\
 			src/utils/utils_tknlist1.c\
 			src/utils/utils_tknlist2.c\
 			src/utils/utils_tknlist3.c\

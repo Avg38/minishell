@@ -79,7 +79,7 @@ int	is_only_space(char *buffer)
 		return (1);
 	while (buffer[i])
 	{
-		if (isspace(buffer[i]))
+		if (!ft_isspace(buffer[i]))
 			return (0);
 		i++;
 	}
@@ -103,7 +103,7 @@ t_tknlist	*lexer(char *buffer)
 	i = 0;
 	while (buffer[i])
 	{
-		if (ft_isspace(buffer[i]))
+		if (!ft_isspace(buffer[i]))
 		{
 			if (detect_error_type(buffer[i]) == 1)
 				break ;

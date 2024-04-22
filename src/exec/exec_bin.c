@@ -49,10 +49,13 @@ void	exec_process(t_btree *node, t_env *env, t_io fds)
 			print_and_exit(strerror(errno), RED, 1);
 		}
 		else
-			print_path_error(node->cmds[0], 126, 2);
+			print_path_error(node->cmds[0], 126, 2); //c'est ici 
 	}
 	else
+	{
 		print_path_error(node->cmds[0], 127, 3);
+
+	}
 }
 
 char	*handle_path(t_btree *node, t_env *env)

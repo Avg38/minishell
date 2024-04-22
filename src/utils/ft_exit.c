@@ -31,13 +31,13 @@ void	print_path_error(char *arg, int exit_code, int error)
 {
 	ft_printf_fd(2, "Minishell: %s", arg);
 	if (error == 1)
-		ft_printf_fd(2, ": Permission denied");
+		ft_printf_fd(2, ": command not found\n");
 	if (error == 2)
-		ft_printf_fd(2, ": No such file or directory");
+		ft_printf_fd(2, ": Permission denied\n");
 	if (error == 3)
-		ft_printf_fd(2, ": Permission denied");
+		ft_printf_fd(2, ": No such file or directory\n");
 	if (error == 4)
-		ft_printf_fd(2, ": is a directory");
+		ft_printf_fd(2, ": is a directory\n");
 	if (error == 5)
 		ft_printf_fd(2, ERR_DOT);
 	free_and_exit(exit_code);

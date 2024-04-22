@@ -18,7 +18,7 @@ void	clear_ctrl_c(int *stdin_cpy, char **line_read)
 }
 
 /*
-STDIN FILENO = 
+
 */
 
 void	sig_handler(int sigcode)
@@ -26,7 +26,6 @@ void	sig_handler(int sigcode)
 	if (sigcode == SIGINT)
 	{
 		close(STDIN_FILENO);
-		write(2, "\n", 1);
 		g_status = 130;
 	}
 	if (sigcode == SIGQUIT)
@@ -43,12 +42,26 @@ on parse la ligne tokenise pour le stocker dans l'arbre binaire.
 
 */
 
+// void	print_lexer(t_token *list)
+// {
+// 	while (list != NULL)
+// 	{
+// 		ft_printf("content = %s, type  = %d, priority = %d\n", list->content, list->type, list->priority);
+// 		list = list->next;
+// 	}
+	
+// }
+
+
 void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)
 {
 	add_history(line_read);
 	shell->tknlist = lexer(line_read);
+	//print_lexer(shell->tknlist->head);
 	shell->btree = parser(shell);
+	//ft_printf("%s\n", shell->btree->left->cmds[0]);
 	browse_tree(shell, shell->btree, shell->io_global);
+	root_first_search(shell->btree, *display_node);
 	dup2(*stdin_cpy, STDIN_FILENO);
 	close(*stdin_cpy);
 	clear_loop();
@@ -63,8 +76,8 @@ la fonction dup sert ..
 
 void	prompt_loop(t_shell *shell)
 {
-	char	*line_read;
 	int		stdin_cpy;
+	char	*line_read;
 
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
@@ -84,5 +97,6 @@ void	prompt_loop(t_shell *shell)
 			builtin_exit(shell, NULL);
 		if (line_read && *line_read)
 			process_shell(shell, line_read, &stdin_cpy);
+		free(line_read);
 	}
 }
