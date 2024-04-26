@@ -17,9 +17,8 @@ int	readline_heredoc(t_btree *node, char *line \
 	if (ft_strlen(line) > 0 && ft_strcmp(line, node->cmds[0]) == 0)
 		return (free(line), 1);
 	ft_printf_fd(fd_pipe[FD_WRITE], "%s\n", line);
-	free(line);
 	(*nb_lines)++;
-	return (0);
+	return (free(line), 0);
 }
 
 void	cross_heredoc(t_shell *shell, t_btree *node, t_io io_inherited)

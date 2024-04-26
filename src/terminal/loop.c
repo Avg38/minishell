@@ -61,7 +61,7 @@ void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)
 	shell->btree = parser(shell);
 	//ft_printf("%s\n", shell->btree->left->cmds[0]);
 	browse_tree(shell, shell->btree, shell->io_global);
-	root_first_search(shell->btree, *display_node);
+	root_first_search(shell->btree, *display_node); // display btree
 	dup2(*stdin_cpy, STDIN_FILENO);
 	close(*stdin_cpy);
 	clear_loop();

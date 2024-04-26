@@ -37,7 +37,7 @@ int	detect_type(const char c1, const char c2)
 	else if (c1 == '\"')
 		return (D_QUOTE);
 	else if (c1 == '(')
-		return (PARENTHESE);
+		return (BRACKETS);
 	else if (c1 == '&' && c2 != '&')
 		print_without_exit("Minishell: \
 			syntax error near unexpected token `&'\n", RED, 2);
@@ -60,8 +60,8 @@ void	handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i)
 		*i += handle_s_quote(buffer, list);
 	else if (type == D_QUOTE)
 		*i += handle_d_quote(buffer, list);
-	else if (type == PARENTHESE)
-		*i += handle_parenthese(buffer, list);
+	else if (type == BRACKETS)
+		*i += handle_brackets(buffer, list);
 	else if (type == WORD)
 		*i += handle_word(buffer, list);
 }

@@ -39,7 +39,7 @@
 # define ERR_MALLOC				"Minishell: Allocation error\n"
 # define ERR_QUOTES				"Minishell: open quotes are not interpreted.\n"
 # define ERR_INFILE				"Minishell: open quotes are not interpreted.\n"
-# define ERR_PARENTHESE			"Minishell: open parenthesis are not interpreted.\n"
+# define ERR_BRACKETS			"Minishell: open brackets are not interpreted.\n"
 # define ERR_OPEN_PIPE			"Minishell: open pipe are not interpreted.\n"
 # define ERR_OPEN_LOGICAL_OP	"Minishell: open logical operators are not interpreted.\n"
 # define ERR_WRONG_CHAR			"Minishell: uninterpreted token present outside quotes.\n"
@@ -83,7 +83,7 @@ typedef enum e_tkntype
 	S_QUOTE,
 	D_QUOTE,
 	LEFT_P,
-	PARENTHESE,
+	BRACKETS,
 }	t_tkntype;
 
 /*
@@ -270,7 +270,7 @@ int				handle_s_quote(char *buffer, t_tknlist *list);
 int				handle_d_quote(char *buffer, t_tknlist *list);
 // -------------- handle_token2.c --------------
 int				is_special_char(char c);
-int				handle_parenthese(char *buffer, t_tknlist *list);
+int				handle_brackets(char *buffer, t_tknlist *list);
 int				handle_word(char *buffer, t_tknlist *list);
 // -------------- lexer_utils.c --------------
 char			*ft_strndup(char *buffer, int len, t_gc_id id);

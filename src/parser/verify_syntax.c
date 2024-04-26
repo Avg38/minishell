@@ -13,7 +13,7 @@ static int	verif_head(t_token *head)
 {
 	if (tkn_is_operator(head->type))
 		return (printfd_err(2, 2, ERR_NEAR_TOKEN, head->content));
-	else if (head->type == PARENTHESE && brackets_is_empty(head->content))
+	else if (head->type == BRACKETS && brackets_is_empty(head->content))
 		return (printfd_err(2, 2, ERR_NEAR_TOKEN, ")"));
 	return (0);
 }
@@ -26,7 +26,7 @@ static int	verif_tail(t_token *tail)
 		return (printfd_err(2, 2, ERR_OPEN_LOGICAL_OP, NULL));
 	if (tkn_is_redir(tail->type) || tail->type == HEREDOC)
 		return (printfd_err(2, 2, ERR_NEAR_TOKEN, "newline"));
-	if (tail->type == PARENTHESE && brackets_is_empty(tail->content))
+	if (tail->type == BRACKETS && brackets_is_empty(tail->content))
 		return (printfd_err(2, 2, ERR_NEAR_TOKEN, "("));
 	return (0);
 }
@@ -41,7 +41,7 @@ static int	verif_body(t_token *curr)
 		if (tkn_is_redir(curr->type) && curr->next->type == WORD
 			&& char_is_in_str('*', curr->next->content))
 			return (printfd_err(2, 1, ERR_STAR_TOKEN, NULL));
-		if (curr->type == PARENTHESE && brackets_is_empty(curr->content) == 1)
+		if (curr->type == BRACKETS && brackets_is_empty(curr->content) == 1)
 			return (printfd_err(2, 2, ERR_NEAR_TOKEN, "("));
 		curr = curr->next;
 	}

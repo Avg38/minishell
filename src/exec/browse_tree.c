@@ -33,7 +33,7 @@ void	browse_tree(t_shell *shell, t_btree *node, t_io io_inherited)
 		cross_output(shell, node, io_inherited);
 	else if (node->type == HEREDOC)
 		cross_heredoc(shell, node, io_inherited);
-	else if (node->type == PARENTHESE)
+	else if (node->type == BRACKETS)
 		g_status = cross_brackets(shell, node, io_inherited);
 	else if (node->type == WORD)
 		g_status = exec_handler(shell, node, io_inherited);

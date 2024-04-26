@@ -4,7 +4,7 @@ int	type_need_reducing(t_tkntype type)
 {
 	if (type == IN || type == OUT || type == APPEND \
 		|| type == HEREDOC || type == D_QUOTE \
-		|| type == S_QUOTE || type == PARENTHESE)
+		|| type == S_QUOTE || type == BRACKETS)
 		return (1);
 	return (0);
 }
@@ -24,7 +24,7 @@ static char	*reduce_content(t_token *tkn)
 		new_content = remove_substr(tkn->content, 0, 2 \
 			+ ft_strlen_until_not(&tkn->content[2], ft_isspace));
 	else if (tkn->type == D_QUOTE \
-		|| tkn->type == S_QUOTE || tkn->type == PARENTHESE)
+		|| tkn->type == S_QUOTE || tkn->type == BRACKETS)
 		new_content = ft_strcut(tkn->content, 1, 1);
 	return (new_content);
 }

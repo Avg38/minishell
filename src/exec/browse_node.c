@@ -10,10 +10,7 @@ void	cross_input(t_shell *shell, t_btree *node \
 	ft_memcpy(&io_transmitted, &io_inherited, sizeof(t_io));
 	io_transmitted.fd_in = open(node->cmds[0], O_RDONLY);
 	if (io_transmitted.fd_in == -1)
-	{
-		print_strerror(node->cmds[0], RED, 1);
-		return ;
-	}
+		return (print_strerror(node->cmds[0], RED, 1));
 	browse_tree(shell, node->left, io_transmitted);
 	if (io_transmitted.fd_in != 0)
 		close(io_transmitted.fd_in);
@@ -50,17 +47,14 @@ void	cross_pipe(t_shell *shell, t_btree *node, t_io io_inherited)
 
 	ft_memcpy(&io_transmitted, &io_inherited, sizeof(t_io));
 	if (pipe(fd_pipe) == -1)
-	{
-		print_strerror("pipe", RED, 1);
-		return ;
-	}
+		return (print_strerror("pipe", RED, 1));
 	io_transmitted.fd_out = fd_pipe[FD_WRITE];
 	browse_tree(shell, node->left, io_transmitted);
 	close(fd_pipe[FD_WRITE]);
 	io_transmitted.fd_in = fd_pipe[FD_READ];
 	io_transmitted.fd_out = io_inherited.fd_out;
 	browse_tree(shell, node->right, io_transmitted);
-	close(fd_pipe[FD_WRITE]);
+	close(fd_pipe[FD_READ]);
 }
 
 void	cross_operator(t_shell *shell, t_btree *node \

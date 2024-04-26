@@ -7,7 +7,7 @@ int	is_special_char(char c)
 	return (c == ';' || c == '&' || c == '|' || c == '<' || c == '>');
 }
 
-int	handle_parenthese(char *buffer, t_tknlist *list)
+int	handle_brackets(char *buffer, t_tknlist *list)
 {
 	int	i;
 	int	depth;
@@ -24,7 +24,7 @@ int	handle_parenthese(char *buffer, t_tknlist *list)
 			if (depth == 0)
 			{
 				if (!add_node(list,
-						create_node(PARENTHESE,
+						create_node(BRACKETS,
 							ft_strndup(buffer, i + 1, TKN_LIST), 0)))
 					print_and_exit(ERR_MALLOC, RED, 1);
 				return (i + 1);
@@ -32,7 +32,7 @@ int	handle_parenthese(char *buffer, t_tknlist *list)
 		}
 		i++;
 	}
-	return (handle_error_lexer(TKN_LIST, ERR_PARENTHESE));
+	return (handle_error_lexer(TKN_LIST, ERR_BRACKETS));
 }
 
 int	handle_word(char *buffer, t_tknlist *list)

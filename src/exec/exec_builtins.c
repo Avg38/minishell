@@ -24,10 +24,10 @@ int	exec_builtin(t_env **envt, t_btree *node, t_io fds)
 	int	status;
 
 	status = 0;
-	if (ft_strcmp(node->cmds[0], "echo") == 0)
-		status = echo(node->cmds, fds);
-	else if (ft_strcmp(node->cmds[0], "cd") == 0)
+	if (ft_strcmp(node->cmds[0], "cd") == 0)
 		status = cd(node->cmds, envt);
+	else if (ft_strcmp(node->cmds[0], "echo") == 0)
+		status = echo(node->cmds, fds);
 	else if (ft_strcmp(node->cmds[0], "pwd") == 0)
 		status = pwd(fds, *envt);
 	else if (ft_strcmp(node->cmds[0], "env") == 0)

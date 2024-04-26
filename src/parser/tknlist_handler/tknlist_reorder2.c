@@ -4,7 +4,7 @@ static	void	extract_tkn_in_another_tknlist(t_token *tkn, \
 		t_tknlist *tknlst_src, t_tknlist *tknlst_dest)
 {
 	unbound_token_in_place(tknlst_src, tkn);
-	if (tkn_is_cmd(tkn->type) || tkn->type == PARENTHESE)
+	if (tkn_is_cmd(tkn->type) || tkn->type == BRACKETS)
 		tknlist_addfront(tkn, tknlst_dest);
 	if (tkn_is_redir(tkn->type) || tkn->type == HEREDOC)
 		tknlist_addback(tkn, tknlst_dest);
