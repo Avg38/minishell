@@ -15,8 +15,7 @@ les commandes (LS, TEXTE ect..)
 // 	ret_status = 0;
 // 	cmd_builtin = is_builtin(node->cmds[0]);
 // 	pipe_is_present = cmd_in_pipe(shell->btree, node->branch);
-// 	// if (pipe_is_present == true && cmd_in_pipe(shell->btree, node->branch))
-// 	if (pipe_is_present == true)
+// 	if (pipe_is_present == true && cmd_builtin == true)
 // 		ret_status = fork_builtin(&(shell->env), node, fds);
 // 	else if (pipe_is_present == false && cmd_builtin == true)
 // 		ret_status = exec_builtin(&(shell->env), node, fds);
@@ -34,7 +33,7 @@ int	exec_handler(t_shell *shell, t_btree *node, t_io fds)
 	ret_status = 0;
 	cmd_builtin = is_builtin(node->cmds[0]);
 	pipe_is_present = cmd_in_pipe(shell->btree, node->branch);
-	if (pipe_is_present == true)
+	if (pipe_is_present == true && cmd_builtin == true)
 	{
 		ft_printf("pipe is present : fork_builtin execution\n");
 		ret_status = fork_builtin(&(shell->env), node, fds);

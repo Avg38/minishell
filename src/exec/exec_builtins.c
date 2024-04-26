@@ -41,19 +41,54 @@ int	exec_builtin(t_env **envt, t_btree *node, t_io fds)
 	return (status);
 }
 
+// int	fork_builtin(t_env **envt, t_btree *node, t_io fds)
+// {
+// 	pid_t	pid;
+// 	int		status;
+// 	int		exit_code;
+
+// 	pid = fork();
+// 	exit_code = 0;
+// 	status = 0;
+// 	if (pid == -1)
+// 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
+// 	if (pid == 0)
+// 	{
+// 		status = exec_builtin(envt, node, fds);
+// 		free_and_exit(status);
+// 	}
+// 	waitpid(pid, &status, 0);
+// 	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
+// 	{
+// 		g_status = 139;
+// 		ft_putendl_fd("Segmentation fault (core dumped)", 2);
+// 	}
+// 	if (WCOREDUMP(status) && WTERMSIG(status) == 3)
+// 		ft_putendl_fd("Quit (core dumped)", 2);
+// 	if (WIFEXITED(status))
+// 		exit_code = WIFEXITED(status);
+// 	return (exit_code);
+// }
+
 int	fork_builtin(t_env **envt, t_btree *node, t_io fds)
 {
 	pid_t	pid;
 	int		status;
 	int		exit_code;
+	int		pipe_fd[2];
+	pipe(pipe_fd);
 
 	pid = fork();
 	exit_code = 0;
 	status = 0;
 	if (pid == -1)
 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
-	if (pid == 0)
+	else if (pid == 0)
 	{
+		//processus enfant (commande avant le pipe)
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT_FILENO); // redirige la sortie standard vers l'extremite d'ecriture du pipe
+		close(pipe_fd[1]);
 		status = exec_builtin(envt, node, fds);
 		free_and_exit(status);
 	}
