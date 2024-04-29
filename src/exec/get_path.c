@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_path.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:50:15 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:54:50 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 char	*ft_strjoin_pipex(char *s1, char *s2, char *sep)
@@ -30,7 +42,7 @@ void	check_path(char *cmd, char *path)
 		print_path_error(cmd, 126, 4);
 	}
 	if (path == NULL)
-		print_path_error(cmd, 127, 1); // s'active quand une commande n'est pas reconnue
+		print_path_error(cmd, 127, 1);
 }
 
 char	*check_cmd_path(char *cmd, char *path)

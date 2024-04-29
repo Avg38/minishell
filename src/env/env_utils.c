@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:49:56 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 15:01:28 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 size_t	env_strlen(t_env *env)
@@ -82,8 +94,8 @@ char	*env_to_str(t_env *lst)
 
 int	is_in_env(t_env *env, char *args)
 {
-	char	var_name[PATH_MAX]; //PATH MAX ?
-	char	env_name[PATH_MAX]; //jsp, ah si c le nb de variable d'environnement max
+	char	var_name[PATH_MAX];
+	char	env_name[PATH_MAX];
 
 	env_get_name(var_name, args);
 	while (env)

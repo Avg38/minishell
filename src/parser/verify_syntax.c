@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   verify_syntax.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:51:32 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 15:01:09 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 int	printfd_err(int fd, int ret, char *err_msg, char *issue)
@@ -35,9 +47,9 @@ static int	verif_body(t_token *curr)
 {
 	while (curr && curr->next && g_status == 0)
 	{
-		if ((tkn_is_operator(curr->type)
-			|| tkn_is_redir(curr->type)) && tkn_is_operator(curr->next->type))
-			return (printfd_err(2, 2, ERR_NEAR_TOKEN, curr->next->content)); //ligne a verifier
+		if ((tkn_is_operator(curr->type) || tkn_is_redir(curr->type))
+			&& tkn_is_operator(curr->next->type))
+			return (printfd_err(2, 2, ERR_NEAR_TOKEN, curr->next->content));
 		if (tkn_is_redir(curr->type) && curr->next->type == WORD
 			&& char_is_in_str('*', curr->next->content))
 			return (printfd_err(2, 1, ERR_STAR_TOKEN, NULL));
@@ -66,7 +78,3 @@ void	verify_syntax_tknlist(t_tknlist *lst)
 	}
 	g_status = verif_tail(lst->tail);
 }
-
-/*
-last verif of g_status ?
-*/

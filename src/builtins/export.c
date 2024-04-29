@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:49:40 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:52:54 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 int	print_error_export(char *args, int error)
@@ -85,7 +97,7 @@ int	ft_export(char **args, t_env **envt, t_io fds)
 				print_error_export("", 1);
 				return (1);
 			}
-			if (export_handler(args[i], envt) != 0) //rajoute une var env
+			if (export_handler(args[i], envt) != 0)
 				return (1);
 			i++;
 		}

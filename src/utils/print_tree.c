@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_tree.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:51:40 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 15:00:17 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
-void depth_first_search(t_btree *node, void (*visit)(t_btree *, int))
+void	depth_first_search(t_btree *node, void (*visit)(t_btree *, int))
 {
-	// ft_printf("depth_first_search\n");
-	static int depth = -1;
-	
+	static int	depth = -1;
+
 	depth++;
-	if (node) 
+	if (node)
 	{
 		depth_first_search(node->left, visit);
 		visit(node, depth);
@@ -15,13 +26,12 @@ void depth_first_search(t_btree *node, void (*visit)(t_btree *, int))
 	depth--;
 }
 
-void root_first_search(t_btree *node, void (*visit)(t_btree *, int))
+void	root_first_search(t_btree *node, void (*visit)(t_btree *, int))
 {
-	// ft_printf("root_first_search\n");
-	static int depth = -1;
-	
+	static int	depth = -1;
+
 	depth++;
-	if (node) 
+	if (node)
 	{
 		visit(node, depth);
 		root_first_search(node->left, visit);
@@ -30,24 +40,23 @@ void root_first_search(t_btree *node, void (*visit)(t_btree *, int))
 	depth--;
 }
 
-void display_node(t_btree *node, int depth) //rename display_node
+void	display_node(t_btree *node, int depth)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0 ;
-	if (!node) 
+	if (!node)
 		printf("Node is NULL\n");
 	printf("DEPTH: %d\n", depth);
 	printf("Type: %d\n", node->type);
 	if (node->cmds)
 	{
 		printf("Cmds :");
-		while (node->cmds && node->cmds[i]) 
+		while (node->cmds && node->cmds[i])
 		{
 			printf("%s   ", node->cmds[i]);
 			i++;
 		}
 	}
-	// printf("IO: [%d, %d]\n", io.fd_in, io.fd_out);
 	printf("\n\n");
 }

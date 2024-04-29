@@ -54,3 +54,4 @@ dkms.conf
 # Others
 .vscode/settings.json
 minishell
+minishell_bonus

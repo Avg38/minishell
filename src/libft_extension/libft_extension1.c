@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_extension1.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:50:23 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:55:27 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
-char	*ft_strcut(char const *str, size_t cut_begin, size_t cut_end) //?
+char	*ft_strcut(char const *str, size_t cut_begin, size_t cut_end)
 {
 	char	*dest;
 	int		len;
@@ -10,7 +22,6 @@ char	*ft_strcut(char const *str, size_t cut_begin, size_t cut_end) //?
 	len = ft_strlen(str) - cut_begin - cut_end;
 	if (len <= 0)
 		return (ft_strdup(""));
-	// dest = (char *)ft_calloc((len + 1) * sizeof(char));
 	dest = (char *)ft_calloc((len + 1), sizeof(char));
 	if (!dest)
 		return (NULL);
@@ -24,7 +35,7 @@ char	*replace_substr(char *str, char *replacement, size_t start, size_t len)
 	char	*new;
 	size_t	size_new;
 
-	size_new = (ft_strlen(str) - len + ft_strlen(replacement) + 1);
+	size_new = (ft_strlen(str) - len + ft_strlen(replacement)) + 1;
 	new = (char *)ft_calloc(size_new, sizeof(char));
 	if (!new)
 		return (NULL);

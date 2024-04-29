@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:50:21 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:50:22 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 /*
@@ -39,8 +51,8 @@ int	detect_type(const char c1, const char c2)
 	else if (c1 == '(')
 		return (BRACKETS);
 	else if (c1 == '&' && c2 != '&')
-		print_without_exit("Minishell: \
-			syntax error near unexpected token `&'\n", RED, 2);
+		print_without_exit(\
+			"Minishell: syntax error near unexpected token '&'\n", RED, 2);
 	return (WORD);
 }
 
@@ -105,7 +117,7 @@ t_tknlist	*lexer(char *buffer)
 	{
 		if (!ft_isspace(buffer[i]))
 		{
-			if (detect_error_type(buffer[i]) == 1)
+			if (detect_error_type(buffer[i]) == -1)
 				break ;
 			type = detect_type(buffer[i], buffer[i + 1]);
 			handle_token(&buffer[i], list, type, &i);

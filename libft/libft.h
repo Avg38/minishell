@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 15:15:00 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 15:17:44 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -66,14 +78,15 @@ void	*gc_calloc(size_t nmemb, size_t size, int id_gc);
 void	gc_clear(int gc_id, void (*del)(void*));
 void	gc_del_one(void *ptr_to_free, int gc_id);
 char	*gc_itoa(int n, int gc_id);
-t_list	*gc_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *),
+t_list	*gc_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *), \
 	int id_gc);
 t_list	*gc_lstnew(void *content, int gc_id);
 void	*gc_malloc(size_t size, int id_gc);
 t_list	**gc_ptr(int gc_id);
 void	*gc_realloc(void *ptr, size_t old_size, size_t new_size, int id_gc);
 char	**gc_split(char const *s, char c, int id_gc);
-char	*gc_strcut(char const *str, size_t cut_begin, size_t cut_end, int gc_id);
+char	*gc_strcut(char const *str, size_t cut_begin, size_t cut_end, \
+	int gc_id);
 char	*gc_strdup(const char *str, int id_gc);
 char	*gc_strjoin(char const *s1, char const *s2, int id_gc);
 char	*gc_strmapi(char const *s, char (*f)(unsigned int, char), int id_gc);

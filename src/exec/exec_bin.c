@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_bin.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:50:10 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:53:58 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 char	**env_to_char2(t_env *env)
@@ -35,7 +47,7 @@ void	exec_process(t_btree *node, t_env *env, t_io fds)
 	cmd_path = handle_path(node, env);
 	if (dup2(fds.fd_in, STDIN_FILENO) == -1)
 		print_and_exit(strerror(errno), RED, 1);
-	if (dup2(fds.fd_out, STDIN_FILENO) == -1)
+	if (dup2(fds.fd_out, STDOUT_FILENO) == -1)
 		print_and_exit(strerror(errno), RED, 1);
 	if (fds.fd_out != 1)
 		close(fds.fd_out);
@@ -49,7 +61,7 @@ void	exec_process(t_btree *node, t_env *env, t_io fds)
 			print_and_exit(strerror(errno), RED, 1);
 		}
 		else
-			print_path_error(node->cmds[0], 126, 2); //c'est ici 
+			print_path_error(node->cmds[0], 126, 2);
 	}
 	else
 		print_path_error(node->cmds[0], 127, 3);

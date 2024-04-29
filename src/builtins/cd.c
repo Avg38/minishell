@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:49:21 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:53:15 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 int	update_oldpwd(t_env **env)
@@ -39,7 +51,7 @@ int	update_pwd(t_env **env, int slash)
 int	go_to_path(t_env **env)
 {
 	char	*env_path;
-	int		ret;		// value to return
+	int		ret;
 
 	env_path = NULL;
 	update_oldpwd(env);
@@ -48,10 +60,10 @@ int	go_to_path(t_env **env)
 		free_and_exit(1);
 	else if (ft_strcmp(env_path, "") == 0)
 		return (ft_putstr_fd("Minishell: cd: HOME not set\n", 2), 1);
-	ret = chdir(env_path); //?
+	ret = chdir(env_path);
 	if (ret)
-		return (ft_putstr_fd(strerror(errno), 2), 1); //?
-	update_pwd(env, 0); //?
+		return (ft_putstr_fd(strerror(errno), 2), 1);
+	update_pwd(env, 0);
 	return (ret);
 }
 
@@ -69,7 +81,7 @@ int	process_cd(char **cmds, t_env **env)
 		ft_printf_fd(2, "Minishell: cd: %s: %s\n", cmds[1], strerror(errno));
 		return (1);
 	}
-	if (ft_strcmp(cmds[1], "//") == 0) // ?
+	if (ft_strcmp(cmds[1], "//") == 0)
 		mod = 1;
 	if (update_pwd(env, mod) != 0)
 		return (1);

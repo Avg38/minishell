@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bin_tree.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:51:19 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:57:33 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 t_token	*find_prio_token(t_token *cur)
@@ -31,7 +43,7 @@ Pas sur de comprendre ...
 
 t_btree	*btree_new(t_token *tkn_to_convert)
 {
-	t_btree	*node; //tree_el ? or node ?
+	t_btree	*node;
 
 	tkn_to_convert->used_flag = 1;
 	node = gc_calloc(1, sizeof(t_btree), B_TREE);
@@ -48,10 +60,6 @@ t_btree	*btree_new(t_token *tkn_to_convert)
 		node->cmds = strdup_in_newchar2(tkn_to_convert->content);
 	return (node);
 }
-
-/*
-tknlst can be named collection...
-*/
 
 t_btree	*create_bin_tree(t_tknlist *tknlst)
 {

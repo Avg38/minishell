@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:51:31 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 15:00:28 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	set_token_index(t_token *cur)
@@ -17,18 +29,16 @@ void	set_token_index(t_token *cur)
 		i++;
 		cur = cur->next;
 	}
-	
-
 }
 
 void	print_lexer(t_token *list)
 {
 	while (list != NULL)
 	{
-		ft_printf("content = %s, type  = %d, priority = %d\n", list->content, list->type, list->priority);
+		ft_printf("content = %s, type  = %d,\
+			priority = %d\n", list->content, list->type, list->priority);
 		list = list->next;
 	}
-	
 }
 
 t_btree	*parser(t_shell *shell)
@@ -43,7 +53,6 @@ t_btree	*parser(t_shell *shell)
 	linker(shell->tknlist);
 	rearrange_cmd_redir_order(shell->tknlist);
 	set_token_index(shell->tknlist->head);
-	print_lexer(shell->tknlist->head);
 	return (create_bin_tree(shell->tknlist));
 }
 

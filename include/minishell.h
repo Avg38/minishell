@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 15:30:37 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -34,29 +46,32 @@
 # define FD_OUT		1
 
 // MESSAGE
-# define ERR_ARGS 				"Error : Invalid number of arguments.\n"
-# define ERR_UNAVAILABLE_ENV	"Minishell: Environment unavailable.\n"
-# define ERR_MALLOC				"Minishell: Allocation error\n"
-# define ERR_QUOTES				"Minishell: open quotes are not interpreted.\n"
-# define ERR_INFILE				"Minishell: open quotes are not interpreted.\n"
-# define ERR_BRACKETS			"Minishell: open brackets are not interpreted.\n"
-# define ERR_OPEN_PIPE			"Minishell: open pipe are not interpreted.\n"
-# define ERR_OPEN_LOGICAL_OP	"Minishell: open logical operators are not interpreted.\n"
-# define ERR_WRONG_CHAR			"Minishell: uninterpreted token present outside quotes.\n"
-# define ERR_NEAR_TOKEN			"Minishell: syntax error near unexpected token"
-# define ERR_STAR_TOKEN			"Minishell: *: ambiguous redirect\n"
-# define ERR_EOF_UNEXPECTED		"Minishell: syntax error: unexpected end of file.\n"
-# define ERR_EOF_HEREDOC		"Minishell:warning: here-document at line 1 delimited by end-of-file"
-# define ERR_PWD				"pwd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory"
-# define ERR_SHLVL				"minishell: warning: shell level (%d) too high, resetting to 1"
-# define ERR_HEREDOC			"%sMinishell: warning: here-document at line %d delimited by end-of-file (wanted `%s')%s\n"
-# define ERR_DOT				": filename argument required\n.: usage: . filename [arguments]\n"
+# define ERR_ARGS "Error : Invalid number of arguments.\n"
+# define ERR_UNAVAILABLE_ENV "Minishell: Environment unavailable.\n"
+# define ERR_MALLOC "Minishell: Allocation error\n"
+# define ERR_QUOTES "Minishell: open quotes are not interpreted.\n"
+# define ERR_INFILE "Minishell: open quotes are not interpreted.\n"
+# define ERR_BRACKETS "Minishell: open brackets are not interpreted.\n"
+# define ERR_OPEN_PIPE "Minishell: open pipe are not interpreted.\n"
+# define ERR_OPEN_LOGICAL_OP "Minishell: open logical \
+	operators are not interpreted.\n"
+# define ERR_WRONG_CHAR "Minishell: uninterpreted token \
+	present outside quotes.\n"
+# define ERR_NEAR_TOKEN "Minishell: syntax error near unexpected token"
+# define ERR_STAR_TOKEN "Minishell: *: ambiguous redirect\n"
+# define ERR_EOF_UNEXPECTED "Minishell: syntax error: unexpected end of file.\n"
+# define ERR_EOF_HEREDOC "Minishell:warning: here-document \
+	at line 1 delimited by end-of-file"
+# define ERR_PWD "pwd: error retrieving current directory: \
+	getcwd: cannot access parent directories: No such file or directory"
+# define ERR_SHLVL "minishell: warning: shell level (%d) \
+	too high, resetting to 1"
+# define ERR_HEREDOC "%sMinishell: warning: here-document \
+	at line %d delimited by end-of-file (wanted `%s')%s\n"
+# define ERR_DOT ": filename argument required\n.: usage: \
+	. filename [arguments]\n"
 
 extern int	g_status;
-
-/*
-Enumeration 
-*/
 
 typedef enum e_gc_id
 {
@@ -65,10 +80,6 @@ typedef enum e_gc_id
 	ENV,
 	TMP
 }	t_gc_id;
-
-/*
-Enumeration des type de token possible
-*/
 
 typedef enum e_tkntype
 {
@@ -86,21 +97,11 @@ typedef enum e_tkntype
 	BRACKETS,
 }	t_tkntype;
 
-/*
-Structure qui contient les file descriptor d'entree et de sortie
-*/
-
 typedef struct s_io
 {
 	int	fd_in;
 	int	fd_out;
 }	t_io;
-
-/*
-Structure de l'arbre binaire
-
-on pourrait l'appelait "t_tree" directement
-*/
 
 typedef struct s_btree
 {
@@ -111,10 +112,6 @@ typedef struct s_btree
 	struct s_btree	*right;
 }	t_btree;
 
-/*
-Enumeration des differents types d'erreur
-*/
-
 typedef enum e_error
 {
 	NOTHING = -1,
@@ -122,12 +119,6 @@ typedef enum e_error
 	FILE_E,
 	TYPE_E
 }	t_error;
-
-/*
-Structure des token
-
-
-*/
 
 typedef struct s_token
 {
@@ -141,20 +132,11 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
-/*
-Structure qui contient un pointeur vers le premier element
-et le dernier element de la structure t_token
-*/
-
 typedef struct s_tknlist
 {
 	struct s_token	*head;
 	struct s_token	*tail;
 }	t_tknlist;
-
-/*
-Structure qui contient toutes les variables d'environnement et leurs valeurs
-*/
 
 typedef struct s_env
 {
@@ -162,17 +144,6 @@ typedef struct s_env
 	int				secret;
 	struct s_env	*next;
 }				t_env;
-
-/*
-All structures are contained in minishell structure
-env : une structure pour un double tableau **env, qui
-contiendra toutes les variables d'environnements.
-tknlist : c'est la liste de token avec un pointeur sur le debut,
-et la fin.
-btree: l'arbre binaire qui contient un chque commande tokenise.
-io_global : jsplus
-last_gstatus : contient l'int de sortie, ex: 127 = exit, 130 = Ctrl+C.
-*/
 
 typedef struct s_shell
 {
@@ -231,15 +202,20 @@ int				is_in_env(t_env *env, char *args);
 
 // ============== EXEC ==============
 // -------------- browse_heredoc.c --------------
-void			handle_signals_heredoc(char *input, size_t nb_lines, char *delim);
-int				readline_heredoc(t_btree *block, char *line , size_t *nb_lines, int fd_pipe[2]);
-void			cross_heredoc(t_shell *shell, t_btree *block, t_io io_inherited);
+void			handle_signals_heredoc(char *input, size_t nb_lines, \
+	char *delim);
+int				readline_heredoc(t_btree *block, char *line, \
+	size_t *nb_lines, int fd_pipe[2]);
+void			cross_heredoc(t_shell *shell, t_btree *block, \
+	t_io io_inherited);
 // -------------- browse_node.c --------------
-void			cross_input(t_shell *shell, t_btree *block , t_io io_inherited);
-void			cross_output(t_shell *shell, t_btree *block , t_io io_inherited);
+void			cross_input(t_shell *shell, t_btree *block, t_io io_inherited);
+void			cross_output(t_shell *shell, t_btree *block, t_io io_inherited);
 void			cross_pipe(t_shell *shell, t_btree *block, t_io io_inherited);
-void			cross_operator(t_shell *shell, t_btree *block , t_io io_inherited);
-int				cross_brackets(t_shell *shell, t_btree *block, t_io io_inherited);
+void			cross_operator(t_shell *shell, t_btree *block, \
+	t_io io_inherited);
+int				cross_brackets(t_shell *shell, t_btree *block, \
+	t_io io_inherited);
 // -------------- browse_tree.c --------------
 int				wait_child(pid_t pid);
 void			browse_tree(t_shell *shell, t_btree *bloc, t_io io_inherited);
@@ -279,14 +255,16 @@ int				detect_error_type(const char c);
 // -------------- lexer.c --------------
 int				handle_error_lexer(int gc_id, char *msg);
 int				detect_type(const char c1, const char c2);
-void			handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i);
+void			handle_token(char *buffer, t_tknlist *list, \
+	t_tkntype type, int *i);
 int				is_only_space(char *buffer);
 t_tknlist		*lexer(char *buffer);
 
 // ============== LIBFT_EXTENSION ==============
 // -------------- libft_extension1.c --------------
 char			*ft_strcut(char const *str, size_t cut_begin, size_t cut_end);
-char			*replace_substr(char *str, char *replacement, size_t start, size_t len);
+char			*replace_substr(char *str, char *replacement, \
+	size_t start, size_t len);
 char			*remove_substr(char *str, size_t start, size_t len_toremove);
 // -------------- libft_extension2.c --------------
 size_t			ft_strlen_utils(const char *str, int (*f)(char));
@@ -303,7 +281,7 @@ bool			s1_is_s2_prefix(char *s1, char *s2);
 // ============== PARSER ==============
 // -------------- parser.c --------------
 void			set_token_index(t_token *cur);
-t_btree	*		parser(t_shell *shell);
+t_btree			*parser(t_shell *shell);
 // -------------- verify_syntax.c --------------
 int				printfd_err(int fd, int ret, char *err_msg, char *issue);
 void			verify_syntax_tknlist(t_tknlist *lst);
@@ -323,9 +301,8 @@ t_btree			*create_bin_tree(t_tknlist *tknlst);
 
 // ~~~~~~~~~~~~~~ EXPANDER ~~~~~~~~~~~~~~
 // -------------- expand_dollars.c --------------
-t_token			*expand_dollar(t_shell *shell, t_token *tkn_to_expand, t_tknlist *tkn_lst);
-// -------------- expand_wildcards.c --------------
-t_token			*expand_wildcard(t_token *tkn_toexpand, t_tknlist *tkn_lst);
+t_token			*expand_dollar(t_shell *shell, t_token *tkn_to_expand, \
+	t_tknlist *tkn_lst);
 // -------------- expander.c --------------
 void			expander(t_shell *shell, t_tknlist *tknlist);
 
@@ -368,9 +345,11 @@ t_token			*create_node(t_tkntype typed, char *value, int linked);
 int				add_node(t_tknlist *list, t_token *node);
 void			init_list(t_tknlist **list);
 // -------------- utils_tknlist2.c --------------
-void			add_after_another(t_tknlist *list, t_token *tkn1, t_token *tkn2);
+void			add_after_another(t_tknlist *list, \
+	t_token *tkn1, t_token *tkn2);
 void			pop_token_in_place(t_tknlist *list_tkn, t_token *to_pop);
-void			add_tknlist_after_target(t_tknlist *lst1 , t_token *tkn_flag, t_tknlist *lst2);
+void			add_tknlist_after_target(t_tknlist *lst1, \
+	t_token *tkn_flag, t_tknlist *lst2);
 void			swap_tokens(t_tknlist *lst, t_token *tkn1, t_token *tkn2);
 size_t			tknlist_size(t_tknlist *tknlist);
 // -------------- utils_tknlist3.c --------------
@@ -384,7 +363,8 @@ int				tkn_is_cmd(t_tkntype tkntype);
 int				tkn_is_redir(t_tkntype tkntype);
 int				tkn_is_operator(t_tkntype tkntype);
 // -------------- print_tree.c --------------
-void			depth_first_search(t_btree *node, void (*visit)(t_btree *, int));
+void			depth_first_search(t_btree *node, \
+	void (*visit)(t_btree *, int));
 void			root_first_search(t_btree *node, void (*visit)(t_btree *, int));
 void			display_node(t_btree *node, int depth);
 

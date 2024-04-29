@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_token2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:50:19 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:50:20 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 /*
 is_special_char sert a savoir si le caractere est un caractere speciale ou pas
@@ -53,7 +65,8 @@ int	handle_word(char *buffer, t_tknlist *list)
 	if (!(buffer[i] == '<' || buffer[i] == '>')
 		&& buffer[i] != 0 && ft_isspace(buffer[i]) == 0)
 		link = 1;
-	if (!add_node(list, create_node(WORD, ft_strndup(buffer, i, TKN_LIST), link)))
+	if (!add_node(list,
+			create_node(WORD, ft_strndup(buffer, i, TKN_LIST), link)))
 		print_and_exit(ERR_MALLOC, RED, 1);
 	return (i);
 }

@@ -1,10 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/29 14:51:48 by avialle-          #+#    #+#             */
+/*   Updated: 2024/04/29 14:52:16 by avialle-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 
 int	g_status = 0;
-
-/*
-cette fonction sert a ....
-*/
 
 t_shell	*singleton_shell(t_shell *addr_shell)
 {
@@ -41,7 +49,7 @@ void	handle_shlvl(t_env *env, int nb)
 	if (!shlvl)
 		print_and_exit(ERR_MALLOC, RED, 1);
 	is_in_env(env, shlvl);
-	rl_outstream = stderr; //???
+	rl_outstream = stderr;
 }
 
 /*
