@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:34:13 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/04/29 15:40:06 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/wait.h>
-# 				include <signal.h>
+# include <signal.h>
 # include <limits.h>
 # include <errno.h>
 # include "../libft/libft.h"
