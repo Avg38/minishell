@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:34 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:58:11 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/02 00:29:35 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,17 @@ void	clear_ctrl_c(int *stdin_cpy, char **line_read)
 
 void	sig_handler(int sigcode)
 {
+	static int	single = 0;
+
 	if (sigcode == SIGINT)
 	{
 		close(STDIN_FILENO);
 		g_status = 130;
+		if (!single)
+		{
+			write(2, "\n", 1);
+			single = 1;
+		}
 	}
 	if (sigcode == SIGQUIT)
 		write(2, "\b\b  \033[2D", 8);
@@ -70,6 +77,7 @@ void	prompt_loop(t_shell *shell)
 		if (g_status == 130)
 		{
 			clear_ctrl_c(&stdin_cpy, &line_read);
+			// ft_printf("\n");
 			continue ;
 		}
 		if (!line_read)

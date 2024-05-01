@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:30:37 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/02 00:38:44 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,22 @@
 # define ERR_BRACKETS "Minishell: open brackets are not interpreted.\n"
 # define ERR_OPEN_PIPE "Minishell: open pipe are not interpreted.\n"
 # define ERR_OPEN_LOGICAL_OP "Minishell: open logical \
-	operators are not interpreted.\n"
+operators are not interpreted.\n"
 # define ERR_WRONG_CHAR "Minishell: uninterpreted token \
-	present outside quotes.\n"
+present outside quotes.\n"
 # define ERR_NEAR_TOKEN "Minishell: syntax error near unexpected token"
 # define ERR_STAR_TOKEN "Minishell: *: ambiguous redirect\n"
 # define ERR_EOF_UNEXPECTED "Minishell: syntax error: unexpected end of file.\n"
 # define ERR_EOF_HEREDOC "Minishell:warning: here-document \
-	at line 1 delimited by end-of-file"
+at line 1 delimited by end-of-file"
 # define ERR_PWD "pwd: error retrieving current directory: \
-	getcwd: cannot access parent directories: No such file or directory"
+getcwd: cannot access parent directories: No such file or directory"
 # define ERR_SHLVL "minishell: warning: shell level (%d) \
-	too high, resetting to 1"
+too high, resetting to 1"
 # define ERR_HEREDOC "%sMinishell: warning: here-document \
-	at line %d delimited by end-of-file (wanted `%s')%s\n"
+at line %d delimited by end-of-file (wanted `%s')%s\n"
 # define ERR_DOT ": filename argument required\n.: usage: \
-	. filename [arguments]\n"
+. filename [arguments]\n"
 
 extern int	g_status;
 
