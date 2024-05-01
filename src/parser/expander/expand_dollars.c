@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollars.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:21 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:51:22 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:16:25 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,8 @@ static void	lstadd_dollar_expansions(t_shell *shell, \
 			new_tkn = dollar_detected(shell, &to_expand[i], &len_sub, tkntype);
 		else
 			new_tkn = dollar_undetected(&to_expand[i], &len_sub, tkntype);
-		if (!new_tkn)
+		if (!add_node(dollar_lst, new_tkn))
 			print_and_exit(ERR_MALLOC, RED, MALLOC_E);
-		add_node(dollar_lst, new_tkn);
 		i += len_sub + 1;
 	}
 }

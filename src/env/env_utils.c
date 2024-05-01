@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:56 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:01:28 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:00:25 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	is_in_env(t_env *env, char *args)
 		if (ft_strcmp(var_name, env_name) == 0)
 		{
 			gc_del_one(env->value, ENV);
-			env->value = ft_strndup(args, ft_strlen(args), ENV);
+			env->value = gc_strndup(args, ft_strlen(args), ENV);
 			if (!env->value)
 				print_and_exit(ERR_MALLOC, RED, 1);
 			return (1);

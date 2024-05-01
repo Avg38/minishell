@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:51 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:49:52 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:07:44 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_env	*env_init(char **env_array)
 		new = gc_malloc(sizeof(t_env), ENV);
 		if (!new)
 			free_and_exit(1);
-		new->value = ft_strndup(env_array[i], ft_strlen(env_array[i]), ENV);
+		new->value = gc_strndup(env_array[i], ft_strlen(env_array[i]), ENV);
 		if (!new->value)
 			print_and_exit(ERR_MALLOC, RED, 1);
 		new->next = NULL;

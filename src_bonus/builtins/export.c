@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:40 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:23:14 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/01 20:10:44 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ int	is_valid_args(const char *args)
 	return (0);
 }
 
-/*
-env_add ajoute aux env une nouvelles valeurs.
-*/
-
 int	env_add(char *value, t_env **env, int mod)
 {
 	t_env	*new;
@@ -50,7 +46,9 @@ int	env_add(char *value, t_env **env, int mod)
 	new = gc_malloc(sizeof(t_env), ENV);
 	if (!new)
 		free_and_exit(1);
-	new->value = ft_strndup(value, ft_strlen(value), ENV);
+	new->value = gc_strndup(value, ft_strlen(value), ENV);
+	if (!new->value)
+		print_and_exit(ERR_MALLOC, RED, 1);
 	new->secret = mod;
 	new->next = NULL;
 	env_add_back(env, new);

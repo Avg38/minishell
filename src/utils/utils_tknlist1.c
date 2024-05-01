@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_tknlist1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:42 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:51:43 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/01 19:49:27 by sei              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*create_node(t_tkntype typed, char *value, int linked)
 int	add_node(t_tknlist *list, t_token *node)
 {
 	if (!node)
-		return (-1);
+		return (0);
 	if (!list->head)
 	{
 		list->head = node;
