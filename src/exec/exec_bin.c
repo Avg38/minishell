@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:10 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:53:58 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:26:33 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ int	exec_bin(t_env *env, t_btree *node, t_io fds)
 	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
 	{
 		g_status = 139;
-		ft_putendl_fd("Segmentation fault (code dumped)", 2);
+		ft_putendl_fd("Segmentation fault (core dumped)", 2);
 	}
 	if (WCOREDUMP(status) && WTERMSIG(status) == 3)
-		ft_putendl_fd("Quit (code dumped)", 2);
+		ft_putendl_fd("Quit (core dumped)", 2);
 	if (WIFEXITED(status))
 		exit_code = WEXITSTATUS(status);
 	return (exit_code);

@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:36 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:51:37 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:10:25 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	*create_prompt(t_shell *shell)
 	int		len_home;
 
 	home = getenv("HOME");
+	// home = env_get_value(shell->env, "HOME", 4);
 	prompt = env_get_value(shell->env, "PWD", 3);
 	if (!prompt)
 		prompt = "Minishell";

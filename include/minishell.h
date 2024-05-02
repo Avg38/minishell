@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 00:38:44 by sei              ###   ########.fr       */
+/*   Updated: 2024/05/02 16:02:14 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@
 
 // MESSAGE
 # define ERR_ARGS "Error : Invalid number of arguments.\n"
+# define ERR_ARGS_ENV "env: '%s': No such file or directory\n"
 # define ERR_UNAVAILABLE_ENV "Minishell: Environment unavailable.\n"
 # define ERR_MALLOC "Minishell: Allocation error\n"
 # define ERR_QUOTES "Minishell: open quotes are not interpreted.\n"
-# define ERR_INFILE "Minishell: open quotes are not interpreted.\n"
 # define ERR_BRACKETS "Minishell: open brackets are not interpreted.\n"
 # define ERR_OPEN_PIPE "Minishell: open pipe are not interpreted.\n"
 # define ERR_OPEN_LOGICAL_OP "Minishell: open logical \
@@ -59,9 +59,9 @@ operators are not interpreted.\n"
 present outside quotes.\n"
 # define ERR_NEAR_TOKEN "Minishell: syntax error near unexpected token"
 # define ERR_STAR_TOKEN "Minishell: *: ambiguous redirect\n"
-# define ERR_EOF_UNEXPECTED "Minishell: syntax error: unexpected end of file.\n"
-# define ERR_EOF_HEREDOC "Minishell:warning: here-document \
-at line 1 delimited by end-of-file"
+// # define ERR_EOF_UNEXPECTED "Minishell: syntax error: unexpected end of file.\n"
+// # define ERR_EOF_HEREDOC "Minishell:warning: here-document \
+// at line 1 delimited by end-of-file"
 # define ERR_PWD "pwd: error retrieving current directory: \
 getcwd: cannot access parent directories: No such file or directory"
 # define ERR_SHLVL "minishell: warning: shell level (%d) \
@@ -72,6 +72,7 @@ at line %d delimited by end-of-file (wanted `%s')%s\n"
 . filename [arguments]\n"
 
 extern int	g_status;
+extern int	single;
 
 typedef enum e_gc_id
 {
@@ -128,14 +129,20 @@ typedef struct s_token
 	size_t			index;
 	int				priority;
 	int				used_flag;
-	struct s_token	*next;
 	struct s_token	*prev;
+	struct s_token	*next;
 }	t_token;
+
+// typedef struct s_tknlist
+// {
+// 	struct s_token	*head;
+// 	struct s_token	*tail;
+// }	t_tknlist;
 
 typedef struct s_tknlist
 {
-	struct s_token	*head;
-	struct s_token	*tail;
+	t_token	*head;
+	t_token	*tail;
 }	t_tknlist;
 
 typedef struct s_env

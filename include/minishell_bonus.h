@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:40:06 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:02:21 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 
 // MESSAGE
 # define ERR_ARGS "Error : Invalid number of arguments.\n"
+# define ERR_ARGS_ENV "env: '%s': No such file or directory\n"
 # define ERR_UNAVAILABLE_ENV "Minishell: Environment unavailable.\n"
 # define ERR_MALLOC "Minishell: Allocation error\n"
 # define ERR_QUOTES "Minishell: open quotes are not interpreted.\n"

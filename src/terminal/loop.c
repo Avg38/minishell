@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:34 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 00:29:35 by sei              ###   ########.fr       */
+/*   Updated: 2024/05/02 14:48:23 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,23 @@ void	clear_ctrl_c(int *stdin_cpy, char **line_read)
 	clear_loop();
 }
 
+void	clear_ctrl_z(int *stdin_cpy, char **line_read)
+{
+	if (*line_read)
+	{
+		ft_printf("%s", line_read);
+		free(*line_read);
+	}
+	*line_read = NULL;
+	dup2(*stdin_cpy, STDIN_FILENO);
+	close(*stdin_cpy);
+	clear_loop();
+}
+
 void	sig_handler(int sigcode)
 {
-	static int	single = 0;
-
+	// static int	single = 0;
+	
 	if (sigcode == SIGINT)
 	{
 		close(STDIN_FILENO);
@@ -45,12 +58,11 @@ void	sig_handler(int sigcode)
 	}
 	if (sigcode == SIGQUIT)
 		write(2, "\b\b  \033[2D", 8);
-	if (sigcode == SIGTSTP)
-		write(2, "\b\b  \033[2D", 8);
 }
 
 void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)
 {
+	signal(SIGQUIT, sig_handler);
 	add_history(line_read);
 	shell->tknlist = lexer(line_read);
 	shell->btree = parser(shell);
@@ -66,18 +78,17 @@ void	prompt_loop(t_shell *shell)
 	char	*line_read;
 
 	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
-	signal(SIGTSTP, sig_handler);
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN);
 		stdin_cpy = dup(STDIN_FILENO);
 		shell ->last_gstatus = g_status;
 		g_status = 0;
 		line_read = readline(create_prompt(shell));
+		single = 1;
 		if (g_status == 130)
 		{
 			clear_ctrl_c(&stdin_cpy, &line_read);
-			// ft_printf("\n");
 			continue ;
 		}
 		if (!line_read)

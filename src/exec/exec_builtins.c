@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:12 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:54:09 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:09:41 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ int	exec_builtin(t_env **envt, t_btree *node, t_io fds)
 	else if (ft_strcmp(node->cmds[0], "pwd") == 0)
 		status = pwd(fds, *envt);
 	else if (ft_strcmp(node->cmds[0], "env") == 0)
+	{
+		if (node->cmds[1])
+			print_path_error(ERR_ARGS_ENV, node->cmds[1]);
+		else
 		env(*envt, fds);
+	}
 	else if (ft_strcmp(node->cmds[0], "export") == 0)
 		status = ft_export(node->cmds, envt, fds);
 	else if (ft_strcmp(node->cmds[0], "unset") == 0)
