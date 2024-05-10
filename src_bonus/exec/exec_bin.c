@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avg38 <avg38@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:10 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 20:50:18 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:57:35 by avg38            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,6 @@ char	*handle_path(t_btree *node, t_env *env)
 		cmd_path = get_cmd_path(cmd, env);
 	check_path(cmd, cmd_path);
 	return (cmd_path);
-}
-
-void	get_fork_number(t_btree *node, int *i)
-{
-	if (node)
-	{
-		if (node->type == PIPE)
-			(*i)++;
-		get_fork_number(node->left, i);
-		get_fork_number(node->right, i);
-	}
 }
 
 int	exec_bin(t_shell *shell, t_env *env, t_btree *node, t_io fds)

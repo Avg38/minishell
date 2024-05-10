@@ -48,6 +48,7 @@ SRC		=	src/builtins/cd.c\
 			\
 			src/terminal/loop.c\
 			src/terminal/prompt.c\
+			src/terminal/signal.c\
 			\
 			src/utils/ft_exit.c\
 			src/utils/print_tree.c\
@@ -101,6 +102,7 @@ SRC_BONUS	=	src_bonus/builtins/cd.c\
 				\
 				src_bonus/terminal/loop.c\
 				src_bonus/terminal/prompt.c\
+				src_bonus/terminal/signal.c\
 				\
 				src_bonus/utils/ft_exit.c\
 				src_bonus/utils/print_tree.c\

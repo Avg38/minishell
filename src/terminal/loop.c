@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avg38 <avg38@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:34 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 20:50:18 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:55:58 by avg38            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,60 +19,15 @@ void	clear_loop(void)
 	gc_clear(B_TREE, free);
 }
 
-void	clear_ctrl_c(int *stdin_cpy, char **line_read)
+void	get_fork_number(t_btree *node, int *i)
 {
-	if (*line_read)
-		free(*line_read);
-	*line_read = NULL;
-	dup2(*stdin_cpy, STDIN_FILENO);
-	close(*stdin_cpy);
-	clear_loop();
-}
-
-void	sig_handler(int sigcode)
-{
-	if (sigcode == SIGINT)
+	if (node)
 	{
-		close(STDIN_FILENO);
-		g_status = 130;
-		if (!g_single)
-		{
-			write(2, "\n", 1);
-			g_single = 1;
-		}
+		if (node->type == PIPE)
+			(*i)++;
+		get_fork_number(node->left, i);
+		get_fork_number(node->right, i);
 	}
-	if (sigcode == SIGQUIT)
-	{
-		write(2, "\b\b  \033[2D", 8);
-		g_status = 131;
-	}
-}
-
-int	waitlist(int nb_fork, int *pid)
-{
-	int		i;
-	int		status;
-	int		exit_status;
-
-	i = 0;
-	exit_status = 0;
-	status = 0;
-	while (i < nb_fork)
-	{
-		waitpid(pid[i], &status, 0);
-		if (WCOREDUMP(status) && WTERMSIG(status) == 11)
-		{
-			g_status = 139;
-			ft_putendl_fd("Segmentation fault (core dumped)", 2);
-		}
-		if (WCOREDUMP(status) && WTERMSIG(status) == 3)
-			ft_putendl_fd("Quit (core dumped)", 2);
-		if (WIFEXITED(status))
-			exit_status = WEXITSTATUS(status);
-		i++;
-		status = 0;
-	}
-	return (exit_status);
 }
 
 void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)

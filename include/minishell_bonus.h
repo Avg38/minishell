@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avg38 <avg38@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 20:50:17 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:58:13 by avg38            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void			browse_tree(t_shell *shell, t_btree *bloc, t_io io_inherited);
 char			**env_to_char2(t_env *env);
 void			exec_process(t_btree *block, t_env *env, t_io fds);
 char			*handle_path(t_btree *block, t_env *env);
-int				exec_bin(t_env *env, t_btree *block, t_io fds);
+int				exec_bin(t_shell *shell, t_env *env, t_btree *node, t_io fds);
 // -------------- exec_builtins.c --------------
 int				is_builtin(char *command);
 int				exec_builtin(t_env **envt, t_btree *block, t_io fds);
@@ -319,12 +319,15 @@ size_t			size_sequence(t_token *begin_seq);
 // ============== TERMINAL ==============
 // -------------- loop.c --------------
 void			clear_loop(void);
-void			clear_ctrl_c(int *stdin_cpy, char **line_read);
-void			sig_handler(int sigcode);
+void			get_fork_number(t_btree *node, int *i);
 void			process_shell(t_shell *shell, char *line_read, int *stdin_cpy);
 void			prompt_loop(t_shell *shell);
 // -------------- prompt.c --------------
 char			*create_prompt(t_shell *shell);
+// -------------- signal.c --------------
+void			clear_ctrl_c(int *stdin_cpy, char **line_read);
+void			sig_handler(int sigcode);
+int				waitlist(int nb_fork, int *pid);
 
 // ============== UTILS ==============
 // -------------- ft_exit.c --------------
