@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:56 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 11:08:32 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:00:49 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	*env_get_value(t_env *env, const char *var, size_t len)
 			path = gc_strdup(&env->value[len + 1], TMP);
 			if (!path)
 				print_and_exit(ERR_MALLOC, RED, 1);
-			// ft_printf("retour de env_get_value = %s\n", path);
 			return (path);
 		}
 		env = env->next;

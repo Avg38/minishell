@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:19 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:57:33 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:48:34 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ t_btree	*place_in_tree(t_btree *node, t_btree *toplace, int index)
 		node->right = place_in_tree(node->right, toplace, index);
 	return (node);
 }
-
-/*
-Pas sur de comprendre ...
-*/
 
 t_btree	*btree_new(t_token *tkn_to_convert)
 {
