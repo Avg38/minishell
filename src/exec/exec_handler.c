@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:13 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:54:37 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:38:33 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	exec_handler(t_shell *shell, t_btree *node, t_io fds)
 	else if (pipe_is_present == false && cmd_builtin == true)
 		ret_status = exec_builtin(&(shell->env), node, fds);
 	else
-		ret_status = exec_bin(shell->env, node, fds);
+		ret_status = exec_bin(shell, shell->env, node, fds);
 	return (ret_status);
 }

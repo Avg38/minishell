@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:40 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/01 20:01:35 by sei              ###   ########.fr       */
+/*   Updated: 2024/05/10 19:04:14 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ int	is_valid_args(const char *args)
 		return (2);
 	return (0);
 }
-
-/*
-env_add ajoute aux env une nouvelles valeurs.
-*/
 
 int	env_add(char *value, t_env **env, int mod)
 {

@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:34 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 14:48:23 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 19:26:09 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,37 @@ void	sig_handler(int sigcode)
 		}
 	}
 	if (sigcode == SIGQUIT)
+	{
 		write(2, "\b\b  \033[2D", 8);
+		g_status = 131;
+	}
+}
+
+int	waitlist(int nb_fork, int *pid)
+{
+	int		i;
+	int		status;
+	int		exit_status;
+
+	i = 0;
+	exit_status = 0;
+	status = 0;
+	while (i < nb_fork)
+	{
+		waitpid(pid[i], &status, 0);
+		if (WCOREDUMP(status) && WTERMSIG(status) == 11)
+		{
+			g_status = 139;
+			ft_putendl_fd("Segmentation fault (core dumped)", 2);
+		}
+		if (WCOREDUMP(status) && WTERMSIG(status) == 3)
+			ft_putendl_fd("Quit (core dumped)", 2);
+		if (WIFEXITED(status))
+			exit_status = WEXITSTATUS(status);
+		i++;
+		status = 0;
+	}
+	return (exit_status);
 }
 
 void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)
@@ -66,7 +96,16 @@ void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)
 	add_history(line_read);
 	shell->tknlist = lexer(line_read);
 	shell->btree = parser(shell);
+	shell->nb_fork = 1;
+	get_fork_number(shell->btree, &(shell->nb_fork));
+	ft_printf("nb_fork = %d\n", shell->nb_fork);
+	// if (shell->nb_fork > 1)
+	shell->pid = gc_calloc(sizeof(int), shell->nb_fork, TMP);
 	browse_tree(shell, shell->btree, shell->io_global);
+	// if (shell->nb_fork > 1)
+	waitlist(shell->nb_fork, shell->pid);
+	
+	// root_first_search(shell->btree, display_node);
 	dup2(*stdin_cpy, STDIN_FILENO);
 	close(*stdin_cpy);
 	clear_loop();
@@ -84,6 +123,8 @@ void	prompt_loop(t_shell *shell)
 		stdin_cpy = dup(STDIN_FILENO);
 		shell ->last_gstatus = g_status;
 		g_status = 0;
+		// usleep(100000);
+		usleep(100000);
 		line_read = readline(create_prompt(shell));
 		single = 1;
 		if (g_status == 130)

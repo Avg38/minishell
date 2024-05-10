@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 16:02:14 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:18:37 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,8 @@ typedef struct s_shell
 	t_btree		*btree;
 	t_io		io_global;
 	int			last_gstatus;
+	int			nb_fork;
+	int			*pid;
 }	t_shell;
 
 // ============== BUILTINS ==============
@@ -230,7 +232,8 @@ void			browse_tree(t_shell *shell, t_btree *bloc, t_io io_inherited);
 char			**env_to_char2(t_env *env);
 void			exec_process(t_btree *block, t_env *env, t_io fds);
 char			*handle_path(t_btree *block, t_env *env);
-int				exec_bin(t_env *env, t_btree *block, t_io fds);
+int				exec_bin(t_shell *shell, t_env *env, t_btree *block, t_io fds);
+void			get_fork_number(t_btree *node, int *i);
 // -------------- exec_builtins.c --------------
 int				is_builtin(char *command);
 int				exec_builtin(t_env **envt, t_btree *block, t_io fds);
