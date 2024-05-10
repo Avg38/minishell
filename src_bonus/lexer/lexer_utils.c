@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:20 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/01 20:11:58 by sei              ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:18 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_bonus.h"
-
-// char	*ft_strndup(char *buffer, int len, t_gc_id id)
-// {
-// 	char	*new;
-// 	int		i;
-
-// 	i = 0;
-// 	while (buffer[i] && i < len)
-// 		i++;
-// 	new = gc_malloc((i + 1) * sizeof(char), id);
-// 	if (!new)
-// 		print_and_exit(ERR_MALLOC, RED, 1);
-// 	i = 0;
-// 	while (buffer[i] && i < len)
-// 	{
-// 		new[i] = buffer[i];
-// 		i++;
-// 	}
-// 	new[i] = 0;
-// 	return (new);
-// }
 
 int	is_operator(const char c1, const char c2)
 {

@@ -6,14 +6,14 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:48 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 14:35:37 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:17 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 int	g_status = 0;
-int	single = 0;
+int	g_single = 0;
 
 t_shell	*singleton_shell(t_shell *addr_shell)
 {

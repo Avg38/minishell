@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 18:18:37 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:51:10 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@
 // COLORS
 # define RESET	"\x1b[0m"
 # define RED	"\x1b[31;1m"
-# define GREEN	"\x1b[32m"
-# define BLUE	"\x1b[34m"
-# define PINK	"\x1b[35m"
-# define YELLOW	"\x1b[33m"
-# define CYAN	"\x1b[36m"
 
 // FD
 # define FD_READ	0
@@ -47,7 +42,6 @@
 
 // MESSAGE
 # define ERR_ARGS "Error : Invalid number of arguments.\n"
-# define ERR_ARGS_ENV "env: '%s': No such file or directory\n"
 # define ERR_UNAVAILABLE_ENV "Minishell: Environment unavailable.\n"
 # define ERR_MALLOC "Minishell: Allocation error\n"
 # define ERR_QUOTES "Minishell: open quotes are not interpreted.\n"
@@ -59,11 +53,6 @@ operators are not interpreted.\n"
 present outside quotes.\n"
 # define ERR_NEAR_TOKEN "Minishell: syntax error near unexpected token"
 # define ERR_STAR_TOKEN "Minishell: *: ambiguous redirect\n"
-// # define ERR_EOF_UNEXPECTED "Minishell: syntax error: unexpected end of file.\n"
-// # define ERR_EOF_HEREDOC "Minishell:warning: here-document \
-// at line 1 delimited by end-of-file"
-# define ERR_PWD "pwd: error retrieving current directory: \
-getcwd: cannot access parent directories: No such file or directory"
 # define ERR_SHLVL "minishell: warning: shell level (%d) \
 too high, resetting to 1"
 # define ERR_HEREDOC "%sMinishell: warning: here-document \
@@ -72,7 +61,7 @@ at line %d delimited by end-of-file (wanted `%s')%s\n"
 . filename [arguments]\n"
 
 extern int	g_status;
-extern int	single;
+extern int	g_single;
 
 typedef enum e_gc_id
 {
@@ -133,12 +122,6 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-// typedef struct s_tknlist
-// {
-// 	struct s_token	*head;
-// 	struct s_token	*tail;
-// }	t_tknlist;
-
 typedef struct s_tknlist
 {
 	t_token	*head;
@@ -150,7 +133,7 @@ typedef struct s_env
 	char			*value;
 	int				secret;
 	struct s_env	*next;
-}				t_env;
+}	t_env;
 
 typedef struct s_shell
 {
@@ -172,7 +155,6 @@ int				process_cd(char **cmds, t_env **env);
 int				cd(char **cmds, t_env **env);
 // -------------- echo.c --------------
 int				size_cmds(char **cmds);
-// static int is_valid_option(char *option);
 int				echo(char **cmds, t_io fds);
 // -------------- env.c --------------
 int				env(t_env *env, t_io fds);

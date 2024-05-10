@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:12 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 17:53:04 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:18 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,7 @@ int	exec_builtin(t_env **envt, t_btree *node, t_io fds)
 	else if (ft_strcmp(node->cmds[0], "pwd") == 0)
 		status = pwd(fds, *envt);
 	else if (ft_strcmp(node->cmds[0], "env") == 0)
-	{
-		if (node->cmds[1])
-			ft_printf_fd(2, "Minishell: env: '%s': No such file or directory\n", node->cmds[1]);
-		else
-			env(*envt, fds);
-	}
+		env(*envt, fds);
 	else if (ft_strcmp(node->cmds[0], "export") == 0)
 		status = ft_export(node->cmds, envt, fds);
 	else if (ft_strcmp(node->cmds[0], "unset") == 0)

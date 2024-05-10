@@ -6,13 +6,13 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:30 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:23:14 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:23 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell_bonus.h"
 
-int	check_limit(int sign, long result, long digit) //optimisalbe
+int	check_limit(int sign, long result, long digit)
 {
 	if (sign == 1 && (result > LONG_MAX / 10
 			|| (result == LONG_MAX / 10 && digit > LONG_MAX % 10)))
@@ -23,7 +23,7 @@ int	check_limit(int sign, long result, long digit) //optimisalbe
 	return (1);
 }
 
-int	is_valid_long(const char *str) //optimisable
+int	is_valid_long(const char *str)
 {
 	long	result;
 	long	digit;

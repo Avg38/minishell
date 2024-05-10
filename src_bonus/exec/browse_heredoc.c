@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:00 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:23:18 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:17 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	cross_heredoc(t_shell *shell, t_btree *node, t_io io_inherited)
 	ft_memcpy(&io_transmitted, &io_inherited, sizeof(t_io));
 	if (pipe(fd_pipe) == -1)
 		print_and_exit("Minishell: pipe error\n", RED, 1);
+	signal(SIGQUIT, SIG_IGN);
 	line = readline("> ");
 	nb_lines = 1;
 	while (line)
@@ -56,6 +57,7 @@ void	cross_heredoc(t_shell *shell, t_btree *node, t_io io_inherited)
 	if (io_inherited.fd_in != 0)
 		close(io_inherited.fd_in);
 	io_transmitted.fd_in = fd_pipe[FD_READ];
+	signal(SIGQUIT, sig_handler);
 	browse_tree(shell, node->left, io_transmitted);
 	close(fd_pipe[FD_READ]);
 }

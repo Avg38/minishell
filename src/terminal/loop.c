@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:34 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 19:26:09 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:18 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,16 @@ void	clear_ctrl_c(int *stdin_cpy, char **line_read)
 	clear_loop();
 }
 
-void	clear_ctrl_z(int *stdin_cpy, char **line_read)
-{
-	if (*line_read)
-	{
-		ft_printf("%s", line_read);
-		free(*line_read);
-	}
-	*line_read = NULL;
-	dup2(*stdin_cpy, STDIN_FILENO);
-	close(*stdin_cpy);
-	clear_loop();
-}
-
 void	sig_handler(int sigcode)
 {
-	// static int	single = 0;
-	
 	if (sigcode == SIGINT)
 	{
 		close(STDIN_FILENO);
 		g_status = 130;
-		if (!single)
+		if (!g_single)
 		{
 			write(2, "\n", 1);
-			single = 1;
+			g_single = 1;
 		}
 	}
 	if (sigcode == SIGQUIT)
@@ -98,14 +83,9 @@ void	process_shell(t_shell *shell, char *line_read, int *stdin_cpy)
 	shell->btree = parser(shell);
 	shell->nb_fork = 1;
 	get_fork_number(shell->btree, &(shell->nb_fork));
-	ft_printf("nb_fork = %d\n", shell->nb_fork);
-	// if (shell->nb_fork > 1)
 	shell->pid = gc_calloc(sizeof(int), shell->nb_fork, TMP);
 	browse_tree(shell, shell->btree, shell->io_global);
-	// if (shell->nb_fork > 1)
 	waitlist(shell->nb_fork, shell->pid);
-	
-	// root_first_search(shell->btree, display_node);
 	dup2(*stdin_cpy, STDIN_FILENO);
 	close(*stdin_cpy);
 	clear_loop();
@@ -123,10 +103,9 @@ void	prompt_loop(t_shell *shell)
 		stdin_cpy = dup(STDIN_FILENO);
 		shell ->last_gstatus = g_status;
 		g_status = 0;
-		// usleep(100000);
 		usleep(100000);
 		line_read = readline(create_prompt(shell));
-		single = 1;
+		g_single = 1;
 		if (g_status == 130)
 		{
 			clear_ctrl_c(&stdin_cpy, &line_read);

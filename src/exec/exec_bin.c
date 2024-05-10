@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:10 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 19:29:25 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:22 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,33 +113,20 @@ void	get_fork_number(t_btree *node, int *i)
 
 int	exec_bin(t_shell *shell, t_env *env, t_btree *node, t_io fds)
 {
-	// pid_t	pid;
 	int				status;
 	int				exit_code;
 	static int		i = 0;
 
 	status = 0;
 	exit_code = 0;
-
-	//partie 1 : creer une Waitlist, c.a.d : tableau de pid, et tous les attendres.
-	//"waitlist"
-	// waitlist();
 	shell->pid[i] = fork();
-	// ft_printf("pid = %d\n", shell->pid[i]);
 	if (shell->pid[i] == -1)
 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
 	if (shell->pid[i] == 0)
 		exec_process(node, env, fds);
-	// waitpid(shell->pid[i], &status, 0);
 	i++;
 	if (i >= shell->nb_fork)
 		i = 0;
-	
-	//partie 2 : executer chaque commande
-	//"exec_bin2"
-	
-	
-	// partie a ne pas changer
 	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
 	{
 		g_status = 139;
@@ -151,29 +138,3 @@ int	exec_bin(t_shell *shell, t_env *env, t_btree *node, t_io fds)
 		exit_code = WEXITSTATUS(status);
 	return (exit_code);
 }
-
-// int	exec_bin(t_env *env, t_btree *node, t_io fds)
-// {
-// 	pid_t	pid;
-// 	int		status;
-// 	int		exit_code;
-
-// 	status = 0;
-// 	exit_code = 0;
-// 	pid = fork();
-// 	if (pid == -1)
-// 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
-// 	if (pid == 0)
-// 		exec_process(node, env, fds);
-// 	waitpid(pid, &status, 0);
-// 	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
-// 	{
-// 		g_status = 139;
-// 		ft_putendl_fd("Segmentation fault (core dumped)", 2);
-// 	}
-// 	if (WCOREDUMP(status) && WTERMSIG(status) == 3)
-// 		ft_putendl_fd("Quit (core dumped)", 2);
-// 	if (WIFEXITED(status))
-// 		exit_code = WEXITSTATUS(status);
-// 	return (exit_code);
-// }

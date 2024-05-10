@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:09 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:23:19 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:17 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	wait_child(pid_t pid)
 
 void	browse_tree(t_shell *shell, t_btree *node, t_io io_inherited)
 {
+	g_single = 0;
 	if (!node || g_status == 130)
 		return ;
 	if (tkn_is_logic(node->type))

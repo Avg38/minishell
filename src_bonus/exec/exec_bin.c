@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:10 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 14:26:44 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:50:18 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,8 @@ char	**env_to_char2(t_env *env)
 	return (env_2d);
 }
 
-void	exec_process(t_btree *node, t_env *env, t_io fds)
+void	exec_fd(t_io fds)
 {
-	char		*cmd_path;
-	struct stat	stats;
-
-	cmd_path = handle_path(node, env);
 	if (dup2(fds.fd_in, STDIN_FILENO) == -1)
 		print_and_exit(strerror(errno), RED, 1);
 	if (dup2(fds.fd_out, STDOUT_FILENO) == -1)
@@ -53,10 +49,23 @@ void	exec_process(t_btree *node, t_env *env, t_io fds)
 		close(fds.fd_out);
 	if (fds.fd_in != 0)
 		close(fds.fd_in);
+}
+
+void	exec_process(t_btree *node, t_env *env, t_io fds)
+{
+	char		*cmd_path;
+	struct stat	stats;
+	int			i;
+
+	i = 3;
+	exec_fd(fds);
+	cmd_path = handle_path(node, env);
 	if (lstat(cmd_path, &stats) != -1)
 	{
 		if ((stats.st_mode & S_IXUSR) && (stats.st_mode & S_IFREG))
 		{
+			while (i < 60)
+				close(i++);
 			execve(cmd_path, node->cmds, env_to_char2(env));
 			print_and_exit(strerror(errno), RED, 1);
 		}
@@ -91,20 +100,33 @@ char	*handle_path(t_btree *node, t_env *env)
 	return (cmd_path);
 }
 
-int	exec_bin(t_env *env, t_btree *node, t_io fds)
+void	get_fork_number(t_btree *node, int *i)
 {
-	pid_t	pid;
-	int		status;
-	int		exit_code;
+	if (node)
+	{
+		if (node->type == PIPE)
+			(*i)++;
+		get_fork_number(node->left, i);
+		get_fork_number(node->right, i);
+	}
+}
+
+int	exec_bin(t_shell *shell, t_env *env, t_btree *node, t_io fds)
+{
+	int			status;
+	int			exit_code;
+	static int	i = 0;
 
 	status = 0;
 	exit_code = 0;
-	pid = fork();
-	if (pid == -1)
+	shell->pid[i] = fork();
+	if (shell->pid[i] == -1)
 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
-	if (pid == 0)
+	if (shell->pid[i] == 0)
 		exec_process(node, env, fds);
-	waitpid(pid, &status, 0);
+	i++;
+	if (i >= shell->nb_fork)
+		i = 0;
 	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
 	{
 		g_status = 139;
