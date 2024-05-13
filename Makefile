@@ -1,7 +1,7 @@
 .DEFAULT_GOAL: $(NAME)
 # valgrind --leak-check=full --suppressions=.readline.supp ./minishell
-NAME		= minishell
-NAME_BONUS	= minishell_bonus
+NAME		=	minishell
+NAME_BONUS	=	minishell_bonus
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf

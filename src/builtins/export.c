@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:40 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 19:04:14 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:16:28 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_valid_args(const char *args)
 		return (print_error_export((char *)args, 1));
 	while (args[i] && args[i] != '=')
 	{
-		if (ft_isdigit(args[i]) == 0 || args[i] == '_')
+		if (ft_isalnum(args[i]) == 0 || args[i] == '_')
 			return (print_error_export((char *)args, 1));
 		i++;
 	}
@@ -46,9 +46,7 @@ int	env_add(char *value, t_env **env, int mod)
 	new = gc_malloc(sizeof(t_env), ENV);
 	if (!new)
 		free_and_exit(1);
-	new->value = gc_strndup(value, ft_strlen(value), ENV);
-	if (!new->value)
-		print_and_exit(ERR_MALLOC, RED, 1);
+	new->value = ft_strndup(value, ft_strlen(value), ENV);
 	new->secret = mod;
 	new->next = NULL;
 	env_add_back(env, new);
@@ -82,10 +80,7 @@ int	ft_export(char **args, t_env **envt, t_io fds)
 
 	i = 1;
 	if (!args[1])
-	{
-		env_print_sorted(*envt, fds);
-		return (0);
-	}
+		return(env_print_sorted(*envt, fds), 0);
 	else
 	{
 		while (args[i] != NULL)

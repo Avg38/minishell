@@ -1,0 +1,10 @@
+erreurs.txt
+erreur.txt
+fichiers.txt
+include
+libft
+liste_fichiers.txt
+Makefile
+minishell
+src
+src_bonus

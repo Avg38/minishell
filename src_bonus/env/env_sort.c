@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:54 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:23:17 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:11:03 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,21 @@ void	env_sort(char **tab, int len_env)
 void	print_export(char **tab, t_io fds)
 {
 	size_t	i;
-	size_t	j;
 	size_t	size_varname;
 
 	i = 0;
-	j = 0;
 	while (tab[i])
 	{
-		size_varname = ft_strlen_until_char(tab[i], '=') + 1;
-		j = 0;
-		ft_putstr_fd("declare -x", fds.fd_out);
+		size_varname = ft_strlen_until_char(tab[i], '=');
+		ft_putstr_fd("declare -x ", fds.fd_out);
 		write(fds.fd_out, tab[i], size_varname);
-		write(fds.fd_out, "$\'", 2);
-		while (tab[i][size_varname + j])
+		if (tab[i][size_varname] == '=' && tab[i][size_varname + 1] != '\0')
 		{
-			if (tab[i][size_varname + j] == 27)
-				write (fds.fd_out, "\\", 1);
-			write(fds.fd_out, &tab[i][size_varname + j], 1);
-			j++;
+			write (fds.fd_out, "=\"", 2);
+			write(fds.fd_out, &tab[i][size_varname + 1],
+				ft_strlen(tab[i]) - size_varname - 1);
+			write (fds.fd_out, "\"", 1);
 		}
-		write(fds.fd_out, "\'", 1);
 		write(fds.fd_out, "\n", 1);
 		i++;
 	}

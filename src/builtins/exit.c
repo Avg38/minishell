@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sei <sei@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:30 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/02 00:21:20 by sei              ###   ########.fr       */
+/*   Updated: 2024/05/13 14:24:02 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	process_exit(char **cmds, int *exit_status)
 	if (check_status_code(cmds[1]) == 1 || is_valid_long(cmds[1]) == 0)
 	{
 		ft_printf_fd(2, "Minishell: exit: \
-			%s : numeric argument required\n", cmds[1]);
+%s : numeric argument required\n", cmds[1]);
 		*exit_status = 2;
 	}
 	else if (cmds[2])
