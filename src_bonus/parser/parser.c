@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:31 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:27:03 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:24:59 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,3 @@ t_btree	*parser(t_shell *shell)
 	set_token_index(shell->tknlist->head);
 	return (create_bin_tree(shell->tknlist));
 }
-
-/*
-Parser need to return a binary tree or a list.
-*/

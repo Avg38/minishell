@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avg38 <avg38@student.42.fr>                +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 22:58:13 by avg38            ###   ########.fr       */
+/*   Updated: 2024/05/14 20:39:49 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_shell
 	int			last_gstatus;
 	int			nb_fork;
 	int			*pid;
+	int			index_pid;
 }	t_shell;
 
 // ============== BUILTINS ==============
@@ -218,7 +219,8 @@ int				exec_bin(t_shell *shell, t_env *env, t_btree *node, t_io fds);
 // -------------- exec_builtins.c --------------
 int				is_builtin(char *command);
 int				exec_builtin(t_env **envt, t_btree *block, t_io fds);
-int				fork_builtin(t_env **envt, t_btree *block, t_io fds);
+int				fork_builtin(t_shell *shell, t_env **envt, \
+	t_btree *block, t_io fds);
 // -------------- exec_handler.c --------------
 int				exec_handler(t_shell *shell, t_btree *block, t_io fds);
 // -------------- get_path.c --------------

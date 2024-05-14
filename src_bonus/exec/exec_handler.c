@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avg38 <avg38@student.42.fr>                +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:13 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 22:53:47 by avg38            ###   ########.fr       */
+/*   Updated: 2024/05/14 19:09:23 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exec_handler(t_shell *shell, t_btree *node, t_io fds)
 	cmd_builtin = is_builtin(node->cmds[0]);
 	pipe_is_present = cmd_in_pipe(shell->btree, node->branch);
 	if (pipe_is_present == true && cmd_builtin == true)
-		ret_status = fork_builtin(&(shell->env), node, fds);
+		ret_status = fork_builtin(shell, &(shell->env), node, fds);
 	else if (pipe_is_present == false && cmd_builtin == true)
 		ret_status = exec_builtin(&(shell->env), node, fds);
 	else

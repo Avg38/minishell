@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avg38 <avg38@student.42.fr>                +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 22:46:14 by avg38             #+#    #+#             */
-/*   Updated: 2024/05/10 22:55:50 by avg38            ###   ########.fr       */
+/*   Updated: 2024/05/14 20:02:17 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	waitlist(int nb_fork, int *pid)
 
 	i = 0;
 	exit_status = 0;
-	status = 0;
 	while (i < nb_fork)
 	{
+		status = 0;
 		waitpid(pid[i], &status, 0);
 		if (WCOREDUMP(status) && WTERMSIG(status) == 11)
 		{
@@ -63,7 +63,6 @@ int	waitlist(int nb_fork, int *pid)
 		if (WIFEXITED(status))
 			exit_status = WEXITSTATUS(status);
 		i++;
-		status = 0;
 	}
 	return (exit_status);
 }

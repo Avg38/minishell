@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:07 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 14:50:08 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:47:58 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,6 @@ void	cross_pipe(t_shell *shell, t_btree *node, t_io io_inherited)
 	io_transmitted.fd_out = io_inherited.fd_out;
 	browse_tree(shell, node->right, io_transmitted);
 	close(fd_pipe[FD_READ]);
-}
-
-void	cross_operator(t_shell *shell, t_btree *node \
-	, t_io io_inherited)
-{
-	browse_tree(shell, node->left, io_inherited);
-	if ((node->type == AND && g_status == 0)
-		|| (node->type == OR && g_status != 0))
-		browse_tree(shell, node->right, io_inherited);
 }
 
 int	cross_brackets(t_shell *shell, t_btree *node, t_io io_inherited)

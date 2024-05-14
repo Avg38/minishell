@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:49:40 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/13 15:16:28 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:00:28 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	ft_export(char **args, t_env **envt, t_io fds)
 
 	i = 1;
 	if (!args[1])
-		return(env_print_sorted(*envt, fds), 0);
+		return (env_print_sorted(*envt, fds), 0);
 	else
 	{
 		while (args[i] != NULL)

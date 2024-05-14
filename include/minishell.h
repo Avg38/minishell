@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 15:01:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/13 15:18:29 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:57:01 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_shell
 	int			last_gstatus;
 	int			nb_fork;
 	int			*pid;
+	int			index_pid;
 }	t_shell;
 
 // ============== BUILTINS ==============
@@ -218,8 +219,10 @@ int				exec_bin(t_shell *shell, t_env *env, t_btree *block, t_io fds);
 // -------------- exec_builtins.c --------------
 int				is_builtin(char *command);
 int				exec_builtin(t_env **envt, t_btree *block, t_io fds);
-int				fork_builtin(t_env **envt, t_btree *block, t_io fds);
+int				fork_builtin(t_shell *shell, t_env **envt, \
+	t_btree *block, t_io fds);
 // -------------- exec_handler.c --------------
+int				singleton_waitlist(int change);
 int				exec_handler(t_shell *shell, t_btree *block, t_io fds);
 // -------------- get_path.c --------------
 char			*ft_strjoin_pipex(char *s1, char *s2, char *sep);
@@ -243,6 +246,7 @@ int				handle_word(char *buffer, t_tknlist *list);
 char			*ft_strndup(char *buffer, int len, t_gc_id id);
 int				is_operator(const char c1, const char c2);
 int				detect_error_type(const char c);
+void			detect_operator_type(const char c1, const char c2);
 // -------------- lexer.c --------------
 int				handle_error_lexer(int gc_id, char *msg);
 int				detect_type(const char c1, const char c2);

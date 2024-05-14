@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:20 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/13 15:23:03 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:44:52 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,23 @@ int	detect_error_type(const char c)
 	if (c == '(' || c == ';' || c == '\\')
 		return (handle_error_lexer(TKN_LIST, ERR_WRONG_CHAR));
 	return (0);
+}
+
+void	detect_operator_type(const char c1, const char c2)
+{
+	if (c1 == '|' && c2 == '|')
+	{
+		print_without_exit(\
+			"Minishell: syntax error near unexpected token \"||\"\n", RED, 2);
+	}
+	else if (c1 == '&' && c2 == '&')
+	{
+		print_without_exit(\
+			"Minishell: syntax error near unexpected token \"&&\"\n", RED, 2);
+	}
+	else if (c1 == '&' && c2 != '&')
+	{
+		print_without_exit(\
+			"Minishell: syntax error near unexpected token '&'\n", RED, 2);
+	}
 }

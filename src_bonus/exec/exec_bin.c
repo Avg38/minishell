@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avg38 <avg38@student.42.fr>                +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:10 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 22:57:35 by avg38            ###   ########.fr       */
+/*   Updated: 2024/05/14 20:17:13 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	exec_process(t_btree *node, t_env *env, t_io fds)
 	int			i;
 
 	i = 3;
-	exec_fd(fds);
 	cmd_path = handle_path(node, env);
+	exec_fd(fds);
 	if (lstat(cmd_path, &stats) != -1)
 	{
 		if ((stats.st_mode & S_IXUSR) && (stats.st_mode & S_IFREG))
@@ -102,28 +102,14 @@ char	*handle_path(t_btree *node, t_env *env)
 
 int	exec_bin(t_shell *shell, t_env *env, t_btree *node, t_io fds)
 {
-	int			status;
-	int			exit_code;
-	static int	i = 0;
-
-	status = 0;
-	exit_code = 0;
-	shell->pid[i] = fork();
-	if (shell->pid[i] == -1)
+	shell->pid[shell->index_pid] = fork();
+	if (shell->pid[shell->index_pid] == -1)
 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
-	if (shell->pid[i] == 0)
+	if (shell->pid[shell->index_pid] == 0)
 		exec_process(node, env, fds);
-	i++;
-	if (i >= shell->nb_fork)
-		i = 0;
-	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
-	{
-		g_status = 139;
-		ft_putendl_fd("Segmentation fault (core dumped)", 2);
-	}
-	if (WCOREDUMP(status) && WTERMSIG(status) == 3)
-		ft_putendl_fd("Quit (core dumped)", 2);
-	if (WIFEXITED(status))
-		exit_code = WEXITSTATUS(status);
-	return (exit_code);
+	usleep(500);
+	(shell->index_pid)++;
+	if (shell->index_pid >= shell->nb_fork)
+		shell->index_pid = 0;
+	return (0);
 }

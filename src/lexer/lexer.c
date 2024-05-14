@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:21 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 13:56:55 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:44:10 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	detect_type(const char c1, const char c2)
 	else if (c1 == '|' && c2 != '|')
 		return (PIPE);
 	else if (c1 == '&' && c2 == '&')
-		return (AND);
+		detect_operator_type(c1, c2);
 	else if (c1 == '|' && c2 == '|')
-		return (OR);
+		detect_operator_type(c1, c2);
 	else if (c1 == '\'')
 		return (S_QUOTE);
 	else if (c1 == '\"')
@@ -43,8 +43,7 @@ int	detect_type(const char c1, const char c2)
 	else if (c1 == '(')
 		return (BRACKETS);
 	else if (c1 == '&' && c2 != '&')
-		print_without_exit(\
-			"Minishell: syntax error near unexpected token '&'\n", RED, 2);
+		detect_operator_type(c1, c2);
 	return (WORD);
 }
 
@@ -54,8 +53,6 @@ void	handle_token(char *buffer, t_tknlist *list, t_tkntype type, int *i)
 		*i += handle_file(buffer, list, type);
 	else if (type == PIPE)
 		*i += handle_pipe(buffer, list);
-	else if (type == AND || type == OR)
-		*i += handle_operator(buffer, list, type);
 	else if (type == S_QUOTE)
 		*i += handle_s_quote(buffer, list);
 	else if (type == D_QUOTE)

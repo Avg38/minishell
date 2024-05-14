@@ -6,11 +6,20 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:13 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 16:38:33 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:48:16 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	singleton_waitlist(int change)
+{
+	static int	use_waitlist = 0;
+
+	if (change)
+		use_waitlist = change;
+	return (use_waitlist);
+}
 
 int	exec_handler(t_shell *shell, t_btree *node, t_io fds)
 {
@@ -22,7 +31,7 @@ int	exec_handler(t_shell *shell, t_btree *node, t_io fds)
 	cmd_builtin = is_builtin(node->cmds[0]);
 	pipe_is_present = cmd_in_pipe(shell->btree, node->branch);
 	if (pipe_is_present == true && cmd_builtin == true)
-		ret_status = fork_builtin(&(shell->env), node, fds);
+		ret_status = fork_builtin(shell, &(shell->env), node, fds);
 	else if (pipe_is_present == false && cmd_builtin == true)
 		ret_status = exec_builtin(&(shell->env), node, fds);
 	else

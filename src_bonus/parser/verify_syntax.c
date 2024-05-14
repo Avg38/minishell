@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:32 by avialle-          #+#    #+#             */
-/*   Updated: 2024/04/29 15:23:33 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:24:11 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,40 @@ int	printfd_err(int fd, int ret, char *err_msg, char *issue)
 static int	verif_head(t_token *head)
 {
 	if (tkn_is_operator(head->type))
-		return (printfd_err(2, 2, ERR_NEAR_TOKEN, head->content));
+	{
+		printfd_err(2, 2, ERR_NEAR_TOKEN, head->content);
+		return (2);
+	}
 	else if (head->type == BRACKETS && brackets_is_empty(head->content))
-		return (printfd_err(2, 2, ERR_NEAR_TOKEN, ")"));
+	{
+		printfd_err(2, 2, ERR_NEAR_TOKEN, ")");
+		return (2);
+	}
 	return (0);
 }
 
 static int	verif_tail(t_token *tail)
 {
 	if (tail->type == PIPE)
-		return (printfd_err(2, 2, ERR_OPEN_PIPE, NULL));
+	{
+		printfd_err(2, 2, ERR_OPEN_PIPE, NULL);
+		return (2);
+	}
 	if (tail->type == AND || tail->type == OR)
-		return (printfd_err(2, 2, ERR_OPEN_LOGICAL_OP, NULL));
+	{
+		printfd_err(2, 2, ERR_OPEN_LOGICAL_OP, NULL);
+		return (2);
+	}
 	if (tkn_is_redir(tail->type) || tail->type == HEREDOC)
-		return (printfd_err(2, 2, ERR_NEAR_TOKEN, "newline"));
+	{
+		printfd_err(2, 2, ERR_NEAR_TOKEN, "newline");
+		return (2);
+	}
 	if (tail->type == BRACKETS && brackets_is_empty(tail->content))
-		return (printfd_err(2, 2, ERR_NEAR_TOKEN, "("));
+	{
+		printfd_err(2, 2, ERR_NEAR_TOKEN, "(");
+		return (2);
+	}
 	return (0);
 }
 
@@ -49,12 +67,21 @@ static int	verif_body(t_token *curr)
 	{
 		if ((tkn_is_operator(curr->type) || tkn_is_redir(curr->type))
 			&& tkn_is_operator(curr->next->type))
-			return (printfd_err(2, 2, ERR_NEAR_TOKEN, curr->next->content));
-		if (tkn_is_redir(curr->type) && curr->next->type == WORD
+		{
+			printfd_err(2, 2, ERR_NEAR_TOKEN, curr->next->content);
+			return (2);
+		}
+		if (tkn_is_redir(curr->type) && curr->next->type == WORD \
 			&& char_is_in_str('*', curr->next->content))
-			return (printfd_err(2, 1, ERR_STAR_TOKEN, NULL));
+		{
+			printfd_err(2, 1, ERR_STAR_TOKEN, NULL);
+			return (1);
+		}
 		if (curr->type == BRACKETS && brackets_is_empty(curr->content) == 1)
-			return (printfd_err(2, 2, ERR_NEAR_TOKEN, "("));
+		{
+			printfd_err(2, 2, ERR_NEAR_TOKEN, "(");
+			return (2);
+		}
 		curr = curr->next;
 	}
 	return (0);

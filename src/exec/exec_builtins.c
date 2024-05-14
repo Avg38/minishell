@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:12 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/10 20:50:18 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:07:00 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,22 @@ int	exec_builtin(t_env **envt, t_btree *node, t_io fds)
 	return (status);
 }
 
-int	fork_builtin(t_env **envt, t_btree *node, t_io fds)
+int	fork_builtin(t_shell *shell, t_env **envt, t_btree *node, t_io fds)
 {
-	pid_t	pid;
-	int		status;
-	int		exit_code;
+	int	status;
 
-	pid = fork();
-	exit_code = 0;
 	status = 0;
-	if (pid == -1)
+	shell->pid[shell->index_pid] = fork();
+	if (shell->pid[shell->index_pid] == -1)
 		print_and_exit("Minishell: Fork() error.\n", RED, 1);
-	if (pid == 0)
+	if (shell->pid[shell->index_pid] == 0)
 	{
 		status = exec_builtin(envt, node, fds);
 		free_and_exit(status);
 	}
-	waitpid(pid, &status, 0);
-	if (WCOREDUMP(status) && WTERMSIG(status) == 11)
-	{
-		g_status = 139;
-		ft_putendl_fd("Segmentation fault (core dumped)", 2);
-	}
-	if (WCOREDUMP(status) && WTERMSIG(status) == 3)
-		ft_putendl_fd("Quit (core dumped)", 2);
-	if (WIFEXITED(status))
-		exit_code = WIFEXITED(status);
-	return (exit_code);
+	usleep(500);
+	(shell->index_pid)++;
+	if (shell->index_pid >= shell->nb_fork)
+		shell->index_pid = 0;
+	return (0);
 }

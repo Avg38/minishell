@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:50:09 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/13 16:18:59 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:48:02 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	browse_tree(t_shell *shell, t_btree *node, t_io io_inherited)
 	g_single = 0;
 	if (!node || g_status == 130)
 		return ;
-	if (node->type == AND || node->type == OR)
-		cross_operator(shell, node, io_inherited);
 	else if (node->type == PIPE)
 		cross_pipe(shell, node, io_inherited);
 	else if (node->type == IN)
