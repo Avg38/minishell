@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ozasahin <ozasahin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:51:48 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/15 10:08:05 by ozasahin         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:32:35 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	if (ac > 1)
 		print_and_exit(ERR_ARGS, RED, 1);
-	if (!envp[0])
-		print_and_exit(ERR_UNAVAILABLE_ENV, RED, 1);
 	shell.env = env_init(envp);
 	shell.io_global = (t_io){0, 1};
 	shell.last_gstatus = 0;

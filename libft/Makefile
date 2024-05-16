@@ -1,3 +1,5 @@
+.DEFAULT_GOAL : all
+
 SRCS	=	\
 			2d/dup_2d.c \
 			2d/free_2d.c \
@@ -84,7 +86,7 @@ SRCS	=	\
 
 OBJS	=	${SRCS:.c=.o}
 NAME	=	libft.a
-CC		=	gcc
+CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 RM		=	rm -rf
 
@@ -103,3 +105,5 @@ fclean:		clean
 			${RM} ${NAME}
 
 re:			fclean all
+
+.PHONY : all clean fclean re
